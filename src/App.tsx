@@ -6,6 +6,7 @@ import { CCTVModal } from './components/CCTVModal';
 import { SteamLoginModal } from './components/SteamLoginModal';
 
 // 15 Pages
+import { HomePage } from './pages/HomePage';
 import { OverviewPage } from './pages/OverviewPage';
 import { MapPage } from './pages/MapPage';
 import { PlayerTrackerPage } from './pages/PlayerTrackerPage';
@@ -27,6 +28,8 @@ const MainContent: React.FC = () => {
 
   const renderActivePage = () => {
     switch (activeTab) {
+      case 'home':
+        return <HomePage />;
       case 'overview':
         return <OverviewPage />;
       case 'map':
@@ -58,7 +61,7 @@ const MainContent: React.FC = () => {
       case 'settings':
         return <SettingsPage />;
       default:
-        return <OverviewPage />;
+        return <HomePage />;
     }
   };
 
