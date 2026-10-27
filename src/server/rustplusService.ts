@@ -85,20 +85,23 @@ async function refreshData(entry: ConnectionEntry, includeMap = false) {
     throw new Error('WebSocket Rust+ отключён.');
   }
 
+  // Optional Rust+ endpoints can fail independently (for example, the player has no team).
+  // Keep the WebSocket session alive and retain the last successful snapshot for each feature.
   const [serverInfo, gameTime, teamInfo, mapMarkers] = await Promise.all([
-    request(client, { getInfo: {} }),
-    request(client, { getTime: {} }),
-    request(client, { getTeamInfo: {} }),
-    request(client, { getMapMarkers: {} }),
+    request(client, { getInfo: {} }).catch(() => undefined),
+    request(client, { getTime: {} }).catch(() => undefined),
+    request(client, { getTeamInfo: {} }).catch(() => undefined),
+    request(client, { getMapMarkers: {} }).catch(() => undefined),
   ]);
 
-  entry.data.serverInfo = serverInfo;
-  entry.data.gameTime = gameTime;
-  entry.data.teamInfo = teamInfo;
-  entry.data.mapMarkers = mapMarkers;
+  if (serverInfo !== undefined) entry.data.serverInfo = serverInfo;
+  if (gameTime !== undefined) entry.data.gameTime = gameTime;
+  if (teamInfo !== undefined) entry.data.teamInfo = teamInfo;
+  if (mapMarkers !== undefined) entry.data.mapMarkers = mapMarkers;
 
   if (includeMap) {
-    entry.data.map = await request(client, { getMap: {} });
+    const map = await request(client, { getMap: {} }).catch(() => undefined);
+    if (map !== undefined) entry.data.map = map;
   }
 
   entry.data.connected = true;
