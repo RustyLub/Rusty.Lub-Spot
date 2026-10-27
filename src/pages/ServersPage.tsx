@@ -102,6 +102,74 @@ export const ServersPage: React.FC = () => {
   const [pairingError, setPairingError] = useState<string | null>(null);
   const [pairingSubmitting, setPairingSubmitting] = useState(false);
 
+  // FCM listener credentials are intentionally kept only in component memory.
+  const [autoPairAndroidId, setAutoPairAndroidId] = useState('');
+  const [autoPairSecurityToken, setAutoPairSecurityToken] = useState('');
+  const [autoPairRunning, setAutoPairRunning] = useState(false);
+  const [autoPairLoading, setAutoPairLoading] = useState(false);
+  const [autoPairMessage, setAutoPairMessage] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (steamAuthState !== 'authenticated') {
+      setAutoPairRunning(false);
+      return;
+    }
+    let cancelled = false;
+    fetch('/api/rustplus/auto-pair/status', { credentials: 'include' })
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        if (!cancelled && data) setAutoPairRunning(Boolean(data.running));
+      })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [steamAuthState]);
+
+  const startAutoPairing = async () => {
+    setAutoPairMessage(null);
+    if (!autoPairAndroidId.trim() || !autoPairSecurityToken.trim()) {
+      setAutoPairMessage('Заполни GCM Android ID и GCM Security Token из страницы credentials.');
+      return;
+    }
+    setAutoPairLoading(true);
+    try {
+      const response = await fetch('/api/rustplus/auto-pair/start', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', 'x-csrf-token': (document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1] ? decodeURIComponent((document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1]) : '' },
+        body: JSON.stringify({ androidId: autoPairAndroidId.trim(), securityToken: autoPairSecurityToken.trim() }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || 'Не удалось запустить автосопряжение.');
+      setAutoPairRunning(true);
+      setAutoPairMessage(data.message || 'Слушатель уведомлений Rust+ запущен.');
+      setAutoPairSecurityToken('');
+    } catch (error: any) {
+      setAutoPairMessage(error?.message || 'Ошибка запуска автосопряжения.');
+    } finally {
+      setAutoPairLoading(false);
+    }
+  };
+
+  const stopAutoPairing = async () => {
+    setAutoPairLoading(true);
+    setAutoPairMessage(null);
+    try {
+      const response = await fetch('/api/rustplus/auto-pair/stop', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'x-csrf-token': (document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1] ? decodeURIComponent((document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1]) : '' },
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || 'Не удалось остановить слушатель.');
+      setAutoPairRunning(false);
+      setAutoPairMessage('Автосопряжение остановлено.');
+    } catch (error: any) {
+      setAutoPairMessage(error?.message || 'Ошибка остановки автосопряжения.');
+    } finally {
+      setAutoPairLoading(false);
+    }
+  };
+
   // Sync SteamID into wizard if user logs in
   React.useEffect(() => {
     if (steamUser?.steamId) {
@@ -385,6 +453,61 @@ export const ServersPage: React.FC = () => {
             </div>
           )}
 
+          {/* Automatic Rust+ pairing via Companion push notifications */}
+          {steamAuthState === 'authenticated' && (
+            <div className="bg-[#12141A] border border-[#262A36] rounded p-4 space-y-3 text-xs">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex items-start gap-2.5">
+                  <Radio className="w-5 h-5 text-[#F97316] shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-mono font-bold text-[#E6E8EC] text-sm">АВТОСОПРЯЖЕНИЕ RUST+ ЧЕРЕЗ УВЕДОМЛЕНИЯ</div>
+                    <p className="text-[11px] text-[#9298A5] mt-1 leading-relaxed">
+                      Один раз подключи FCM credentials. Затем нажми PAIR WITH SERVER в Rust — приложение само добавит сервер и попробует подключиться.
+                    </p>
+                    <a className="inline-flex items-center gap-1 mt-2 text-[#F97316] hover:text-[#FF9B5E] underline underline-offset-2"
+                       href="https://rustplusplus-credentials.netlify.app/" target="_blank" rel="noreferrer">
+                      Получить credentials через официальный инструмент <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+                <span className={`px-2 py-1 rounded border font-mono text-[10px] ${autoPairRunning ? 'border-[#00C896]/40 bg-[#00C896]/10 text-[#00C896]' : 'border-[#262A36] bg-[#171A21] text-[#9298A5]'}`}>
+                  {autoPairRunning ? 'СЛУШАТЕЛЬ АКТИВЕН' : 'СЛУШАТЕЛЬ ОТКЛЮЧЁН'}
+                </span>
+              </div>
+              {!autoPairRunning && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <label className="space-y-1">
+                    <span className="block text-[10px] text-[#9298A5] font-mono">GCM ANDROID ID</span>
+                    <input value={autoPairAndroidId} onChange={(e) => setAutoPairAndroidId(e.target.value)}
+                      autoComplete="off" spellCheck={false} placeholder="Android ID"
+                      className="w-full bg-[#0D0F12] border border-[#262A36] rounded px-3 py-2 text-[#E6E8EC] outline-none focus:border-[#F97316]" />
+                  </label>
+                  <label className="space-y-1">
+                    <span className="block text-[10px] text-[#9298A5] font-mono">GCM SECURITY TOKEN</span>
+                    <input value={autoPairSecurityToken} onChange={(e) => setAutoPairSecurityToken(e.target.value)}
+                      type="password" autoComplete="new-password" spellCheck={false} placeholder="Security Token"
+                      className="w-full bg-[#0D0F12] border border-[#262A36] rounded px-3 py-2 text-[#E6E8EC] outline-none focus:border-[#F97316]" />
+                  </label>
+                </div>
+              )}
+              {autoPairMessage && <div className="text-[11px] text-[#E6E8EC] bg-[#171A21] border border-[#262A36] rounded p-2">{autoPairMessage}</div>}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-[10px] text-[#9298A5]">Credentials хранятся только в памяти сервера и не отправляются обратно в браузер. После перезапуска потребуется запустить слушатель снова.</p>
+                {autoPairRunning ? (
+                  <button disabled={autoPairLoading} onClick={stopAutoPairing}
+                    className="px-3 py-2 rounded border border-[#F04444]/40 text-[#F04444] hover:bg-[#F04444]/10 disabled:opacity-50 font-mono font-bold">
+                    {autoPairLoading ? 'ОСТАНОВКА…' : 'ОСТАНОВИТЬ'}
+                  </button>
+                ) : (
+                  <button disabled={autoPairLoading} onClick={startAutoPairing}
+                    className="px-3 py-2 rounded bg-[#F97316] hover:bg-[#E05326] text-white disabled:opacity-50 font-mono font-bold">
+                    {autoPairLoading ? 'ЗАПУСК…' : 'ВКЛЮЧИТЬ АВТОСОПРЯЖЕНИЕ'}
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Paired Server Cards List */}
           {pairedServers.length === 0 ? (
             <div className="bg-[#12141A] border border-[#262A36] rounded p-8 text-center space-y-3 text-xs">
@@ -445,7 +568,7 @@ export const ServersPage: React.FC = () => {
                       <div className="flex justify-between text-[#9298A5]">
                         <span>Источник сопряжения:</span>
                         <span className="text-[#E6E8EC]">
-                          {server.pairingSource === 'pairing_url' ? 'Rust+ Notification URL' : 'Ручной ввод токена'}
+                          {server.pairingSource === 'in_game_notification' ? 'Уведомление Rust+ в игре' : server.pairingSource === 'pairing_url' ? 'Rust+ Notification URL' : 'Ручной ввод токена'}
                         </span>
                       </div>
                       {server.lastError && (
