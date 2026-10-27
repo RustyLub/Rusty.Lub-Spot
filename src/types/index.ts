@@ -13,6 +13,7 @@ export interface SteamUser {
 export type SteamAuthState = 'unauthenticated' | 'logging_in' | 'authenticated' | 'error';
 
 export type NavPageId = 
+  | 'home'
   | 'overview'
   | 'map'
   | 'player_tracker'
