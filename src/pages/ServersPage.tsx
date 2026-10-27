@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Server,
   Star,
@@ -48,6 +48,35 @@ export const ServersPage: React.FC = () => {
   // Browser filter
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'official' | 'modded' | 'community' | 'fav'>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [liveDataByServer, setLiveDataByServer] = useState<Record<string, any>>({});
+
+  // Poll only servers whose real Rust+ handshake succeeded.
+  useEffect(() => {
+    let cancelled = false;
+    const syncLiveData = async () => {
+      const connected = pairedServers.filter(server => server.status === 'connected');
+      await Promise.all(connected.map(async server => {
+        try {
+          const response = await fetch(`/api/rustplus/servers/${encodeURIComponent(server.id)}/data`, {
+            credentials: 'include',
+          });
+          if (!response.ok) return;
+          const result = await response.json();
+          if (!cancelled && result.liveData) {
+            setLiveDataByServer(prev => ({ ...prev, [server.id]: result.liveData }));
+          }
+        } catch {
+          // Keep the last confirmed snapshot during transient network failures.
+        }
+      }));
+    };
+    syncLiveData();
+    const timer = window.setInterval(syncLiveData, 10000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [pairedServers]);
 
   // Modals
   const [isAddBrowserModalOpen, setIsAddBrowserModalOpen] = useState(false);
@@ -426,6 +455,45 @@ export const ServersPage: React.FC = () => {
                       )}
                     </div>
                   </div>
+
+                  {server.status === 'connected' && liveDataByServer[server.id] && (() => {
+                    const live = liveDataByServer[server.id];
+                    const info = live.serverInfo?.info || live.serverInfo?.response?.info || {};
+                    const gameTime = live.gameTime?.time || live.gameTime?.response?.time || {};
+                    const team = live.teamInfo?.teamInfo || live.teamInfo?.response?.teamInfo || {};
+                    const members = Array.isArray(team.members) ? team.members : [];
+                    const playerCount = info.players ?? info.playerCount;
+                    const maxPlayers = info.maxPlayers;
+                    const gameClock = gameTime.time || gameTime.gameTime || gameTime.hour;
+                    return (
+                      <div className="p-2.5 rounded bg-[#0D0F12] border border-[#00C896]/30 space-y-2">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[#00C896] font-mono font-bold text-[10px]">LIVE RUST+ DATA</span>
+                          <span className="text-[#9298A5] text-[10px]">Обновление каждые 10 сек.</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <div className="text-[#9298A5] text-[10px]">Игроки на сервере</div>
+                            <div className="text-[#E6E8EC] font-mono font-bold">{playerCount !== undefined ? `${playerCount}${maxPlayers !== undefined ? ` / ${maxPlayers}` : ''}` : 'Нет данных'}</div>
+                          </div>
+                          <div>
+                            <div className="text-[#9298A5] text-[10px]">Отряд Rust+</div>
+                            <div className="text-[#E6E8EC] font-mono font-bold">{team.members ? members.length : 'Нет данных'}</div>
+                          </div>
+                          <div>
+                            <div className="text-[#9298A5] text-[10px]">Карта</div>
+                            <div className="text-[#E6E8EC] font-mono font-bold">{info.map || info.mapName || 'Нет данных'}</div>
+                          </div>
+                          <div>
+                            <div className="text-[#9298A5] text-[10px]">Игровое время</div>
+                            <div className="text-[#E6E8EC] font-mono font-bold">{gameClock !== undefined ? String(gameClock) : 'Нет данных'}</div>
+                          </div>
+                        </div>
+                        {live.lastSync && <div className="text-[10px] text-[#9298A5]">Последний ответ сервера: {new Date(live.lastSync).toLocaleTimeString('ru-RU')}</div>}
+                        {live.lastError && <div className="text-[10px] text-[#F04444]">{live.lastError}</div>}
+                      </div>
+                    );
+                  })()}
 
                   {/* Actions Bar */}
                   <div className="pt-2 border-t border-[#262A36] flex items-center justify-between gap-2 font-mono text-xs">
