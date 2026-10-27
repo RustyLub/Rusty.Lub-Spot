@@ -41,6 +41,14 @@ interface ConnectionEntry {
 
 const connections = new Map<string, ConnectionEntry>();
 
+function isClientConnected(client: RustPlusClient): boolean {
+  try {
+    return client.isConnected();
+  } catch {
+    return false;
+  }
+}
+
 function cleanError(error: unknown): string {
   if (error instanceof Error) return error.message;
   if (typeof error === 'string') return error;
@@ -53,7 +61,7 @@ async function request(client: RustPlusClient, payload: Record<string, unknown>)
 
 async function refreshData(entry: ConnectionEntry, includeMap = false) {
   const client = entry.client;
-  if (!client.isConnected()) {
+  if (!isClientConnected(client)) {
     entry.data.connected = false;
     throw new Error('WebSocket Rust+ отключён.');
   }
@@ -86,7 +94,7 @@ export async function connectRustPlus(
 ): Promise<RustPlusLiveData> {
   const existing = connections.get(serverId);
   if (existing?.connecting) return existing.connecting;
-  if (existing?.client.isConnected()) {
+  if (existing && isClientConnected(existing.client)) {
     return refreshData(existing);
   }
   if (existing) disconnectRustPlus(serverId);
@@ -140,7 +148,7 @@ export async function connectRustPlus(
         entry.refreshTimer = setInterval(() => {
           refreshData(entry).catch((error) => {
             entry.data.lastError = cleanError(error);
-            if (!client.isConnected()) entry.data.connected = false;
+            if (!isClientConnected(client)) entry.data.connected = false;
           });
         }, 30000);
         resolve(data);
@@ -171,7 +179,7 @@ export async function connectRustPlus(
 export function getRustPlusLiveData(serverId: string): RustPlusLiveData | null {
   const entry = connections.get(serverId);
   if (!entry) return null;
-  entry.data.connected = entry.client.isConnected() && entry.data.connected;
+  entry.data.connected = isClientConnected(entry.client) && entry.data.connected;
   return entry.data;
 }
 
