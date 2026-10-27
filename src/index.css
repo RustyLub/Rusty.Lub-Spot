@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Chakra Petch', sans-serif;
+    
+    --bg-main: #0D0F12;
+    --bg-card: #12141A;
+    --bg-panel: #171A21;
+    --border-color: #262A36;
+    --accent-primary: #F97316;
+    --accent-secondary: #E05326;
+    --color-success: #00C896;
+    --color-warning: #F5B942;
+    --color-danger: #F04444;
+    --text-primary: #E6E8EC;
+    --text-secondary: #9298A5;
+  }
+  
+  body {
+    background-color: #0D0F12;
+    color: #E6E8EC;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom compact industrial scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0F12;
+}
+::-webkit-scrollbar-thumb {
+  background: #262A36;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #383E4E;
+}
+
+/* Scanline effect for tactical CCTV */
+.cctv-scanlines {
+  background: linear-gradient(
+    rgba(13, 15, 18, 0) 50%, 
+    rgba(0, 0, 0, 0.45) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(240, 68, 68, 0.03),
+    rgba(0, 200, 150, 0.02),
+    rgba(249, 115, 22, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+}

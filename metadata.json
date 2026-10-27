@@ -1,0 +1,6 @@
+{
+  "name": "Rusty.Lub Spot",
+  "description": "Industrial tactical desktop companion for Rust: interactive map, smart electrical controls, raid calculator, CCTV feeds, team status, and survival tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
