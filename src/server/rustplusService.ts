@@ -206,6 +206,7 @@ export async function connectRustPlus(
   } catch (error) {
     entry.data.connected = false;
     entry.data.lastError = cleanError(error);
+    scheduleReconnect(serverId, entry);
     throw error;
   }
 }
