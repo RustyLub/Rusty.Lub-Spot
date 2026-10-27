@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDownRight, ArrowRight, Bell, BookOpen, Bomb, Clock3, Cpu, Map, Radio, Server, Shield, Sprout, Users, Video, Wifi, WifiOff, Zap } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, Bell, BookOpen, Bomb, Clock3, Cpu, Map, Server, Shield, Sprout, Users, Video, Wifi, WifiOff, Zap } from 'lucide-react';
 import { useCompanion } from '../context/CompanionContext';
 import { NavPageId } from '../types';
 
