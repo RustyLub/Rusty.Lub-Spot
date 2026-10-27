@@ -24,7 +24,8 @@
     "@liamcottle/rustplus.js": "^2.5.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "vite": "^8.3.0"
+    "vite": "^8.3.0",
+    "@liamcottle/push-receiver": "^0.0.4"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",
