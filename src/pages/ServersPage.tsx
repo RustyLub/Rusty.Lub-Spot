@@ -35,6 +35,7 @@ export const ServersPage: React.FC = () => {
     toggleFavoriteServer,
     steamUser,
     steamAuthState,
+    csrfToken,
     setShowLoginModal,
     pairedServers,
     pairServer,
@@ -135,7 +136,7 @@ export const ServersPage: React.FC = () => {
       const response = await fetch('/api/rustplus/auto-pair/start', {
         method: 'POST',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json', 'x-csrf-token': (document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1] ? decodeURIComponent((document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1]) : '' },
+        headers: { 'Content-Type': 'application/json', 'x-csrf-token': csrfToken },
         body: JSON.stringify({ androidId: autoPairAndroidId.trim(), securityToken: autoPairSecurityToken.trim() }),
       });
       const data = await response.json();
@@ -157,7 +158,7 @@ export const ServersPage: React.FC = () => {
       const response = await fetch('/api/rustplus/auto-pair/stop', {
         method: 'POST',
         credentials: 'include',
-        headers: { 'x-csrf-token': (document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1] ? decodeURIComponent((document.cookie.match(/(?:^|; )rusty_csrf_token=([^;]*)/) || [])[1]) : '' },
+        headers: { 'x-csrf-token': csrfToken },
       });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.message || 'Не удалось остановить слушатель.');
