@@ -36,6 +36,9 @@ interface ConnectionEntry {
   client: RustPlusClient;
   data: RustPlusLiveData;
   refreshTimer?: ReturnType<typeof setInterval>;
+  retryTimer?: ReturnType<typeof setTimeout>;
+  retryAttempts: number;
+  server: { ip: string; port: number; playerId: string; playerToken: number };
   connecting?: Promise<RustPlusLiveData>;
 }
 
@@ -47,6 +50,22 @@ function isClientConnected(client: RustPlusClient): boolean {
   } catch {
     return false;
   }
+}
+
+function scheduleReconnect(serverId: string, entry: ConnectionEntry): void {
+  if (entry.retryTimer || connections.get(serverId) !== entry) return;
+  entry.retryAttempts += 1;
+  const delay = Math.min(60000, 3000 * Math.pow(2, Math.min(entry.retryAttempts - 1, 4)));
+  entry.retryTimer = setTimeout(() => {
+    entry.retryTimer = undefined;
+    if (connections.get(serverId) !== entry) return;
+    connectRustPlus(serverId, entry.server).catch((error) => {
+      entry.data.connected = false;
+      entry.data.lastError = cleanError(error);
+      // A failed attempt is retried by the next disconnect/error event or polling cycle.
+      scheduleReconnect(serverId, entry);
+    });
+  }, delay);
 }
 
 function cleanError(error: unknown): string {
@@ -103,6 +122,8 @@ export async function connectRustPlus(
   const entry: ConnectionEntry = {
     client,
     data: { connected: false },
+    retryAttempts: 0,
+    server: { ...server },
   };
   connections.set(serverId, entry);
 
@@ -123,14 +144,23 @@ export async function connectRustPlus(
       try { client.disconnect(); } catch { /* no-op */ }
     }, 15000);
 
-    client.on('error', finishError);
+    client.on('error', (error: unknown) => {
+      if (!settled) {
+        finishError(error);
+      } else {
+        entry.data.connected = false;
+        entry.data.lastError = cleanError(error);
+        scheduleReconnect(serverId, entry);
+      }
+    });
     client.on('disconnected', () => {
       entry.data.connected = false;
       if (entry.data.lastSync) {
-        entry.data.lastError = 'Соединение с сервером Rust+ было закрыто.';
+        entry.data.lastError = 'Соединение с сервером Rust+ было закрыто. Выполняется переподключение.';
       }
       if (entry.refreshTimer) clearInterval(entry.refreshTimer);
       entry.refreshTimer = undefined;
+      scheduleReconnect(serverId, entry);
     });
 
     client.on('connected', async () => {
@@ -141,14 +171,18 @@ export async function connectRustPlus(
         entry.data.connected = true;
         entry.data.connectedAt = Date.now();
         entry.data.lastError = undefined;
-        const data = await refreshData(entry);
+        const data = await refreshData(entry, true);
         if (settled) return;
         settled = true;
         clearTimeout(timeout);
+        entry.retryAttempts = 0;
         entry.refreshTimer = setInterval(() => {
           refreshData(entry).catch((error) => {
             entry.data.lastError = cleanError(error);
-            if (!isClientConnected(client)) entry.data.connected = false;
+            if (!isClientConnected(client)) {
+              entry.data.connected = false;
+              scheduleReconnect(serverId, entry);
+            }
           });
         }, 30000);
         resolve(data);
@@ -187,7 +221,9 @@ export function disconnectRustPlus(serverId: string): void {
   const entry = connections.get(serverId);
   if (!entry) return;
   if (entry.refreshTimer) clearInterval(entry.refreshTimer);
+  if (entry.retryTimer) clearTimeout(entry.retryTimer);
   entry.refreshTimer = undefined;
+  entry.retryTimer = undefined;
   try { entry.client.disconnect(); } catch { /* no-op */ }
   entry.client.removeAllListeners();
   entry.data.connected = false;
