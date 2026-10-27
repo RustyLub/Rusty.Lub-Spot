@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   LayoutDashboard,
+  Home,
   Map,
   Users,
   Zap,
@@ -35,7 +36,8 @@ export const Sidebar: React.FC = () => {
 
   const items: SidebarItemDef[] = [
     // 1. Основное
-    { id: 'overview', label: 'Обзор', icon: LayoutDashboard, section: 'ОСНОВНОЕ' },
+    { id: 'home', label: 'Главная', icon: Home, section: 'ОСНОВНОЕ' },
+    { id: 'overview', label: 'Оперативный обзор', icon: LayoutDashboard },
     { id: 'map', label: 'Карта', icon: Map },
     { id: 'player_tracker', label: 'Трекер игроков', icon: Users },
     { id: 'smart_electrical', label: 'Умная электрика', icon: Zap },
