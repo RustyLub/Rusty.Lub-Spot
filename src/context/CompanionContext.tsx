@@ -462,13 +462,16 @@ export const CompanionProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
   }, [checkSteamSession]);
 
-  // Sync paired servers whenever user is authenticated
+  // Sync paired servers periodically so FCM-discovered in-game pairings appear without a reload.
   useEffect(() => {
-    if (steamAuthState === 'authenticated') {
-      fetchPairedServers();
-    } else {
+    if (steamAuthState !== 'authenticated') {
       setPairedServers([]);
+      return;
     }
+
+    fetchPairedServers();
+    const timer = window.setInterval(fetchPairedServers, 5000);
+    return () => window.clearInterval(timer);
   }, [steamAuthState, fetchPairedServers]);
 
   // Synchronize team leader profile with authenticated Steam profile
