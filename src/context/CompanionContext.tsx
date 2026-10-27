@@ -119,7 +119,7 @@ export const CompanionProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const [activeTab, setActiveTab] = useState<NavPageId>(() => {
-    return (localStorage.getItem(`${LOCAL_STORAGE_PREFIX}tab`) as NavPageId) || 'overview';
+    return (localStorage.getItem(`${LOCAL_STORAGE_PREFIX}tab`) as NavPageId) || 'home';
   });
 
   const [servers, setServers] = useState<RustServer[]>(() => {
