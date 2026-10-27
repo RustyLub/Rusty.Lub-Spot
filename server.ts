@@ -5,6 +5,7 @@ import path from 'path';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
 import { connectRustPlus, disconnectRustPlus, getRustPlusLiveData, refreshRustPlusData } from './src/server/rustplusService';
+import { getRustPlusPushListenerStatus, startRustPlusPushListener, stopRustPlusPushListener } from './src/server/rustplusPushService';
 
 dotenv.config();
 
@@ -894,6 +895,94 @@ function getUserServers(userId: string): PairedRustServer[] {
   }
   return list;
 }
+
+// FCM auto-pairing: credentials are held in memory and never returned to the browser.
+app.get('/api/rustplus/auto-pair/status', requireAuth, rustPlusLimiter, (req: Request, res: Response) => {
+  const user = (req as any).user as SteamSession;
+  res.json({ success: true, ...getRustPlusPushListenerStatus(user.steamId) });
+});
+
+app.post('/api/rustplus/auto-pair/start', requireAuth, requireCsrf, rustPlusLimiter, (req: Request, res: Response) => {
+  const user = (req as any).user as SteamSession;
+  const androidId = String(req.body?.androidId || '').trim();
+  const securityToken = String(req.body?.securityToken || '').trim();
+
+  if (!androidId || !securityToken || androidId.length > 256 || securityToken.length > 512) {
+    return res.status(400).json({
+      success: false,
+      error: 'FCM_CREDENTIALS_REQUIRED',
+      message: 'Нужны GCM Android ID и GCM Security Token из rustplusplus-credentials.',
+    });
+  }
+
+  try {
+    const result = startRustPlusPushListener(user.steamId, androidId, securityToken, async (pairing) => {
+      // A push notification is accepted only when it belongs to the Steam account logged into this app.
+      if (pairing.playerId !== user.steamId) {
+        console.warn('[Rust+ FCM] Pairing notification ignored: player SteamID does not match authenticated user.');
+        return;
+      }
+
+      const existing = getUserServers(user.steamId).find(
+        (server) => server.ip === pairing.ip && server.port === pairing.port && server.playerId === user.steamId,
+      );
+
+      const serverId = existing?.id || `srv-${crypto.randomBytes(8).toString('hex')}`;
+      const pairedServer: PairedRustServer = {
+        id: serverId,
+        userId: user.steamId,
+        name: pairing.name || pairing.title || `Rust Server [${pairing.ip}:${pairing.port}]`,
+        ip: pairing.ip,
+        port: pairing.port,
+        playerId: user.steamId,
+        playerToken: pairing.playerToken,
+        status: 'connecting',
+        pairingSource: 'in_game_notification',
+        reconnectAttempts: 0,
+        createdAt: existing?.createdAt || Date.now(),
+        lastSync: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+      };
+      pairedServersStore.set(serverId, pairedServer);
+
+      try {
+        const liveData = await connectRustPlus(serverId, {
+          ip: pairedServer.ip,
+          port: pairedServer.port,
+          playerId: pairedServer.playerId,
+          playerToken: pairedServer.playerToken,
+        });
+        pairedServer.status = 'connected';
+        pairedServer.lastSync = new Date(liveData.lastSync || Date.now()).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        pairedServer.lastError = undefined;
+        pairedServer.reconnectAttempts = 0;
+      } catch (error) {
+        pairedServer.status = 'error';
+        pairedServer.lastError = error instanceof Error ? error.message : 'Не удалось подключиться к Rust+.';
+      }
+    });
+
+    return res.json({
+      success: true,
+      running: true,
+      alreadyRunning: result.alreadyRunning,
+      message: result.alreadyRunning
+        ? 'Автосопряжение Rust+ уже активно.'
+        : 'Слушатель Rust+ запущен. Выполни PAIR WITH SERVER в игре — сервер появится автоматически.',
+    });
+  } catch (error) {
+    return res.status(502).json({
+      success: false,
+      error: 'FCM_LISTENER_START_FAILED',
+      message: error instanceof Error ? error.message : 'Не удалось запустить слушатель Rust+.',
+    });
+  }
+});
+
+app.post('/api/rustplus/auto-pair/stop', requireAuth, requireCsrf, rustPlusLimiter, (req: Request, res: Response) => {
+  const user = (req as any).user as SteamSession;
+  const stopped = stopRustPlusPushListener(user.steamId);
+  res.json({ success: true, running: false, stopped });
+});
 
 // GET /api/rustplus/servers: List user's paired servers
 app.get('/api/rustplus/servers', requireAuth, rustPlusLimiter, (req: Request, res: Response) => {
