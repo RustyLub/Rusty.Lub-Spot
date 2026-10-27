@@ -19,7 +19,8 @@ const tools: { id: NavPageId; title: string; description: string; icon: React.Co
 ];
 
 export const HomePage: React.FC = () => {
-  const { setActiveTab, selectedServer, isSimulatedMode, isRustPlusConnected, steamUser, steamAuthState, setShowLoginModal, setIsGuestMode } = useCompanion();
+  const { setActiveTab, selectedServer, pairedServers, steamUser, steamAuthState, setShowLoginModal, setIsGuestMode } = useCompanion();
+  const liveRustPlusServer = pairedServers.find(server => server.status === 'connected');
   const openPage = (page: NavPageId) => setActiveTab(page);
 
   return (
@@ -38,10 +39,10 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
           <div className="relative mt-8 grid gap-3 border-t border-[#34303A] pt-5 sm:grid-cols-3 lg:max-w-4xl">
-            <div className="flex items-center gap-3 rounded border border-[#2C303A] bg-[#0D0F12]/70 p-3"><Server className="h-4 w-4 shrink-0 text-[#F97316]" /><div className="min-w-0"><div className="text-[9px] font-mono tracking-wider text-[#9298A5]">АКТИВНЫЙ СЕРВЕР</div><div className="truncate text-xs font-semibold">{selectedServer.name}</div></div></div>
+            <div className="flex items-center gap-3 rounded border border-[#2C303A] bg-[#0D0F12]/70 p-3"><Server className="h-4 w-4 shrink-0 text-[#F97316]" /><div className="min-w-0"><div className="text-[9px] font-mono tracking-wider text-[#9298A5]">СЕРВЕР RUST+</div><div className="truncate text-xs font-semibold">{liveRustPlusServer?.name || selectedServer.name}</div></div></div>
             <div className="flex items-center gap-3 rounded border border-[#2C303A] bg-[#0D0F12]/70 p-3">
-              {isSimulatedMode ? <Radio className="h-4 w-4 shrink-0 text-[#F5B942]" /> : isRustPlusConnected ? <Wifi className="h-4 w-4 shrink-0 text-[#00C896]" /> : <WifiOff className="h-4 w-4 shrink-0 text-[#F04444]" />}
-              <div><div className="text-[9px] font-mono tracking-wider text-[#9298A5]">РЕЖИМ RUST+</div><div className={isSimulatedMode ? 'text-xs font-semibold text-[#F5B942]' : isRustPlusConnected ? 'text-xs font-semibold text-[#00C896]' : 'text-xs font-semibold text-[#F04444]'}>{isSimulatedMode ? 'ТЕСТОВАЯ СИМУЛЯЦИЯ' : isRustPlusConnected ? 'СТАТУС: ПОДКЛЮЧЕНО' : 'НЕТ ПОДКЛЮЧЕНИЯ'}</div></div>
+              {liveRustPlusServer ? <Wifi className="h-4 w-4 shrink-0 text-[#00C896]" /> : <WifiOff className="h-4 w-4 shrink-0 text-[#F04444]" />}
+              <div><div className="text-[9px] font-mono tracking-wider text-[#9298A5]">РЕЖИМ RUST+</div><div className={liveRustPlusServer ? 'text-xs font-semibold text-[#00C896]' : 'text-xs font-semibold text-[#F04444]'}>{liveRustPlusServer ? 'РЕАЛЬНОЕ СОЕДИНЕНИЕ' : 'НЕТ СОЕДИНЕНИЯ'}</div></div>
             </div>
             <div className="flex items-center gap-3 rounded border border-[#2C303A] bg-[#0D0F12]/70 p-3"><div className={steamAuthState === 'authenticated' && steamUser ? 'h-2 w-2 shrink-0 rounded-full bg-[#00C896]' : 'h-2 w-2 shrink-0 rounded-full bg-[#9298A5]'} /><div className="min-w-0 flex-1"><div className="text-[9px] font-mono tracking-wider text-[#9298A5]">STEAM</div><div className="truncate text-xs font-semibold">{steamAuthState === 'authenticated' && steamUser ? steamUser.displayName : 'Не авторизован'}</div></div>{!(steamAuthState === 'authenticated' && steamUser) && <button onClick={() => { setIsGuestMode(false); setShowLoginModal(true); }} className="text-[10px] font-semibold text-[#F97316] hover:underline">Войти</button>}</div>
           </div>
