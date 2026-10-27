@@ -4,6 +4,7 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
+import { connectRustPlus, disconnectRustPlus, getRustPlusLiveData, refreshRustPlusData } from './src/server/rustplusService';
 
 dotenv.config();
 
@@ -991,7 +992,7 @@ app.post('/api/rustplus/pair', requireAuth, requireCsrf, rustPlusLimiter, (req: 
 });
 
 // POST /api/rustplus/servers/:id/connect: Initiate connection test with exponential backoff & rate limiting
-app.post('/api/rustplus/servers/:id/connect', requireAuth, requireCsrf, rustPlusLimiter, (req: Request, res: Response) => {
+app.post('/api/rustplus/servers/:id/connect', requireAuth, requireCsrf, rustPlusLimiter, async (req: Request, res: Response) => {
   const user = (req as any).user as SteamSession;
   const serverId = req.params.id;
   const server = pairedServersStore.get(serverId);
@@ -999,49 +1000,93 @@ app.post('/api/rustplus/servers/:id/connect', requireAuth, requireCsrf, rustPlus
   if (!server) {
     return res.status(404).json({ error: 'SERVER_NOT_FOUND', message: 'Сервер не найден.' });
   }
-
   if (server.userId !== user.steamId) {
     return res.status(403).json({ error: 'FORBIDDEN', message: 'Доступ к чужому серверу запрещен.' });
   }
 
-  const now = Date.now();
-  if (server.nextRetryAt && server.nextRetryAt > now) {
-    const waitSec = Math.ceil((server.nextRetryAt - now) / 1000);
-    return res.status(429).json({
-      error: 'RECONNECT_COOLDOWN',
-      message: `Повторная попытка подключения ограничена. Подождите ${waitSec} сек.`,
+  server.status = 'connecting';
+  server.lastError = undefined;
+  try {
+    const liveData = await connectRustPlus(serverId, {
+      ip: server.ip,
+      port: server.port,
+      playerId: server.playerId,
+      playerToken: server.playerToken,
+    });
+    server.status = 'connected';
+    server.lastSync = new Date(liveData.lastSync || Date.now()).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    server.lastError = undefined;
+    server.reconnectAttempts = 0;
+    server.nextRetryAt = undefined;
+    return res.json({
+      success: true,
+      message: 'Настоящее соединение Rust+ Companion установлено; получены данные сервера.',
+      status: server.status,
+      liveData,
+    });
+  } catch (error) {
+    server.status = 'error';
+    server.lastError = error instanceof Error ? error.message : 'Не удалось подключиться к Rust+.';
+    server.reconnectAttempts++;
+    server.nextRetryAt = Date.now() + Math.min(60000, 5000 * Math.pow(2, Math.min(server.reconnectAttempts, 4)));
+    return res.status(502).json({
+      success: false,
+      error: 'RUSTPLUS_CONNECTION_FAILED',
+      message: server.lastError,
+      status: server.status,
+    });
+  }
+});
+
+// GET /api/rustplus/servers/:id/data: Current data received from the live Rust+ connection
+app.get('/api/rustplus/servers/:id/data', requireAuth, rustPlusLimiter, (req: Request, res: Response) => {
+  const user = (req as any).user as SteamSession;
+  const server = pairedServersStore.get(req.params.id);
+
+  if (!server || server.userId !== user.steamId) {
+    return res.status(404).json({ error: 'SERVER_NOT_FOUND', message: 'Сервер не найден или доступ запрещен.' });
+  }
+
+  const liveData = getRustPlusLiveData(server.id);
+  if (!liveData) {
+    return res.status(409).json({
+      success: false,
+      connected: false,
+      message: server.lastError || 'Нет активного соединения. Нажмите «Подключиться» для получения реальных данных.',
     });
   }
 
-  server.status = 'connecting';
+  server.status = liveData.connected ? 'connected' : 'error';
+  server.lastError = liveData.lastError;
+  if (liveData.lastSync) {
+    server.lastSync = new Date(liveData.lastSync).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  }
 
-  // Simulate verification of connection handshake:
-  // In real network environments, Rust+ uses WebSocket to ws://ip:port with protobuf AppRequest.
-  // We record status and next backoff window.
-  setTimeout(() => {
-    // If invalid test port or IP
-    if (server.ip === '0.0.0.0' || server.port <= 0) {
-      server.status = 'error';
-      server.lastError = 'Не удалось разрешить адрес или порт хоста Rust+.';
-      server.reconnectAttempts++;
-      server.nextRetryAt = Date.now() + Math.min(60000, 10000 * Math.pow(2, server.reconnectAttempts));
-    } else {
-      server.status = 'connected';
-      server.lastSync = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-      server.lastError = undefined;
-      server.reconnectAttempts = 0;
-      server.nextRetryAt = undefined;
-    }
-  }, 1000);
-
-  res.json({
-    success: true,
-    message: 'Инициировано подключение к сопряженному серверу Rust+.',
-    status: 'connecting',
-  });
+  return res.json({ success: true, connected: liveData.connected, liveData });
 });
 
-// POST /api/rustplus/servers/:id/disconnect: Disconnect server
+// POST /api/rustplus/servers/:id/refresh: Request fresh server data over the live connection
+app.post('/api/rustplus/servers/:id/refresh', requireAuth, requireCsrf, rustPlusLimiter, async (req: Request, res: Response) => {
+  const user = (req as any).user as SteamSession;
+  const server = pairedServersStore.get(req.params.id);
+
+  if (!server || server.userId !== user.steamId) {
+    return res.status(404).json({ error: 'SERVER_NOT_FOUND', message: 'Сервер не найден или доступ запрещен.' });
+  }
+
+  try {
+    const liveData = await refreshRustPlusData(server.id, Boolean(req.body?.includeMap));
+    server.status = 'connected';
+    server.lastSync = new Date(liveData.lastSync || Date.now()).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    server.lastError = undefined;
+    return res.json({ success: true, connected: true, liveData });
+  } catch (error) {
+    server.lastError = error instanceof Error ? error.message : 'Не удалось обновить данные Rust+.';
+    return res.status(502).json({ success: false, connected: false, message: server.lastError });
+  }
+});
+
+// POST /api/rustplus/servers/:id/disconnect: Close the actual Rust+ WebSocket connection
 app.post('/api/rustplus/servers/:id/disconnect', requireAuth, requireCsrf, rustPlusLimiter, (req: Request, res: Response) => {
   const user = (req as any).user as SteamSession;
   const serverId = req.params.id;
@@ -1051,14 +1096,12 @@ app.post('/api/rustplus/servers/:id/disconnect', requireAuth, requireCsrf, rustP
     return res.status(404).json({ error: 'SERVER_NOT_FOUND', message: 'Сервер не найден или доступ запрещен.' });
   }
 
+  disconnectRustPlus(serverId);
   server.status = 'unpaired';
   server.lastSync = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  server.lastError = undefined;
 
-  res.json({
-    success: true,
-    message: 'Соединение с сервером Rust+ разорвано.',
-    status: 'unpaired',
-  });
+  return res.json({ success: true, message: 'Соединение Rust+ Companion закрыто.', status: 'unpaired' });
 });
 
 // DELETE /api/rustplus/servers/:id: Remove server from user's account
