@@ -45,7 +45,7 @@ export const TopBar: React.FC = () => {
       {/* 1. Brand Mark R.L. and RUSTY.LUB SPOT + 2. Server Selector */}
       <div className="flex items-center gap-2.5">
         <div 
-          onClick={() => setActiveTab('overview')} 
+          onClick={() => setActiveTab('home')} 
           className="flex items-center gap-2 cursor-pointer group pr-2.5 border-r border-[#262A36]"
           title="Rusty.Lub Spot — Главная"
         >
