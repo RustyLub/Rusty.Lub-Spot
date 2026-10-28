@@ -83,50 +83,50 @@ export const SmartElectricalPage: React.FC = () => {
     <div className="p-3 space-y-3 max-w-[1600px] mx-auto select-none">
       {/* Toast notice */}
       {activePresetNotice && (
-        <div className="bg-[#171A21] border border-[#F97316] text-[#E6E8EC] px-3 py-1.5 rounded text-xs font-mono flex items-center justify-between shadow-lg">
+        <div className="bg-[#1D2026] border border-[#FF7417] text-[#F0F1F3] px-3 py-1.5 rounded text-xs font-mono flex items-center justify-between shadow-lg">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#00C896]" />
+            <span className="w-2 h-2 rounded-full bg-[#28C995]" />
             {activePresetNotice}
           </span>
-          <button onClick={() => setActivePresetNotice(null)} className="text-[#9298A5] hover:text-white">✕</button>
+          <button onClick={() => setActivePresetNotice(null)} className="text-[#9BA2AF] hover:text-white">✕</button>
         </div>
       )}
 
       {/* Top Telemetry & Rust+ Protocol Bar */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded bg-[#171A21] border border-[#262A36]">
-            <Zap className="w-5 h-5 text-[#F97316]" />
+          <div className="p-2 rounded bg-[#1D2026] border border-[#2B2F38]">
+            <Zap className="w-5 h-5 text-[#FF7417]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono font-bold text-[#E6E8EC] text-sm">
+              <span className="font-mono font-bold text-[#F0F1F3] text-sm">
                 УМНАЯ ЭЛЕКТРИКА БАЗЫ (RUST+ SMART DEVICES)
               </span>
-              <span className="text-[10px] font-mono text-[#00C896] bg-[#10241B] border border-[#00C896]/40 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-mono text-[#28C995] bg-[#10241B] border border-[#28C995]/40 px-2 py-0.5 rounded">
                 СЕТЬ 240V АКТИВНА
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#9298A5] mt-0.5">
-              Канал сопряжения устройств: <span className="text-[#E6E8EC]">28082 TCP/WEBSOCKET</span> ·{' '}
+            <div className="text-[11px] font-mono text-[#9BA2AF] mt-0.5">
+              Канал сопряжения устройств: <span className="text-[#F0F1F3]">28082 TCP/WEBSOCKET</span> ·{' '}
               {isSimulatedMode ? (
                 <span className="text-[#F5B942]">РЕЖИМ ТЕСТОВОЙ СИМУЛЯЦИИ RUST+</span>
               ) : (
-                <span className="text-[#00C896]">LIVE RUST+ FEED</span>
+                <span className="text-[#28C995]">LIVE RUST+ FEED</span>
               )}
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-4 font-mono text-xs">
-          <div className="bg-[#171A21] px-3 py-1.5 rounded border border-[#262A36]">
-            <span className="text-[#9298A5]">ОБЩАЯ НАГРУЗКА: </span>
-            <span className="text-[#F97316] font-bold tabular-nums">{totalPowerConsumption} W</span>
+          <div className="bg-[#1D2026] px-3 py-1.5 rounded border border-[#2B2F38]">
+            <span className="text-[#9BA2AF]">ОБЩАЯ НАГРУЗКА: </span>
+            <span className="text-[#FF7417] font-bold tabular-nums">{totalPowerConsumption} W</span>
           </div>
 
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> Подключить устройство
           </button>
@@ -137,54 +137,54 @@ export const SmartElectricalPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Battery Power Bank */}
         {mainBattery && (
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 flex flex-col justify-between">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-                <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                  <Battery className="w-4 h-4 text-[#00C896]" />
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+                <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                  <Battery className="w-4 h-4 text-[#28C995]" />
                   <span>ГЛАВНЫЙ АККУМУЛЯТОР (LARGE BATTERY)</span>
                 </div>
-                <span className="font-mono text-[#00C896] font-bold text-xs">
+                <span className="font-mono text-[#28C995] font-bold text-xs">
                   {mainBattery.batteryLevel}%
                 </span>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-2.5 bg-[#171A21] rounded-full overflow-hidden mb-3 border border-[#262A36]">
+              <div className="w-full h-2.5 bg-[#1D2026] rounded-full overflow-hidden mb-3 border border-[#2B2F38]">
                 <div
-                  className="h-full bg-[#00C896] rounded-full transition-all duration-300"
+                  className="h-full bg-[#28C995] rounded-full transition-all duration-300"
                   style={{ width: `${mainBattery.batteryLevel}%` }}
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                <div className="bg-[#171A21] p-2 rounded border border-[#262A36]">
-                  <div className="text-[10px] text-[#9298A5]">ГЕНЕРАЦИЯ (ВХОД)</div>
-                  <div className="text-[#00C896] font-bold">+{mainBattery.batteryInput} W (Wind)</div>
+                <div className="bg-[#1D2026] p-2 rounded border border-[#2B2F38]">
+                  <div className="text-[10px] text-[#9BA2AF]">ГЕНЕРАЦИЯ (ВХОД)</div>
+                  <div className="text-[#28C995] font-bold">+{mainBattery.batteryInput} W (Wind)</div>
                 </div>
-                <div className="bg-[#171A21] p-2 rounded border border-[#262A36]">
-                  <div className="text-[10px] text-[#9298A5]">НАГРУЗКА (ВЫХОД)</div>
+                <div className="bg-[#1D2026] p-2 rounded border border-[#2B2F38]">
+                  <div className="text-[10px] text-[#9BA2AF]">НАГРУЗКА (ВЫХОД)</div>
                   <div className="text-[#F5B942] font-bold">-{mainBattery.batteryOutput} W</div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-2 text-[10px] font-mono text-[#9298A5] flex justify-between border-t border-[#262A36] mt-3">
+            <div className="pt-2 text-[10px] font-mono text-[#9BA2AF] flex justify-between border-t border-[#2B2F38] mt-3">
               <span>РЕЗЕРВ АВТОНОМНОСТИ: ~18 ЧАСОВ</span>
-              <span className="text-[#00C896]">ЗАРЯДКА: ПОЛНАЯ</span>
+              <span className="text-[#28C995]">ЗАРЯДКА: ПОЛНАЯ</span>
             </div>
           </div>
         )}
 
         {/* Tactical Presets */}
-        <div className="lg:col-span-2 bg-[#12141A] border border-[#262A36] rounded p-3.5 flex flex-col justify-between">
+        <div className="lg:col-span-2 bg-[#17191E] border border-[#2B2F38] rounded p-3.5 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Sliders className="w-4 h-4 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Sliders className="w-4 h-4 text-[#FF7417]" />
                 <span>ТАКТИЧЕСКИЕ ПРЕСЕТЫ ЭЛЕКТРИКИ (1-CLICK)</span>
               </div>
-              <span className="text-[10px] font-mono text-[#9298A5]">АВТО-ПЕРЕКЛЮЧЕНИЕ</span>
+              <span className="text-[10px] font-mono text-[#9BA2AF]">АВТО-ПЕРЕКЛЮЧЕНИЕ</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -195,7 +195,7 @@ export const SmartElectricalPage: React.FC = () => {
                 <div className="font-bold font-mono text-xs text-[#F04444] group-hover:text-red-300">
                   ТРЕВОГА РЕЙДА
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   Турели + ПВО + сирена
                 </div>
               </button>
@@ -207,7 +207,7 @@ export const SmartElectricalPage: React.FC = () => {
                 <div className="font-bold font-mono text-xs text-[#F5B942] group-hover:text-amber-300">
                   НОЧНОЙ СВЕТ
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   Свет ВКЛ, ферма ВЫКЛ
                 </div>
               </button>
@@ -219,28 +219,28 @@ export const SmartElectricalPage: React.FC = () => {
                 <div className="font-bold font-mono text-xs text-blue-400 group-hover:text-blue-300">
                   ЛОКДАУН
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   Все выключатели ВКЛ
                 </div>
               </button>
 
               <button
                 onClick={() => handleApplyPreset('farming', 'Ферма ягод')}
-                className="p-2.5 rounded bg-[#10241B] hover:bg-[#153124] border border-[#00C896]/60 text-left transition-colors group"
+                className="p-2.5 rounded bg-[#10241B] hover:bg-[#153124] border border-[#28C995]/60 text-left transition-colors group"
               >
-                <div className="font-bold font-mono text-xs text-[#00C896] group-hover:text-emerald-300">
+                <div className="font-bold font-mono text-xs text-[#28C995] group-hover:text-emerald-300">
                   ФЕРМА ЯГОД
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   Насосы + фитолампы ВКЛ
                 </div>
               </button>
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] font-mono text-[#9298A5] flex justify-between border-t border-[#262A36] mt-3">
+          <div className="pt-2 text-[10px] font-mono text-[#9BA2AF] flex justify-between border-t border-[#2B2F38] mt-3">
             <span>СИНХРОНИЗАЦИЯ RUST+: МГНОВЕННО</span>
-            <span className="text-[#00C896]">СТАТУС ПЕРЕДАТЧИКА: АКТИВЕН</span>
+            <span className="text-[#28C995]">СТАТУС ПЕРЕДАТЧИКА: АКТИВЕН</span>
           </div>
         </div>
       </div>
@@ -248,15 +248,15 @@ export const SmartElectricalPage: React.FC = () => {
       {/* Group Filter Tabs & Bulk Actions */}
       <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
         <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono">
-          <span className="text-[#9298A5] text-[11px] mr-1">ГРУППА:</span>
+          <span className="text-[#9BA2AF] text-[11px] mr-1">ГРУППА:</span>
           {['Все', ...groups].map(grp => (
             <button
               key={grp}
               onClick={() => setSelectedGroupFilter(grp)}
               className={`px-2.5 py-1 rounded border transition-colors ${
                 selectedGroupFilter === grp
-                  ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-medium'
-                  : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                  ? 'bg-[#1D2026] border-[#FF7417] text-[#FF7417] font-medium'
+                  : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
               }`}
             >
               {grp}
@@ -268,7 +268,7 @@ export const SmartElectricalPage: React.FC = () => {
           <div className="flex items-center gap-2 text-xs font-mono">
             <button
               onClick={() => setGroupState(selectedGroupFilter, true)}
-              className="px-2.5 py-1 rounded bg-[#10241B] hover:bg-[#153124] text-[#00C896] border border-[#00C896]/40"
+              className="px-2.5 py-1 rounded bg-[#10241B] hover:bg-[#153124] text-[#28C995] border border-[#28C995]/40"
             >
               Включить группу
             </button>
@@ -294,8 +294,8 @@ export const SmartElectricalPage: React.FC = () => {
               key={dev.id}
               className={`p-3 rounded border transition-all ${
                 dev.state
-                  ? 'bg-[#171A21] border-[#262A36]'
-                  : 'bg-[#12141A] border-[#262A36] opacity-75'
+                  ? 'bg-[#1D2026] border-[#2B2F38]'
+                  : 'bg-[#17191E] border-[#2B2F38] opacity-75'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
@@ -303,8 +303,8 @@ export const SmartElectricalPage: React.FC = () => {
                   <div
                     className={`w-7 h-7 rounded flex items-center justify-center ${
                       dev.state
-                        ? 'bg-[#F97316]/20 text-[#F97316]'
-                        : 'bg-[#171A21] text-[#9298A5]'
+                        ? 'bg-[#FF7417]/20 text-[#FF7417]'
+                        : 'bg-[#1D2026] text-[#9BA2AF]'
                     }`}
                   >
                     {isTurret ? (
@@ -318,10 +318,10 @@ export const SmartElectricalPage: React.FC = () => {
                     )}
                   </div>
                   <div className="truncate">
-                    <div className="font-medium text-xs text-[#E6E8EC] truncate">
+                    <div className="font-medium text-xs text-[#F0F1F3] truncate">
                       {dev.name}
                     </div>
-                    <div className="text-[10px] font-mono text-[#9298A5]">
+                    <div className="text-[10px] font-mono text-[#9BA2AF]">
                       {dev.group} · {dev.powerUsage}W
                     </div>
                   </div>
@@ -331,7 +331,7 @@ export const SmartElectricalPage: React.FC = () => {
                 <button
                   onClick={() => toggleSmartDevice(dev.id)}
                   className={`w-11 h-6 rounded-full p-0.5 transition-colors relative flex items-center ${
-                    dev.state ? 'bg-[#F97316]' : 'bg-[#262A36]'
+                    dev.state ? 'bg-[#FF7417]' : 'bg-[#2B2F38]'
                   }`}
                   title={dev.state ? 'Выключить' : 'Включить'}
                 >
@@ -344,22 +344,22 @@ export const SmartElectricalPage: React.FC = () => {
               </div>
 
               {/* Status Details */}
-              <div className="pt-2 border-t border-[#262A36] flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#9298A5]">
+              <div className="pt-2 border-t border-[#2B2F38] flex items-center justify-between text-[11px] font-mono">
+                <span className="text-[#9BA2AF]">
                   СТАТУС:{' '}
-                  <strong className={dev.state ? 'text-[#00C896]' : 'text-[#9298A5]'}>
+                  <strong className={dev.state ? 'text-[#28C995]' : 'text-[#9BA2AF]'}>
                     {dev.state ? 'ВКЛЮЧЕНО' : 'ОТКЛЮЧЕНО'}
                   </strong>
                 </span>
 
                 {isTurret && dev.ammoCount !== undefined && (
-                  <span className="text-[#E6E8EC]">Патроны: {dev.ammoCount} шт</span>
+                  <span className="text-[#F0F1F3]">Патроны: {dev.ammoCount} шт</span>
                 )}
                 {isCounter && dev.counterValue !== undefined && (
                   <span className="text-[#F5B942]">Счет: {dev.counterValue}</span>
                 )}
                 {dev.lastTriggered && (
-                  <span className="text-[#9298A5]">{dev.lastTriggered}</span>
+                  <span className="text-[#9BA2AF]">{dev.lastTriggered}</span>
                 )}
               </div>
             </div>
@@ -370,32 +370,32 @@ export const SmartElectricalPage: React.FC = () => {
       {/* Add Device Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-4 w-full max-w-sm text-xs space-y-3">
-            <div className="flex justify-between items-center pb-2 border-b border-[#262A36]">
-              <span className="font-mono font-bold text-[#E6E8EC] text-sm">ПОДКЛЮЧИТЬ УСТРОЙСТВО RUST+</span>
-              <button onClick={() => setIsAddModalOpen(false)} className="text-[#9298A5] hover:text-[#E6E8EC]">✕</button>
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 w-full max-w-sm text-xs space-y-3">
+            <div className="flex justify-between items-center pb-2 border-b border-[#2B2F38]">
+              <span className="font-mono font-bold text-[#F0F1F3] text-sm">ПОДКЛЮЧИТЬ УСТРОЙСТВО RUST+</span>
+              <button onClick={() => setIsAddModalOpen(false)} className="text-[#9BA2AF] hover:text-[#F0F1F3]">✕</button>
             </div>
 
             <form onSubmit={handleCreateDevice} className="space-y-2.5">
               <div>
-                <label className="block text-[#9298A5] mb-1">Название устройства</label>
+                <label className="block text-[#9BA2AF] mb-1">Название устройства</label>
                 <input
                   type="text"
                   required
                   placeholder="напр: Освещение двора / ПВО #2"
                   value={newDevName}
                   onChange={e => setNewDevName(e.target.value)}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Тип устройства</label>
+                  <label className="block text-[#9BA2AF] mb-1">Тип устройства</label>
                   <select
                     value={newDevType}
                     onChange={e => setNewDevType(e.target.value as any)}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                   >
                     <option value="switch">Переключатель (Smart Switch)</option>
                     <option value="alarm">Сигнализация (Smart Alarm)</option>
@@ -406,11 +406,11 @@ export const SmartElectricalPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Группа</label>
+                  <label className="block text-[#9BA2AF] mb-1">Группа</label>
                   <select
                     value={newDevGroup}
                     onChange={e => setNewDevGroup(e.target.value as any)}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                   >
                     {groups.map(g => (
                       <option key={g} value={g}>{g}</option>
@@ -420,14 +420,14 @@ export const SmartElectricalPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#9298A5] mb-1">Потребление энергии (Ватт)</label>
+                <label className="block text-[#9BA2AF] mb-1">Потребление энергии (Ватт)</label>
                 <input
                   type="number"
                   min="0"
                   max="100"
                   value={newDevPower}
                   onChange={e => setNewDevPower(Number(e.target.value))}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
@@ -435,13 +435,13 @@ export const SmartElectricalPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-3 py-1.5 rounded bg-[#171A21] text-[#9298A5] hover:bg-[#262A36] hover:text-[#E6E8EC]"
+                  className="px-3 py-1.5 rounded bg-[#1D2026] text-[#9BA2AF] hover:bg-[#2B2F38] hover:text-[#F0F1F3]"
                 >
                   Отмена
                 </button>
                 <button
                   type="submit"
-                  className="px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-medium"
+                  className="px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-medium"
                 >
                   Сопряжение
                 </button>
