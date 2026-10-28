@@ -101,9 +101,9 @@ export const Sidebar: React.FC = () => {
                   <span
                     className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold ${
                       isActive
-                        ? 'bg-[#F97316] text-white'
-                        : 'bg-[#262A36] text-[#E6E8EC] group-hover:bg-[#383E4E]'
-                    } ${collapsed ? 'absolute top-1 right-1 w-2 h-2 p-0 rounded-full bg-[#F97316]' : ''}`}
+                        ? 'bg-[#FF7417] text-white'
+                        : 'bg-[#2B2F38] text-[#F0F1F3] group-hover:bg-[#383E4E]'
+                    } ${collapsed ? 'absolute top-1 right-1 w-2 h-2 p-0 rounded-full bg-[#FF7417]' : ''}`}
                   >
                     {!collapsed && item.badge}
                   </span>
@@ -126,7 +126,7 @@ export const Sidebar: React.FC = () => {
           ) : (
             <>
               <ChevronLeft className="w-4 h-4" />
-              <span className="text-[11px] font-mono text-[#9298A5]">Свернуть меню</span>
+              <span className="text-[11px] font-mono text-[#9BA2AF]">Свернуть меню</span>
             </>
           )}
         </button>
