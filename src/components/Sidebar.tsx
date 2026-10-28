@@ -60,7 +60,7 @@ export const Sidebar: React.FC = () => {
 
   return (
     <aside
-      className={`h-[calc(100vh-2.75rem)] bg-[#101114]/95 border-r border-[#2B2F38] flex flex-col justify-between transition-all duration-200 select-none shrink-0 backdrop-blur-xl ${
+      className={`h-[calc(100vh-3.5rem)] bg-[#101114]/95 border-r border-[#2B2F38] flex flex-col justify-between transition-all duration-200 select-none shrink-0 backdrop-blur-xl ${
         collapsed ? 'w-14' : 'w-60'
       }`}
     >
