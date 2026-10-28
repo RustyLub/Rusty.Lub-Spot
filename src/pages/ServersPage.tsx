@@ -308,8 +308,8 @@ export const ServersPage: React.FC = () => {
     switch (status) {
       case 'connected':
         return (
-          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#00C896]/15 text-[#00C896] border border-[#00C896]/40 font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00C896]" />
+          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#28C995]/15 text-[#28C995] border border-[#28C995]/40 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#28C995]" />
             ПОДКЛЮЧЁН
           </span>
         );
@@ -328,7 +328,7 @@ export const ServersPage: React.FC = () => {
         );
       case 'reauth_required':
         return (
-          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#F97316]/15 text-[#F97316] border border-[#F97316]/40 font-bold">
+          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#FF7417]/15 text-[#FF7417] border border-[#FF7417]/40 font-bold">
             ТРЕБУЕТСЯ ПОВТОРНАЯ АВТОРИЗАЦИЯ
           </span>
         );
@@ -341,7 +341,7 @@ export const ServersPage: React.FC = () => {
       case 'unpaired':
       default:
         return (
-          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#171A21] text-[#9298A5] border border-[#262A36] font-bold">
+          <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded bg-[#1D2026] text-[#9BA2AF] border border-[#2B2F38] font-bold">
             НЕ ПРИВЯЗАН
           </span>
         );
@@ -359,19 +359,19 @@ export const ServersPage: React.FC = () => {
   return (
     <div className="p-3 space-y-3 max-w-[1400px] mx-auto select-none">
       {/* Header with Dual Tab Switcher */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded bg-[#171A21] border border-[#262A36]">
-            <Server className="w-5 h-5 text-[#F97316]" />
+          <div className="p-2 rounded bg-[#1D2026] border border-[#2B2F38]">
+            <Server className="w-5 h-5 text-[#FF7417]" />
           </div>
           <div>
-            <div className="font-mono font-bold text-[#E6E8EC] text-sm flex items-center gap-2">
+            <div className="font-mono font-bold text-[#F0F1F3] text-sm flex items-center gap-2">
               <span>СЕРВЕРЫ И СОПРЯЖЕНИЕ RUST+</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#171A21] text-[#9298A5] border border-[#262A36]">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1D2026] text-[#9BA2AF] border border-[#2B2F38]">
                 COMPANION PROTOCOL
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#9298A5]">
+            <div className="text-[11px] font-mono text-[#9BA2AF]">
               Управление реальным сопряжением через Rust+ Companion и каталогом серверов
             </div>
           </div>
@@ -379,13 +379,13 @@ export const ServersPage: React.FC = () => {
 
         {/* Tab Controls */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center p-0.5 bg-[#0D0F12] border border-[#262A36] rounded font-mono text-xs">
+          <div className="flex items-center p-0.5 bg-[#101114] border border-[#2B2F38] rounded font-mono text-xs">
             <button
               onClick={() => setActiveTab('paired')}
               className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
                 activeTab === 'paired'
-                  ? 'bg-[#171A21] text-[#F97316] font-bold shadow-sm'
-                  : 'text-[#9298A5] hover:text-[#E6E8EC]'
+                  ? 'bg-[#1D2026] text-[#FF7417] font-bold shadow-sm'
+                  : 'text-[#9BA2AF] hover:text-[#F0F1F3]'
               }`}
             >
               <Radio className="w-3.5 h-3.5" />
@@ -395,8 +395,8 @@ export const ServersPage: React.FC = () => {
               onClick={() => setActiveTab('browser')}
               className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
                 activeTab === 'browser'
-                  ? 'bg-[#171A21] text-[#F97316] font-bold shadow-sm'
-                  : 'text-[#9298A5] hover:text-[#E6E8EC]'
+                  ? 'bg-[#1D2026] text-[#FF7417] font-bold shadow-sm'
+                  : 'text-[#9BA2AF] hover:text-[#F0F1F3]'
               }`}
             >
               <Compass className="w-3.5 h-3.5" />
@@ -413,14 +413,14 @@ export const ServersPage: React.FC = () => {
                   setIsPairingWizardOpen(true);
                 }
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold transition-colors shadow-sm"
             >
               <Plus className="w-3.5 h-3.5" /> Привязать сервер Rust+
             </button>
           ) : (
             <button
               onClick={() => setIsAddBrowserModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold transition-colors shadow-sm"
             >
               <Plus className="w-3.5 h-3.5" /> Добавить в каталог
             </button>
@@ -433,21 +433,21 @@ export const ServersPage: React.FC = () => {
         <div className="space-y-3">
           {/* Steam Auth Requirement Banner if not logged in */}
           {steamAuthState !== 'authenticated' && (
-            <div className="p-3.5 rounded bg-[#171A21] border border-[#F97316]/50 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="p-3.5 rounded bg-[#1D2026] border border-[#FF7417]/50 flex flex-wrap items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2.5">
-                <Shield className="w-5 h-5 text-[#F97316] shrink-0" />
+                <Shield className="w-5 h-5 text-[#FF7417] shrink-0" />
                 <div>
-                  <div className="font-bold text-[#E6E8EC] font-mono">
+                  <div className="font-bold text-[#F0F1F3] font-mono">
                     ДЛЯ СОПРЯЖЕНИЯ RUST+ ТРЕБУЕТСЯ АВТОРИЗАЦИЯ STEAM
                   </div>
-                  <div className="text-[#9298A5] text-[11px] font-sans mt-0.5">
+                  <div className="text-[#9BA2AF] text-[11px] font-sans mt-0.5">
                     Каждый сервер Rust+ генерирует Player Token, привязанный к вашему личному SteamID64. Войдите через Steam, чтобы токены хранились на сервере изолированно под вашей учетной записью.
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setShowLoginModal(true)}
-                className="px-3.5 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold transition-colors shrink-0 shadow-sm"
+                className="px-3.5 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold transition-colors shrink-0 shadow-sm"
               >
                 Войти через Steam
               </button>
@@ -456,44 +456,44 @@ export const ServersPage: React.FC = () => {
 
           {/* Automatic Rust+ pairing via Companion push notifications */}
           {steamAuthState === 'authenticated' && (
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-4 space-y-3 text-xs">
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 space-y-3 text-xs">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="flex items-start gap-2.5">
-                  <Radio className="w-5 h-5 text-[#F97316] shrink-0 mt-0.5" />
+                  <Radio className="w-5 h-5 text-[#FF7417] shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-mono font-bold text-[#E6E8EC] text-sm">АВТОСОПРЯЖЕНИЕ RUST+ ЧЕРЕЗ УВЕДОМЛЕНИЯ</div>
-                    <p className="text-[11px] text-[#9298A5] mt-1 leading-relaxed">
+                    <div className="font-mono font-bold text-[#F0F1F3] text-sm">АВТОСОПРЯЖЕНИЕ RUST+ ЧЕРЕЗ УВЕДОМЛЕНИЯ</div>
+                    <p className="text-[11px] text-[#9BA2AF] mt-1 leading-relaxed">
                       Один раз подключи FCM credentials. Затем нажми PAIR WITH SERVER в Rust — приложение само добавит сервер и попробует подключиться.
                     </p>
-                    <a className="inline-flex items-center gap-1 mt-2 text-[#F97316] hover:text-[#FF9B5E] underline underline-offset-2"
+                    <a className="inline-flex items-center gap-1 mt-2 text-[#FF7417] hover:text-[#FF9B5E] underline underline-offset-2"
                        href="https://rustplusplus-credentials.netlify.app/" target="_blank" rel="noreferrer">
                       Получить credentials через официальный инструмент <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
-                <span className={`px-2 py-1 rounded border font-mono text-[10px] ${autoPairRunning ? 'border-[#00C896]/40 bg-[#00C896]/10 text-[#00C896]' : 'border-[#262A36] bg-[#171A21] text-[#9298A5]'}`}>
+                <span className={`px-2 py-1 rounded border font-mono text-[10px] ${autoPairRunning ? 'border-[#28C995]/40 bg-[#28C995]/10 text-[#28C995]' : 'border-[#2B2F38] bg-[#1D2026] text-[#9BA2AF]'}`}>
                   {autoPairRunning ? 'СЛУШАТЕЛЬ АКТИВЕН' : 'СЛУШАТЕЛЬ ОТКЛЮЧЁН'}
                 </span>
               </div>
               {!autoPairRunning && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <label className="space-y-1">
-                    <span className="block text-[10px] text-[#9298A5] font-mono">GCM ANDROID ID</span>
+                    <span className="block text-[10px] text-[#9BA2AF] font-mono">GCM ANDROID ID</span>
                     <input value={autoPairAndroidId} onChange={(e) => setAutoPairAndroidId(e.target.value)}
                       autoComplete="off" spellCheck={false} placeholder="Android ID"
-                      className="w-full bg-[#0D0F12] border border-[#262A36] rounded px-3 py-2 text-[#E6E8EC] outline-none focus:border-[#F97316]" />
+                      className="w-full bg-[#101114] border border-[#2B2F38] rounded px-3 py-2 text-[#F0F1F3] outline-none focus:border-[#FF7417]" />
                   </label>
                   <label className="space-y-1">
-                    <span className="block text-[10px] text-[#9298A5] font-mono">GCM SECURITY TOKEN</span>
+                    <span className="block text-[10px] text-[#9BA2AF] font-mono">GCM SECURITY TOKEN</span>
                     <input value={autoPairSecurityToken} onChange={(e) => setAutoPairSecurityToken(e.target.value)}
                       type="password" autoComplete="new-password" spellCheck={false} placeholder="Security Token"
-                      className="w-full bg-[#0D0F12] border border-[#262A36] rounded px-3 py-2 text-[#E6E8EC] outline-none focus:border-[#F97316]" />
+                      className="w-full bg-[#101114] border border-[#2B2F38] rounded px-3 py-2 text-[#F0F1F3] outline-none focus:border-[#FF7417]" />
                   </label>
                 </div>
               )}
-              {autoPairMessage && <div className="text-[11px] text-[#E6E8EC] bg-[#171A21] border border-[#262A36] rounded p-2">{autoPairMessage}</div>}
+              {autoPairMessage && <div className="text-[11px] text-[#F0F1F3] bg-[#1D2026] border border-[#2B2F38] rounded p-2">{autoPairMessage}</div>}
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[10px] text-[#9298A5]">Credentials хранятся только в памяти сервера и не отправляются обратно в браузер. После перезапуска потребуется запустить слушатель снова.</p>
+                <p className="text-[10px] text-[#9BA2AF]">Credentials хранятся только в памяти сервера и не отправляются обратно в браузер. После перезапуска потребуется запустить слушатель снова.</p>
                 {autoPairRunning ? (
                   <button disabled={autoPairLoading} onClick={stopAutoPairing}
                     className="px-3 py-2 rounded border border-[#F04444]/40 text-[#F04444] hover:bg-[#F04444]/10 disabled:opacity-50 font-mono font-bold">
@@ -501,7 +501,7 @@ export const ServersPage: React.FC = () => {
                   </button>
                 ) : (
                   <button disabled={autoPairLoading} onClick={startAutoPairing}
-                    className="px-3 py-2 rounded bg-[#F97316] hover:bg-[#E05326] text-white disabled:opacity-50 font-mono font-bold">
+                    className="px-3 py-2 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white disabled:opacity-50 font-mono font-bold">
                     {autoPairLoading ? 'ЗАПУСК…' : 'ВКЛЮЧИТЬ АВТОСОПРЯЖЕНИЕ'}
                   </button>
                 )}
@@ -511,15 +511,15 @@ export const ServersPage: React.FC = () => {
 
           {/* Paired Server Cards List */}
           {pairedServers.length === 0 ? (
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-8 text-center space-y-3 text-xs">
-              <div className="w-12 h-12 rounded-full bg-[#171A21] border border-[#262A36] flex items-center justify-center mx-auto text-[#9298A5]">
-                <Radio className="w-6 h-6 text-[#F97316]" />
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-8 text-center space-y-3 text-xs">
+              <div className="w-12 h-12 rounded-full bg-[#1D2026] border border-[#2B2F38] flex items-center justify-center mx-auto text-[#9BA2AF]">
+                <Radio className="w-6 h-6 text-[#FF7417]" />
               </div>
               <div className="max-w-md mx-auto space-y-1">
-                <div className="font-mono font-bold text-sm text-[#E6E8EC]">
+                <div className="font-mono font-bold text-sm text-[#F0F1F3]">
                   НЕТ ПРИВЯЗАННЫХ СЕРВЕРОВ RUST+
                 </div>
-                <div className="text-[11px] text-[#9298A5] leading-relaxed">
+                <div className="text-[11px] text-[#9BA2AF] leading-relaxed">
                   Привяжите свой игровой сервер, чтобы получать телеметрию отряда, карту монументов, управлять турелями и сигнализациями базы.
                 </div>
               </div>
@@ -531,9 +531,9 @@ export const ServersPage: React.FC = () => {
                     setIsPairingWizardOpen(true);
                   }
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-[#171A21] hover:bg-[#1E232F] text-[#E6E8EC] border border-[#262A36] hover:border-[#F97316] font-mono text-xs font-bold transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-[#1D2026] hover:bg-[#1E232F] text-[#F0F1F3] border border-[#2B2F38] hover:border-[#FF7417] font-mono text-xs font-bold transition-colors"
               >
-                <Plus className="w-4 h-4 text-[#F97316]" /> Начать сопряжение сервера
+                <Plus className="w-4 h-4 text-[#FF7417]" /> Начать сопряжение сервера
               </button>
             </div>
           ) : (
@@ -541,15 +541,15 @@ export const ServersPage: React.FC = () => {
               {pairedServers.map(server => (
                 <div
                   key={server.id}
-                  className="bg-[#12141A] border border-[#262A36] rounded p-3.5 text-xs space-y-3 flex flex-col justify-between"
+                  className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 text-xs space-y-3 flex flex-col justify-between"
                 >
                   <div className="space-y-2">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <div className="font-bold text-[#E6E8EC] text-sm tracking-tight truncate">
+                        <div className="font-bold text-[#F0F1F3] text-sm tracking-tight truncate">
                           {server.name}
                         </div>
-                        <div className="text-[11px] font-mono text-[#9298A5] mt-0.5">
+                        <div className="text-[11px] font-mono text-[#9BA2AF] mt-0.5">
                           {server.ip}:{server.port}
                         </div>
                       </div>
@@ -557,18 +557,18 @@ export const ServersPage: React.FC = () => {
                     </div>
 
                     {/* Metadata & Status Grid */}
-                    <div className="p-2.5 rounded bg-[#171A21] border border-[#262A36] font-mono text-[11px] space-y-1">
-                      <div className="flex justify-between text-[#9298A5]">
+                    <div className="p-2.5 rounded bg-[#1D2026] border border-[#2B2F38] font-mono text-[11px] space-y-1">
+                      <div className="flex justify-between text-[#9BA2AF]">
                         <span>Привязанный SteamID64:</span>
-                        <span className="text-[#E6E8EC] font-semibold">{server.playerId}</span>
+                        <span className="text-[#F0F1F3] font-semibold">{server.playerId}</span>
                       </div>
-                      <div className="flex justify-between text-[#9298A5]">
+                      <div className="flex justify-between text-[#9BA2AF]">
                         <span>Синхронизация:</span>
-                        <span className="text-[#E6E8EC]">{server.lastSync || 'Только что'}</span>
+                        <span className="text-[#F0F1F3]">{server.lastSync || 'Только что'}</span>
                       </div>
-                      <div className="flex justify-between text-[#9298A5]">
+                      <div className="flex justify-between text-[#9BA2AF]">
                         <span>Источник сопряжения:</span>
-                        <span className="text-[#E6E8EC]">
+                        <span className="text-[#F0F1F3]">
                           {server.pairingSource === 'in_game_notification' ? 'Уведомление Rust+ в игре' : server.pairingSource === 'pairing_url' ? 'Rust+ Notification URL' : 'Ручной ввод токена'}
                         </span>
                       </div>
@@ -590,51 +590,51 @@ export const ServersPage: React.FC = () => {
                     const maxPlayers = info.maxPlayers;
                     const gameClock = gameTime.time || gameTime.gameTime || gameTime.hour;
                     return (
-                      <div className="p-2.5 rounded bg-[#0D0F12] border border-[#00C896]/30 space-y-2">
+                      <div className="p-2.5 rounded bg-[#101114] border border-[#28C995]/30 space-y-2">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-[#00C896] font-mono font-bold text-[10px]">LIVE RUST+ DATA</span>
-                          <span className="text-[#9298A5] text-[10px]">Обновление каждые 10 сек.</span>
+                          <span className="text-[#28C995] font-mono font-bold text-[10px]">LIVE RUST+ DATA</span>
+                          <span className="text-[#9BA2AF] text-[10px]">Обновление каждые 10 сек.</span>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                           <div>
-                            <div className="text-[#9298A5] text-[10px]">Игроки на сервере</div>
-                            <div className="text-[#E6E8EC] font-mono font-bold">{playerCount !== undefined ? `${playerCount}${maxPlayers !== undefined ? ` / ${maxPlayers}` : ''}` : 'Нет данных'}</div>
+                            <div className="text-[#9BA2AF] text-[10px]">Игроки на сервере</div>
+                            <div className="text-[#F0F1F3] font-mono font-bold">{playerCount !== undefined ? `${playerCount}${maxPlayers !== undefined ? ` / ${maxPlayers}` : ''}` : 'Нет данных'}</div>
                           </div>
                           <div>
-                            <div className="text-[#9298A5] text-[10px]">Отряд Rust+</div>
-                            <div className="text-[#E6E8EC] font-mono font-bold">{team.members ? members.length : 'Нет данных'}</div>
+                            <div className="text-[#9BA2AF] text-[10px]">Отряд Rust+</div>
+                            <div className="text-[#F0F1F3] font-mono font-bold">{team.members ? members.length : 'Нет данных'}</div>
                           </div>
                           <div>
-                            <div className="text-[#9298A5] text-[10px]">Карта</div>
-                            <div className="text-[#E6E8EC] font-mono font-bold">{info.map || info.mapName || 'Нет данных'}</div>
+                            <div className="text-[#9BA2AF] text-[10px]">Карта</div>
+                            <div className="text-[#F0F1F3] font-mono font-bold">{info.map || info.mapName || 'Нет данных'}</div>
                           </div>
                           <div>
-                            <div className="text-[#9298A5] text-[10px]">Игровое время</div>
-                            <div className="text-[#E6E8EC] font-mono font-bold">{gameClock !== undefined ? String(gameClock) : 'Нет данных'}</div>
+                            <div className="text-[#9BA2AF] text-[10px]">Игровое время</div>
+                            <div className="text-[#F0F1F3] font-mono font-bold">{gameClock !== undefined ? String(gameClock) : 'Нет данных'}</div>
                           </div>
                         </div>
-                        {live.lastSync && <div className="text-[10px] text-[#9298A5]">Последний ответ сервера: {new Date(live.lastSync).toLocaleTimeString('ru-RU')}</div>}
+                        {live.lastSync && <div className="text-[10px] text-[#9BA2AF]">Последний ответ сервера: {new Date(live.lastSync).toLocaleTimeString('ru-RU')}</div>}
                         {live.lastError && <div className="text-[10px] text-[#F04444]">{live.lastError}</div>}
                       </div>
                     );
                   })()}
 
                   {/* Actions Bar */}
-                  <div className="pt-2 border-t border-[#262A36] flex items-center justify-between gap-2 font-mono text-xs">
+                  <div className="pt-2 border-t border-[#2B2F38] flex items-center justify-between gap-2 font-mono text-xs">
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => reconnectServer(server.id)}
-                        className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] hover:border-[#F97316] text-[11px] flex items-center gap-1 transition-colors"
+                        className="px-2.5 py-1 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] hover:border-[#FF7417] text-[11px] flex items-center gap-1 transition-colors"
                         title="Проверить соединение и обновить статус"
                       >
-                        <RefreshCw className="w-3 h-3 text-[#F97316]" />
+                        <RefreshCw className="w-3 h-3 text-[#FF7417]" />
                         <span>Связаться</span>
                       </button>
                     </div>
 
                     <button
                       onClick={() => unpairServer(server.id)}
-                      className="px-2 py-1 rounded bg-[#171A21] hover:bg-[#261515] text-[#9298A5] hover:text-[#F04444] border border-[#262A36] hover:border-[#F04444]/40 text-[11px] flex items-center gap-1 transition-colors"
+                      className="px-2 py-1 rounded bg-[#1D2026] hover:bg-[#261515] text-[#9BA2AF] hover:text-[#F04444] border border-[#2B2F38] hover:border-[#F04444]/40 text-[11px] flex items-center gap-1 transition-colors"
                       title="Удалить привязку сервера"
                     >
                       <Trash2 className="w-3 h-3" />
@@ -647,9 +647,9 @@ export const ServersPage: React.FC = () => {
           )}
 
           {/* Technical Info Footnote */}
-          <div className="p-3 bg-[#12141A] border border-[#262A36] rounded font-mono text-[10px] text-[#9298A5] space-y-1">
-            <div className="text-[#E6E8EC] font-bold flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 text-[#F97316]" />
+          <div className="p-3 bg-[#17191E] border border-[#2B2F38] rounded font-mono text-[10px] text-[#9BA2AF] space-y-1">
+            <div className="text-[#F0F1F3] font-bold flex items-center gap-1.5">
+              <Info className="w-3.5 h-3.5 text-[#FF7417]" />
               <span>Архитектура безопасности протокола Rust+:</span>
             </div>
             <div>• Player Token и сопряжение хранятся на сервере в изоляции по вашему SteamID64 и не передаются в браузер открытым текстом.</div>
@@ -675,8 +675,8 @@ export const ServersPage: React.FC = () => {
                 onClick={() => setCategoryFilter(tab.id as any)}
                 className={`px-3 py-1.5 rounded border transition-colors ${
                   categoryFilter === tab.id
-                    ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-semibold'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                    ? 'bg-[#1D2026] border-[#FF7417] text-[#FF7417] font-semibold'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
                 }`}
               >
                 {tab.label}
@@ -692,23 +692,23 @@ export const ServersPage: React.FC = () => {
               return (
                 <div
                   key={server.id}
-                  className={`bg-[#12141A] border rounded p-3 text-xs flex flex-col justify-between space-y-3 transition-colors ${
+                  className={`bg-[#17191E] border rounded p-3 text-xs flex flex-col justify-between space-y-3 transition-colors ${
                     isSelected
-                      ? 'border-[#F97316] shadow-sm'
-                      : 'border-[#262A36] hover:border-[#383E4E]'
+                      ? 'border-[#FF7417] shadow-sm'
+                      : 'border-[#2B2F38] hover:border-[#383E4E]'
                   }`}
                 >
                   <div>
                     {/* Title & Favorite */}
                     <div className="flex items-start justify-between gap-2 mb-1.5">
                       <div className="truncate">
-                        <div className="font-bold text-[#E6E8EC] text-sm truncate flex items-center gap-1.5">
+                        <div className="font-bold text-[#F0F1F3] text-sm truncate flex items-center gap-1.5">
                           {isSelected && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#00C896] shrink-0" title="Текущий рабочий сервер" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#28C995] shrink-0" title="Текущий рабочий сервер" />
                           )}
                           <span className="truncate">{server.name}</span>
                         </div>
-                        <div className="text-[10px] font-mono text-[#9298A5] mt-0.5">
+                        <div className="text-[10px] font-mono text-[#9BA2AF] mt-0.5">
                           {server.ip}:{server.port}
                         </div>
                       </div>
@@ -716,7 +716,7 @@ export const ServersPage: React.FC = () => {
                       <button
                         onClick={() => toggleFavoriteServer(server.id)}
                         className={`p-1 rounded text-sm transition-colors ${
-                          server.isFavorite ? 'text-[#F5B942]' : 'text-[#9298A5] hover:text-white'
+                          server.isFavorite ? 'text-[#F5B942]' : 'text-[#9BA2AF] hover:text-white'
                         }`}
                       >
                         <Star className="w-4 h-4 fill-current" />
@@ -724,21 +724,21 @@ export const ServersPage: React.FC = () => {
                     </div>
 
                     {/* Stats Strip */}
-                    <div className="grid grid-cols-3 gap-1.5 my-2 p-2 rounded bg-[#171A21] border border-[#262A36] text-center font-mono">
+                    <div className="grid grid-cols-3 gap-1.5 my-2 p-2 rounded bg-[#1D2026] border border-[#2B2F38] text-center font-mono">
                       <div>
-                        <div className="text-[9px] text-[#9298A5]">ОНЛАЙН</div>
-                        <div className="font-bold text-[#00C896] tabular-nums text-xs">
+                        <div className="text-[9px] text-[#9BA2AF]">ОНЛАЙН</div>
+                        <div className="font-bold text-[#28C995] tabular-nums text-xs">
                           {server.currentPlayers}/{server.maxPlayers}
                         </div>
                       </div>
                       <div>
-                        <div className="text-[9px] text-[#9298A5]">ОЧЕРЕДЬ</div>
-                        <div className="font-bold text-[#E6E8EC] tabular-nums text-xs">
+                        <div className="text-[9px] text-[#9BA2AF]">ОЧЕРЕДЬ</div>
+                        <div className="font-bold text-[#F0F1F3] tabular-nums text-xs">
                           {server.queue > 0 ? server.queue : '0'}
                         </div>
                       </div>
                       <div>
-                        <div className="text-[9px] text-[#9298A5]">ПИНГ</div>
+                        <div className="text-[9px] text-[#9BA2AF]">ПИНГ</div>
                         <div className="font-bold text-[#F5B942] tabular-nums text-xs">
                           {server.ping} ms
                         </div>
@@ -746,26 +746,26 @@ export const ServersPage: React.FC = () => {
                     </div>
 
                     {/* Wipe info */}
-                    <div className="space-y-1 text-[10px] font-mono text-[#9298A5]">
+                    <div className="space-y-1 text-[10px] font-mono text-[#9BA2AF]">
                       <div className="flex justify-between">
                         <span>Расписание вайпов:</span>
-                        <span className="text-[#E6E8EC]">{server.wipeSchedule}</span>
+                        <span className="text-[#F0F1F3]">{server.wipeSchedule}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Размер карты:</span>
-                        <span className="text-[#E6E8EC]">{server.mapSize} м</span>
+                        <span className="text-[#F0F1F3]">{server.mapSize} м</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Connect and Select controls */}
-                  <div className="pt-2 border-t border-[#262A36] flex items-center justify-between gap-2 font-mono text-xs">
+                  <div className="pt-2 border-t border-[#2B2F38] flex items-center justify-between gap-2 font-mono text-xs">
                     <button
                       onClick={() => setSelectedServer(server)}
                       className={`px-3 py-1.5 rounded transition-colors flex-1 ${
                         isSelected
-                          ? 'bg-[#171A21] text-[#F97316] font-bold border border-[#F97316]'
-                          : 'bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36]'
+                          ? 'bg-[#1D2026] text-[#FF7417] font-bold border border-[#FF7417]'
+                          : 'bg-[#1D2026] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38]'
                       }`}
                     >
                       {isSelected ? '✓ Активный' : 'Выбрать'}
@@ -773,13 +773,13 @@ export const ServersPage: React.FC = () => {
 
                     <button
                       onClick={() => handleCopyConnect(server)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] transition-colors"
                       title="Копировать F1 connect команду"
                     >
                       {copiedId === server.id ? (
-                        <Check className="w-3.5 h-3.5 text-[#00C896]" />
+                        <Check className="w-3.5 h-3.5 text-[#28C995]" />
                       ) : (
-                        <Copy className="w-3.5 h-3.5 text-[#9298A5]" />
+                        <Copy className="w-3.5 h-3.5 text-[#9BA2AF]" />
                       )}
                       <span>{copiedId === server.id ? 'Скопировано' : 'F1 connect'}</span>
                     </button>
@@ -794,16 +794,16 @@ export const ServersPage: React.FC = () => {
       {/* RUST+ PAIRING WIZARD MODAL */}
       {isPairingWizardOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm select-none">
-          <div className="relative w-full max-w-lg bg-[#12141A] border border-[#262A36] rounded-md shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-150">
+          <div className="relative w-full max-w-lg bg-[#17191E] border border-[#2B2F38] rounded-md shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-150">
             {/* Modal Header */}
-            <div className="px-5 py-4 border-b border-[#262A36] bg-[#0D0F12] flex items-center justify-between">
+            <div className="px-5 py-4 border-b border-[#2B2F38] bg-[#101114] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Radio className="w-5 h-5 text-[#F97316]" />
+                <Radio className="w-5 h-5 text-[#FF7417]" />
                 <div>
-                  <div className="font-bold text-[#E6E8EC] text-sm font-mono">
+                  <div className="font-bold text-[#F0F1F3] text-sm font-mono">
                     МАСТЕР СОПРЯЖЕНИЯ RUST+ COMPANION
                   </div>
-                  <div className="text-[10px] text-[#9298A5] font-mono">
+                  <div className="text-[10px] text-[#9BA2AF] font-mono">
                     ШАГ {wizardStep} ИЗ 2 // ПОДКЛЮЧЕНИЕ СЕРВЕРА
                   </div>
                 </div>
@@ -811,7 +811,7 @@ export const ServersPage: React.FC = () => {
 
               <button
                 onClick={() => setIsPairingWizardOpen(false)}
-                className="p-1.5 text-[#9298A5] hover:text-[#E6E8EC] hover:bg-[#171A21] rounded transition-colors"
+                className="p-1.5 text-[#9BA2AF] hover:text-[#F0F1F3] hover:bg-[#1D2026] rounded transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -820,7 +820,7 @@ export const ServersPage: React.FC = () => {
             {/* Modal Body */}
             <div className="p-5 text-xs space-y-4">
               {pairingError && (
-                <div className="p-3 rounded bg-[#261515] border border-[#F04444]/60 text-xs text-[#E6E8EC] flex items-start gap-2">
+                <div className="p-3 rounded bg-[#261515] border border-[#F04444]/60 text-xs text-[#F0F1F3] flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-[#F04444] shrink-0 mt-0.5" />
                   <div className="text-[#F04444] font-mono text-[11px] leading-relaxed">
                     {pairingError}
@@ -832,8 +832,8 @@ export const ServersPage: React.FC = () => {
               {wizardStep === 1 && (
                 <div className="space-y-4">
                   {/* Instructions */}
-                  <div className="p-3 rounded bg-[#171A21] border border-[#262A36] text-[11px] text-[#9298A5] space-y-1.5 leading-relaxed">
-                    <div className="text-[#E6E8EC] font-bold font-mono">Инструкция по сопряжению в игре Rust:</div>
+                  <div className="p-3 rounded bg-[#1D2026] border border-[#2B2F38] text-[11px] text-[#9BA2AF] space-y-1.5 leading-relaxed">
+                    <div className="text-[#F0F1F3] font-bold font-mono">Инструкция по сопряжению в игре Rust:</div>
                     <div>1. Зайдите на игровой сервер в клиенте Rust.</div>
                     <div>2. Нажмите клавишу <strong>Esc</strong> и перейдите в меню <strong>Rust+</strong>.</div>
                     <div>3. Нажмите кнопку <strong>«Привязать сервер»</strong> (Pair with Server).</div>
@@ -847,8 +847,8 @@ export const ServersPage: React.FC = () => {
                       onClick={() => setPairingMethod('url')}
                       className={`flex-1 py-2 px-3 rounded border text-center transition-colors ${
                         pairingMethod === 'url'
-                          ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-bold'
-                          : 'bg-[#0D0F12] border-[#262A36] text-[#9298A5]'
+                          ? 'bg-[#1D2026] border-[#FF7417] text-[#FF7417] font-bold'
+                          : 'bg-[#101114] border-[#2B2F38] text-[#9BA2AF]'
                       }`}
                     >
                       Импорт ссылки / JSON
@@ -861,8 +861,8 @@ export const ServersPage: React.FC = () => {
                       }}
                       className={`flex-1 py-2 px-3 rounded border text-center transition-colors ${
                         pairingMethod === 'manual'
-                          ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-bold'
-                          : 'bg-[#0D0F12] border-[#262A36] text-[#9298A5]'
+                          ? 'bg-[#1D2026] border-[#FF7417] text-[#FF7417] font-bold'
+                          : 'bg-[#101114] border-[#2B2F38] text-[#9BA2AF]'
                       }`}
                     >
                       Ручной ввод параметров
@@ -871,7 +871,7 @@ export const ServersPage: React.FC = () => {
 
                   {pairingMethod === 'url' && (
                     <div className="space-y-2">
-                      <label className="block text-[#9298A5] font-mono text-[11px]">
+                      <label className="block text-[#9BA2AF] font-mono text-[11px]">
                         Вставьте ссылку сопряжения (rustplus:pair?...) или JSON-уведомление:
                       </label>
                       <textarea
@@ -879,12 +879,12 @@ export const ServersPage: React.FC = () => {
                         value={rawPairingInput}
                         onChange={e => setRawPairingInput(e.target.value)}
                         placeholder="rustplus:pair?ip=123.45.67.89&port=28082&playerId=76561198...&playerToken=-12345678"
-                        className="w-full bg-[#171A21] border border-[#262A36] rounded p-2.5 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316] transition-colors"
+                        className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2.5 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417] transition-colors"
                       />
                       <button
                         type="button"
                         onClick={handleParsePairingInput}
-                        className="w-full py-2.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold transition-colors shadow-sm"
+                        className="w-full py-2.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold transition-colors shadow-sm"
                       >
                         Распознать и перейти к подтверждению →
                       </button>
@@ -897,7 +897,7 @@ export const ServersPage: React.FC = () => {
               {wizardStep === 2 && (
                 <form onSubmit={handleFinishPairing} className="space-y-3">
                   <div>
-                    <label className="block text-[#9298A5] font-mono text-[11px] mb-1">
+                    <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">
                       Название сервера (для отображения в хабе):
                     </label>
                     <input
@@ -905,13 +905,13 @@ export const ServersPage: React.FC = () => {
                       value={pairServerName}
                       onChange={e => setPairServerName(e.target.value)}
                       placeholder="Например: Rustafied EU Main"
-                      className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] text-xs focus:outline-none focus:border-[#F97316] transition-colors"
+                      className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] text-xs focus:outline-none focus:border-[#FF7417] transition-colors"
                     />
                   </div>
 
                   <div className="grid grid-cols-3 gap-2">
                     <div className="col-span-2">
-                      <label className="block text-[#9298A5] font-mono text-[11px] mb-1">
+                      <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">
                         IP или хост сервера:
                       </label>
                       <input
@@ -920,11 +920,11 @@ export const ServersPage: React.FC = () => {
                         onChange={e => setPairIp(e.target.value)}
                         placeholder="123.45.67.89"
                         required
-                        className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316] transition-colors"
+                        className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417] transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[#9298A5] font-mono text-[11px] mb-1">
+                      <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">
                         Порт Rust+:
                       </label>
                       <input
@@ -932,25 +932,25 @@ export const ServersPage: React.FC = () => {
                         value={pairPort}
                         onChange={e => setPairPort(Number(e.target.value))}
                         required
-                        className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316] transition-colors"
+                        className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417] transition-colors"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-[#9298A5] font-mono text-[11px] mb-1">
+                      <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">
                         Ваш подтвержденный SteamID64:
                       </label>
                       <input
                         type="text"
                         value={steamUser?.steamId || pairPlayerId}
                         disabled
-                        className="w-full bg-[#0D0F12] border border-[#262A36] rounded p-2 text-[#00C896] font-mono text-xs cursor-not-allowed font-semibold"
+                        className="w-full bg-[#101114] border border-[#2B2F38] rounded p-2 text-[#28C995] font-mono text-xs cursor-not-allowed font-semibold"
                       />
                     </div>
                     <div>
-                      <label className="block text-[#9298A5] font-mono text-[11px] mb-1">
+                      <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">
                         Player Token (секретный токен):
                       </label>
                       <input
@@ -959,23 +959,23 @@ export const ServersPage: React.FC = () => {
                         onChange={e => setPairToken(e.target.value === '' ? '' : Number(e.target.value))}
                         placeholder="-1987654321"
                         required
-                        className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316] transition-colors"
+                        className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417] transition-colors"
                       />
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-[#262A36] flex items-center justify-between">
+                  <div className="pt-3 border-t border-[#2B2F38] flex items-center justify-between">
                     <button
                       type="button"
                       onClick={() => setWizardStep(1)}
-                      className="px-3 py-1.5 rounded bg-[#171A21] hover:bg-[#262A36] text-[#9298A5] font-mono text-xs transition-colors"
+                      className="px-3 py-1.5 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#9BA2AF] font-mono text-xs transition-colors"
                     >
                       ← Назад
                     </button>
                     <button
                       type="submit"
                       disabled={pairingSubmitting}
-                      className="px-4 py-2 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold transition-colors disabled:opacity-50 shadow-sm flex items-center gap-2"
+                      className="px-4 py-2 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold transition-colors disabled:opacity-50 shadow-sm flex items-center gap-2"
                     >
                       {pairingSubmitting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : null}
                       <span>{pairingSubmitting ? 'Сохранение...' : 'Завершить сопряжение'}</span>
@@ -991,12 +991,12 @@ export const ServersPage: React.FC = () => {
       {/* ADD BROWSER SERVER MODAL */}
       {isAddBrowserModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm select-none">
-          <div className="relative w-full max-w-md bg-[#12141A] border border-[#262A36] rounded-md shadow-2xl p-4 text-xs space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-[#262A36]">
-              <div className="font-mono font-bold text-[#E6E8EC]">ДОБАВИТЬ СЕРВЕР В КАТАЛОГ</div>
+          <div className="relative w-full max-w-md bg-[#17191E] border border-[#2B2F38] rounded-md shadow-2xl p-4 text-xs space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-[#2B2F38]">
+              <div className="font-mono font-bold text-[#F0F1F3]">ДОБАВИТЬ СЕРВЕР В КАТАЛОГ</div>
               <button
                 onClick={() => setIsAddBrowserModalOpen(false)}
-                className="text-[#9298A5] hover:text-[#E6E8EC]"
+                className="text-[#9BA2AF] hover:text-[#F0F1F3]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1004,48 +1004,48 @@ export const ServersPage: React.FC = () => {
 
             <form onSubmit={handleCreateBrowserServer} className="space-y-3">
               <div>
-                <label className="block text-[#9298A5] font-mono text-[11px] mb-1">Название сервера:</label>
+                <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">Название сервера:</label>
                 <input
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Rustafied EU Medium"
                   required
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] text-xs focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] text-xs focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-2">
                 <div className="col-span-2">
-                  <label className="block text-[#9298A5] font-mono text-[11px] mb-1">IP сервера:</label>
+                  <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">IP сервера:</label>
                   <input
                     type="text"
                     value={ip}
                     onChange={e => setIp(e.target.value)}
                     placeholder="185.120.55.10"
                     required
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#9298A5] font-mono text-[11px] mb-1">Game Port:</label>
+                  <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">Game Port:</label>
                   <input
                     type="number"
                     value={port}
                     onChange={e => setPort(Number(e.target.value))}
                     required
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#9298A5] font-mono text-[11px] mb-1">Тип сервера:</label>
+                  <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">Тип сервера:</label>
                   <select
                     value={type}
                     onChange={e => setType(e.target.value as any)}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417]"
                   >
                     <option value="official">Официальный (Vanilla)</option>
                     <option value="modded">Модифицированный (2x/5x)</option>
@@ -1053,27 +1053,27 @@ export const ServersPage: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[#9298A5] font-mono text-[11px] mb-1">Размер карты (м):</label>
+                  <label className="block text-[#9BA2AF] font-mono text-[11px] mb-1">Размер карты (м):</label>
                   <input
                     type="number"
                     value={mapSize}
                     onChange={e => setMapSize(Number(e.target.value))}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono text-xs focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono text-xs focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
               </div>
 
-              <div className="pt-2 flex justify-end gap-2 border-t border-[#262A36]">
+              <div className="pt-2 flex justify-end gap-2 border-t border-[#2B2F38]">
                 <button
                   type="button"
                   onClick={() => setIsAddBrowserModalOpen(false)}
-                  className="px-3 py-1.5 rounded bg-[#171A21] text-[#9298A5] font-mono text-xs"
+                  className="px-3 py-1.5 rounded bg-[#1D2026] text-[#9BA2AF] font-mono text-xs"
                 >
                   Отмена
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs font-bold"
+                  className="px-4 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-xs font-bold"
                 >
                   Добавить
                 </button>
