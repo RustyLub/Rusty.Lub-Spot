@@ -41,19 +41,19 @@ export const TopBar: React.FC = () => {
   };
 
   return (
-    <header className="h-11 bg-[#0D0F12] border-b border-[#262A36] flex items-center justify-between px-3 text-xs select-none z-30 shrink-0">
+    <header className="h-14 bg-[#101114]/95 border-b border-[#2B2F38] flex items-center justify-between gap-3 px-4 text-xs select-none z-30 shrink-0 backdrop-blur-xl shadow-[0_8px_28px_rgba(0,0,0,0.12)]">
       {/* 1. Brand Mark R.L. and RUSTY.LUB SPOT + 2. Server Selector */}
       <div className="flex items-center gap-2.5">
         <div 
           onClick={() => setActiveTab('home')} 
-          className="flex items-center gap-2 cursor-pointer group pr-2.5 border-r border-[#262A36]"
+          className="flex items-center gap-2 cursor-pointer group pr-2.5 border-r border-[#2B2F38]"
           title="Rusty.Lub Spot — Главная"
         >
-          <div className="w-6 h-6 rounded bg-[#F97316] flex items-center justify-center font-bold text-white tracking-tight text-xs font-['Chakra_Petch'] shadow-sm">
+          <div className="w-6 h-6 rounded bg-[#FF7417] flex items-center justify-center font-bold text-white tracking-tight text-xs font-['Chakra_Petch'] shadow-sm">
             R.L.
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-[#E6E8EC] tracking-wider text-xs font-['Chakra_Petch'] group-hover:text-[#F97316] transition-colors leading-tight">
+            <span className="font-bold text-[#E6E8EC] tracking-wider text-xs font-['Chakra_Petch'] group-hover:text-[#FF7417] transition-colors leading-tight">
               RUSTY.LUB SPOT
             </span>
             <span className="text-[9px] text-[#9298A5] font-mono tracking-tight leading-none">
@@ -66,7 +66,7 @@ export const TopBar: React.FC = () => {
         <div className="relative">
           <button
             onClick={() => setServerDropdownOpen(prev => !prev)}
-            className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#12141A] border border-[#262A36] hover:border-[#F97316]/50 text-[#E6E8EC] transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#12141A] border border-[#262A36] hover:border-[#FF7417]/50 text-[#E6E8EC] transition-colors"
           >
             <Server className="w-3.5 h-3.5 text-[#F97316]" />
             <span className="font-medium max-w-[200px] truncate text-left text-xs">
