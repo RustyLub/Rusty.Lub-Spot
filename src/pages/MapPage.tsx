@@ -55,7 +55,7 @@ export const MapPage: React.FC = () => {
   const [newMarkerName, setNewMarkerName] = useState('');
   const [newMarkerGrid, setNewMarkerGrid] = useState('G11');
   const [newMarkerType, setNewMarkerType] = useState<MapMarker['type']>('base');
-  const [newMarkerColor, setNewMarkerColor] = useState('#F97316');
+  const [newMarkerColor, setNewMarkerColor] = useState('#FF7417');
   const [newMarkerNote, setNewMarkerNote] = useState('');
 
   const gridLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
@@ -135,36 +135,36 @@ export const MapPage: React.FC = () => {
   );
 
   return (
-    <div className="h-[calc(100vh-2.75rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#0D0F12]">
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#101114]">
       {/* Central Map Canvas Workspace */}
       <div 
-        className="flex-1 relative overflow-hidden bg-[#0D0F12] cursor-grab active:cursor-grabbing border-r border-[#262A36]"
+        className="flex-1 relative overflow-hidden bg-[#101114] cursor-grab active:cursor-grabbing border-r border-[#2B2F38]"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onClick={handleMapClick}
       >
         {/* Simulation Watermark Banner */}
-        <div className="absolute top-2 left-2 z-20 flex items-center gap-2 px-2.5 py-1 rounded bg-[#12141A]/90 border border-[#262A36] text-xs font-mono backdrop-blur-xs">
+        <div className="absolute top-2 left-2 z-20 flex items-center gap-2 px-2.5 py-1 rounded bg-[#17191E]/90 border border-[#2B2F38] text-xs font-mono backdrop-blur-xs">
           <Radio className="w-3.5 h-3.5 text-[#F5B942] animate-pulse" />
-          <span className="text-[#E6E8EC]">RUST+ КАРТА (4250M)</span>
-          <span className="text-[#9298A5]">|</span>
+          <span className="text-[#F0F1F3]">RUST+ КАРТА (4250M)</span>
+          <span className="text-[#9BA2AF]">|</span>
           <span className="text-[#F5B942]">
             {isSimulatedMode ? 'СИМУЛЯЦИЯ' : 'LIVE API'}
           </span>
-          <span className="text-[#9298A5]">|</span>
-          <span className="text-[#00C896] font-bold">КУРСОР: {cursorCoords.grid} ({cursorCoords.x}, {cursorCoords.y})</span>
+          <span className="text-[#9BA2AF]">|</span>
+          <span className="text-[#28C995] font-bold">КУРСОР: {cursorCoords.grid} ({cursorCoords.x}, {cursorCoords.y})</span>
         </div>
 
         {/* Floating Map Zoom / Layer Tools */}
         <div className="absolute top-2 right-2 z-20 flex flex-col gap-1.5">
-          <div className="bg-[#12141A]/95 border border-[#262A36] rounded p-1 flex flex-col gap-1 backdrop-blur-xs shadow-xl">
+          <div className="bg-[#17191E]/95 border border-[#2B2F38] rounded p-1 flex flex-col gap-1 backdrop-blur-xs shadow-xl">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setZoom(prev => Math.min(prev + 0.3, 3));
               }}
-              className="p-1.5 rounded hover:bg-[#171A21] text-[#9298A5] hover:text-[#E6E8EC]"
+              className="p-1.5 rounded hover:bg-[#1D2026] text-[#9BA2AF] hover:text-[#F0F1F3]"
               title="Приблизить (+)"
             >
               <ZoomIn className="w-4 h-4" />
@@ -174,7 +174,7 @@ export const MapPage: React.FC = () => {
                 e.stopPropagation();
                 setZoom(prev => Math.max(prev - 0.3, 0.7));
               }}
-              className="p-1.5 rounded hover:bg-[#171A21] text-[#9298A5] hover:text-[#E6E8EC]"
+              className="p-1.5 rounded hover:bg-[#1D2026] text-[#9BA2AF] hover:text-[#F0F1F3]"
               title="Отдалить (-)"
             >
               <ZoomOut className="w-4 h-4" />
@@ -185,7 +185,7 @@ export const MapPage: React.FC = () => {
                 setZoom(1);
                 setPan({ x: 0, y: 0 });
               }}
-              className="p-1.5 rounded hover:bg-[#171A21] text-[#9298A5] hover:text-[#E6E8EC]"
+              className="p-1.5 rounded hover:bg-[#1D2026] text-[#9BA2AF] hover:text-[#F0F1F3]"
               title="Сброс положения"
             >
               <Compass className="w-4 h-4" />
@@ -197,7 +197,7 @@ export const MapPage: React.FC = () => {
               e.stopPropagation();
               setIsAddModalOpen(true);
             }}
-            className="p-2 rounded bg-[#F97316] hover:bg-[#E05326] text-white shadow-lg transition-colors flex items-center justify-center"
+            className="p-2 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white shadow-lg transition-colors flex items-center justify-center"
             title="Добавить свою метку на карту"
           >
             <Plus className="w-4 h-4" />
@@ -286,8 +286,8 @@ export const MapPage: React.FC = () => {
                   const x = (cIdx / gridLetters.length) * 1000;
                   return (
                     <g key={`col-${col}`}>
-                      <line x1={x} y1={0} x2={x} y2={1000} stroke="#262A36" strokeWidth="1" opacity="0.6" />
-                      <text x={x + 5} y={15} fill="#9298A5" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      <line x1={x} y1={0} x2={x} y2={1000} stroke="#2B2F38" strokeWidth="1" opacity="0.6" />
+                      <text x={x + 5} y={15} fill="#9BA2AF" fontSize="10" fontFamily="monospace" fontWeight="bold">
                         {col}
                       </text>
                     </g>
@@ -297,8 +297,8 @@ export const MapPage: React.FC = () => {
                   const y = (rIdx / gridNumbers.length) * 1000;
                   return (
                     <g key={`row-${row}`}>
-                      <line x1={0} y1={y} x2={1000} y2={y} stroke="#262A36" strokeWidth="1" opacity="0.6" />
-                      <text x={5} y={y + 14} fill="#9298A5" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      <line x1={0} y1={y} x2={1000} y2={y} stroke="#2B2F38" strokeWidth="1" opacity="0.6" />
+                      <text x={5} y={y + 14} fill="#9BA2AF" fontSize="10" fontFamily="monospace" fontWeight="bold">
                         {row}
                       </text>
                     </g>
@@ -323,7 +323,7 @@ export const MapPage: React.FC = () => {
                 <div
                   className={`w-5 h-5 rounded flex items-center justify-center font-mono text-[10px] font-bold border shadow-lg transition-transform group-hover:scale-125 ${
                     m.tier === 'safe'
-                      ? 'bg-[#10241B] border-[#00C896] text-[#00C896]'
+                      ? 'bg-[#10241B] border-[#28C995] text-[#28C995]'
                       : m.tier === 'high'
                       ? 'bg-[#261416] border-[#F04444] text-[#F04444]'
                       : 'bg-[#221B12] border-[#F5B942] text-[#F5B942]'
@@ -331,7 +331,7 @@ export const MapPage: React.FC = () => {
                 >
                   {m.tier === 'safe' ? 'S' : m.tier === 'high' ? 'H' : 'M'}
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 bg-[#12141A]/95 px-1.5 py-0.5 rounded border border-[#262A36] text-[10px] font-mono text-[#E6E8EC] whitespace-nowrap opacity-90 group-hover:opacity-100 pointer-events-none">
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 bg-[#17191E]/95 px-1.5 py-0.5 rounded border border-[#2B2F38] text-[10px] font-mono text-[#F0F1F3] whitespace-nowrap opacity-90 group-hover:opacity-100 pointer-events-none">
                   {m.ruName}
                 </div>
               </div>
@@ -353,7 +353,7 @@ export const MapPage: React.FC = () => {
                   className="w-4 h-4 rounded-full border-2 border-white flex items-center justify-center shadow-md transition-transform group-hover:scale-125"
                   style={{ backgroundColor: marker.color }}
                 />
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 bg-[#12141A]/95 px-1.5 py-0.5 rounded border border-[#262A36] text-[10px] font-mono text-[#E6E8EC] whitespace-nowrap shadow-lg">
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 bg-[#17191E]/95 px-1.5 py-0.5 rounded border border-[#2B2F38] text-[10px] font-mono text-[#F0F1F3] whitespace-nowrap shadow-lg">
                   {marker.name} ({marker.grid})
                 </div>
               </div>
@@ -372,7 +372,7 @@ export const MapPage: React.FC = () => {
                 style={{ left: `${member.coords.x}%`, top: `${member.coords.y}%` }}
               >
                 <div className="relative">
-                  <div className="w-6 h-6 rounded-full overflow-hidden border-2 border-[#00C896] shadow-lg">
+                  <div className="w-6 h-6 rounded-full overflow-hidden border-2 border-[#28C995] shadow-lg">
                     <img
                       src={member.avatar}
                       alt={member.name}
@@ -384,7 +384,7 @@ export const MapPage: React.FC = () => {
                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F5B942] rounded-full border border-black" />
                   )}
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0.5 bg-black/90 px-1 py-0.5 rounded text-[9px] font-mono text-[#00C896] whitespace-nowrap">
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0.5 bg-black/90 px-1 py-0.5 rounded text-[9px] font-mono text-[#28C995] whitespace-nowrap">
                   {member.name.split(' ')[0]} ({member.hp} HP)
                 </div>
               </div>
@@ -393,12 +393,12 @@ export const MapPage: React.FC = () => {
       </div>
 
       {/* Right Tactical Sidebar: Layer Toggles, Inspector & Monuments Search */}
-      <div className="w-full md:w-80 bg-[#12141A] flex flex-col justify-between border-t md:border-t-0 border-[#262A36] overflow-y-auto">
+      <div className="w-full md:w-80 bg-[#17191E] flex flex-col justify-between border-t md:border-t-0 border-[#2B2F38] overflow-y-auto">
         <div className="p-3 space-y-3">
           {/* Layer Controls Bar */}
-          <div className="bg-[#171A21] border border-[#262A36] rounded p-2.5">
-            <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC] mb-2">
-              <Layers className="w-3.5 h-3.5 text-[#F97316]" />
+          <div className="bg-[#1D2026] border border-[#2B2F38] rounded p-2.5">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3] mb-2">
+              <Layers className="w-3.5 h-3.5 text-[#FF7417]" />
               <span>СЛОИ КАРТЫ</span>
             </div>
             <div className="grid grid-cols-2 gap-1.5 text-xs">
@@ -406,8 +406,8 @@ export const MapPage: React.FC = () => {
                 onClick={() => setShowGrid(!showGrid)}
                 className={`px-2 py-1 rounded text-left border transition-colors ${
                   showGrid
-                    ? 'bg-[#12141A] border-[#F97316] text-[#F97316] font-medium'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-medium'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF]'
                 }`}
               >
                 Сетка A1-N14
@@ -416,8 +416,8 @@ export const MapPage: React.FC = () => {
                 onClick={() => setShowMonuments(!showMonuments)}
                 className={`px-2 py-1 rounded text-left border transition-colors ${
                   showMonuments
-                    ? 'bg-[#12141A] border-[#F97316] text-[#F97316] font-medium'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-medium'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF]'
                 }`}
               >
                 Монументы
@@ -426,8 +426,8 @@ export const MapPage: React.FC = () => {
                 onClick={() => setShowMarkers(!showMarkers)}
                 className={`px-2 py-1 rounded text-left border transition-colors ${
                   showMarkers
-                    ? 'bg-[#12141A] border-[#F97316] text-[#F97316] font-medium'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-medium'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF]'
                 }`}
               >
                 Метки ({markers.length})
@@ -436,8 +436,8 @@ export const MapPage: React.FC = () => {
                 onClick={() => setShowTeam(!showTeam)}
                 className={`px-2 py-1 rounded text-left border transition-colors ${
                   showTeam
-                    ? 'bg-[#12141A] border-[#F97316] text-[#F97316] font-medium'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-medium'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF]'
                 }`}
               >
                 Команда ({teamMembers.length})
@@ -446,8 +446,8 @@ export const MapPage: React.FC = () => {
                 onClick={() => setShowRadiation(!showRadiation)}
                 className={`col-span-2 px-2 py-1 rounded text-left border transition-colors ${
                   showRadiation
-                    ? 'bg-[#12141A] border-[#F97316] text-[#F97316] font-medium'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-medium'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF]'
                 }`}
               >
                 Зоны радиации (Launch / MilTunnels)
@@ -457,9 +457,9 @@ export const MapPage: React.FC = () => {
 
           {/* Selected Item Inspector Panel */}
           {selectedItem && (
-            <div className="bg-[#171A21] border border-[#262A36] rounded p-3 text-xs space-y-2">
-              <div className="flex items-center justify-between pb-1.5 border-b border-[#262A36]">
-                <span className="font-mono font-bold text-[#E6E8EC] uppercase">
+            <div className="bg-[#1D2026] border border-[#2B2F38] rounded p-3 text-xs space-y-2">
+              <div className="flex items-center justify-between pb-1.5 border-b border-[#2B2F38]">
+                <span className="font-mono font-bold text-[#F0F1F3] uppercase">
                   {selectedItem.type === 'monument'
                     ? 'ИНФО МОНУМЕНТА'
                     : selectedItem.type === 'marker'
@@ -468,7 +468,7 @@ export const MapPage: React.FC = () => {
                 </span>
                 <button
                   onClick={() => setSelectedItem(null)}
-                  className="text-[#9298A5] hover:text-[#E6E8EC] text-[11px]"
+                  className="text-[#9BA2AF] hover:text-[#F0F1F3] text-[11px]"
                 >
                   ✕ Закрыть
                 </button>
@@ -476,14 +476,14 @@ export const MapPage: React.FC = () => {
 
               {selectedItem.type === 'monument' && (
                 <div>
-                  <div className="font-bold text-sm text-[#F97316]">
+                  <div className="font-bold text-sm text-[#FF7417]">
                     {selectedItem.data.ruName} ({selectedItem.data.name})
                   </div>
-                  <div className="text-[11px] font-mono text-[#E6E8EC] mt-1">
-                    Квадрат: <span className="text-[#F97316] font-bold">{selectedItem.data.grid}</span> · Радиация:{' '}
+                  <div className="text-[11px] font-mono text-[#F0F1F3] mt-1">
+                    Квадрат: <span className="text-[#FF7417] font-bold">{selectedItem.data.grid}</span> · Радиация:{' '}
                     <span className="text-[#F5B942]">{selectedItem.data.radiation}</span>
                   </div>
-                  <div className="mt-2 text-[#9298A5] text-[11px] space-y-0.5">
+                  <div className="mt-2 text-[#9BA2AF] text-[11px] space-y-0.5">
                     <div>Особенности: {selectedItem.data.features.join(', ')}</div>
                     <div>
                       Переработчик: {selectedItem.data.hasRecycler ? '✅ Есть' : '❌ Нет'} · НПЗ:{' '}
@@ -492,8 +492,8 @@ export const MapPage: React.FC = () => {
                   </div>
 
                   {selectedItem.data.cctvCodes.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-[#262A36]">
-                      <div className="text-[10px] font-mono text-[#9298A5] mb-1">КАМЕРЫ CCTV:</div>
+                    <div className="mt-2 pt-2 border-t border-[#2B2F38]">
+                      <div className="text-[10px] font-mono text-[#9BA2AF] mb-1">КАМЕРЫ CCTV:</div>
                       <div className="flex flex-wrap gap-1">
                         {selectedItem.data.cctvCodes.map((code: string) => {
                           const cam = allCameras.find(c => c.code === code);
@@ -501,9 +501,9 @@ export const MapPage: React.FC = () => {
                             <button
                               key={code}
                               onClick={() => cam && openCCTV(cam)}
-                              className="px-2 py-0.5 rounded bg-[#12141A] hover:bg-[#262A36] text-[#E6E8EC] font-mono text-[10px] flex items-center gap-1 border border-[#262A36]"
+                              className="px-2 py-0.5 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#F0F1F3] font-mono text-[10px] flex items-center gap-1 border border-[#2B2F38]"
                             >
-                              <Eye className="w-3 h-3 text-[#00C896]" />
+                              <Eye className="w-3 h-3 text-[#28C995]" />
                               {code}
                             </button>
                           );
@@ -517,14 +517,14 @@ export const MapPage: React.FC = () => {
               {selectedItem.type === 'marker' && (
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#E6E8EC]">
+                    <span className="font-bold text-sm text-[#F0F1F3]">
                       {selectedItem.data.name}
                     </span>
-                    <span className="font-mono text-xs text-[#F97316] font-bold">
+                    <span className="font-mono text-xs text-[#FF7417] font-bold">
                       {selectedItem.data.grid}
                     </span>
                   </div>
-                  <div className="text-[11px] text-[#9298A5] mt-1">
+                  <div className="text-[11px] text-[#9BA2AF] mt-1">
                     {selectedItem.data.note || 'Заметка отсутствует'}
                   </div>
                   <div className="pt-2 flex justify-end">
@@ -551,16 +551,16 @@ export const MapPage: React.FC = () => {
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <div className="font-bold text-[#E6E8EC]">{selectedItem.data.name}</div>
-                      <div className="text-[10px] font-mono text-[#9298A5]">
+                      <div className="font-bold text-[#F0F1F3]">{selectedItem.data.name}</div>
+                      <div className="text-[10px] font-mono text-[#9BA2AF]">
                         {selectedItem.data.coords.grid} · {selectedItem.data.distance}
                       </div>
                     </div>
                   </div>
-                  <div className="mt-2 text-[11px] text-[#E6E8EC]">
-                    Здоровье: <span className="font-mono font-bold text-[#00C896]">{selectedItem.data.hp} / 100 HP</span>
+                  <div className="mt-2 text-[11px] text-[#F0F1F3]">
+                    Здоровье: <span className="font-mono font-bold text-[#28C995]">{selectedItem.data.hp} / 100 HP</span>
                   </div>
-                  <div className="text-[11px] text-[#9298A5]">
+                  <div className="text-[11px] text-[#9BA2AF]">
                     В руках: <span className="text-[#F5B942]">{selectedItem.data.heldItem}</span>
                   </div>
                 </div>
@@ -570,19 +570,19 @@ export const MapPage: React.FC = () => {
 
           {/* Monuments Directory Search */}
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between text-xs font-mono text-[#E6E8EC] px-1">
+            <div className="flex items-center justify-between text-xs font-mono text-[#F0F1F3] px-1">
               <span>КАТАЛОГ МОНУМЕНТОВ</span>
-              <span className="text-[10px] text-[#9298A5]">{filteredMonuments.length} РТ</span>
+              <span className="text-[10px] text-[#9BA2AF]">{filteredMonuments.length} РТ</span>
             </div>
 
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#9298A5] absolute left-2.5 top-2" />
+              <Search className="w-3.5 h-3.5 text-[#9BA2AF] absolute left-2.5 top-2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Поиск монумента или квадрата..."
-                className="w-full bg-[#171A21] border border-[#262A36] rounded pl-8 pr-2 py-1 text-xs text-[#E6E8EC] placeholder-[#9298A5] focus:outline-none focus:border-[#F97316]"
+                className="w-full bg-[#1D2026] border border-[#2B2F38] rounded pl-8 pr-2 py-1 text-xs text-[#F0F1F3] placeholder-[#9BA2AF] focus:outline-none focus:border-[#FF7417]"
               />
             </div>
 
@@ -591,13 +591,13 @@ export const MapPage: React.FC = () => {
                 <div
                   key={m.id}
                   onClick={() => setSelectedItem({ type: 'monument', data: m })}
-                  className="bg-[#171A21] border border-[#262A36] hover:border-[#F97316]/50 rounded p-2 flex items-center justify-between text-xs cursor-pointer transition-colors"
+                  className="bg-[#1D2026] border border-[#2B2F38] hover:border-[#FF7417]/50 rounded p-2 flex items-center justify-between text-xs cursor-pointer transition-colors"
                 >
                   <div>
-                    <div className="font-medium text-[#E6E8EC]">{m.ruName}</div>
-                    <div className="text-[10px] font-mono text-[#9298A5]">{m.name}</div>
+                    <div className="font-medium text-[#F0F1F3]">{m.ruName}</div>
+                    <div className="text-[10px] font-mono text-[#9BA2AF]">{m.name}</div>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-[#12141A] border border-[#262A36] text-[10px] font-mono text-[#F97316] font-bold">
+                  <span className="px-2 py-0.5 rounded bg-[#17191E] border border-[#2B2F38] text-[10px] font-mono text-[#FF7417] font-bold">
                     {m.grid}
                   </span>
                 </div>
@@ -607,7 +607,7 @@ export const MapPage: React.FC = () => {
         </div>
 
         {/* Bottom Map Status Bar */}
-        <div className="p-2.5 border-t border-[#262A36] bg-[#0D0F12] text-[10px] font-mono text-[#9298A5] flex justify-between">
+        <div className="p-2.5 border-t border-[#2B2F38] bg-[#101114] text-[10px] font-mono text-[#9BA2AF] flex justify-between">
           <span>СЕТКА КАРТЫ: PROCEDURAL 4250M</span>
           <span>МАСШТАБ: {Math.round(zoom * 100)}%</span>
         </div>
@@ -616,12 +616,12 @@ export const MapPage: React.FC = () => {
       {/* Add Custom Marker Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-4 w-full max-w-sm text-xs space-y-3">
-            <div className="flex justify-between items-center pb-2 border-b border-[#262A36]">
-              <span className="font-mono font-bold text-[#E6E8EC] text-sm">ДОБАВИТЬ МЕТКУ</span>
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 w-full max-w-sm text-xs space-y-3">
+            <div className="flex justify-between items-center pb-2 border-b border-[#2B2F38]">
+              <span className="font-mono font-bold text-[#F0F1F3] text-sm">ДОБАВИТЬ МЕТКУ</span>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="text-[#9298A5] hover:text-[#E6E8EC]"
+                className="text-[#9BA2AF] hover:text-[#F0F1F3]"
               >
                 ✕
               </button>
@@ -629,32 +629,32 @@ export const MapPage: React.FC = () => {
 
             <form onSubmit={handleCreateMarker} className="space-y-2.5">
               <div>
-                <label className="block text-[#9298A5] mb-1">Название метки</label>
+                <label className="block text-[#9BA2AF] mb-1">Название метки</label>
                 <input
                   type="text"
                   required
                   placeholder="напр: Тайник серы / База врагов"
                   value={newMarkerName}
                   onChange={e => setNewMarkerName(e.target.value)}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Квадрат (A1-N14)</label>
+                  <label className="block text-[#9BA2AF] mb-1">Квадрат (A1-N14)</label>
                   <input
                     type="text"
                     required
                     value={newMarkerGrid}
                     onChange={e => setNewMarkerGrid(e.target.value)}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] uppercase font-mono focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] uppercase font-mono focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Цвет метки</label>
+                  <label className="block text-[#9BA2AF] mb-1">Цвет метки</label>
                   <div className="flex gap-1.5 items-center mt-1">
-                    {['#F97316', '#3b82f6', '#00C896', '#F04444', '#F5B942'].map(c => (
+                    {['#FF7417', '#3b82f6', '#28C995', '#F04444', '#F5B942'].map(c => (
                       <button
                         key={c}
                         type="button"
@@ -670,11 +670,11 @@ export const MapPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#9298A5] mb-1">Тип метки</label>
+                <label className="block text-[#9BA2AF] mb-1">Тип метки</label>
                 <select
                   value={newMarkerType}
                   onChange={e => setNewMarkerType(e.target.value as any)}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 >
                   <option value="base">База / Постройка</option>
                   <option value="stash">Тайник / Скрап</option>
@@ -685,13 +685,13 @@ export const MapPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#9298A5] mb-1">Заметка</label>
+                <label className="block text-[#9BA2AF] mb-1">Заметка</label>
                 <textarea
                   rows={2}
                   placeholder="Дополнительные детали..."
                   value={newMarkerNote}
                   onChange={e => setNewMarkerNote(e.target.value)}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
@@ -699,13 +699,13 @@ export const MapPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-3 py-1.5 rounded bg-[#171A21] text-[#9298A5] hover:bg-[#262A36] hover:text-[#E6E8EC]"
+                  className="px-3 py-1.5 rounded bg-[#1D2026] text-[#9BA2AF] hover:bg-[#2B2F38] hover:text-[#F0F1F3]"
                 >
                   Отмена
                 </button>
                 <button
                   type="submit"
-                  className="px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-medium"
+                  className="px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-medium"
                 >
                   Сохранить метку
                 </button>
