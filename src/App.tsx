@@ -82,7 +82,7 @@ const MainContent: React.FC = () => {
       <TopBar />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-[#0D0F12]">
+        <main className="min-w-0 flex-1 overflow-y-auto bg-[#101114]">
           {renderActivePage()}
         </main>
       </div>
