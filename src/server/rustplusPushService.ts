@@ -8,7 +8,7 @@ const PushReceiverClient = require('@liamcottle/push-receiver/src/client') as ne
 ) => PushReceiver;
 
 interface PushReceiver {
-  connect(): void;
+  connect(): Promise<void>;
   destroy(): void;
   on(event: string, listener: (...args: any[]) => void): this;
 }
@@ -72,13 +72,15 @@ function parseNotification(data: any): RustPlusPairingNotification | null {
   };
 }
 
-export function startRustPlusPushListener(
+export async function startRustPlusPushListener(
   userId: string,
   androidId: string,
   securityToken: string,
   onPairing: (notification: RustPlusPairingNotification) => Promise<void> | void,
-): { started: boolean; alreadyRunning: boolean } {
-  if (listeners.has(userId)) return { started: false, alreadyRunning: true };
+): Promise<{ started: boolean; alreadyRunning: boolean }> {
+  if (listeners.has(userId)) {
+    return { started: false, alreadyRunning: true };
+  }
 
   const client = new PushReceiverClient(androidId, securityToken, []);
   const entry: ListenerEntry = { client, startedAt: Date.now() };
@@ -90,25 +92,36 @@ export function startRustPlusPushListener(
 
     entry.lastNotificationAt = Date.now();
     Promise.resolve(onPairing(notification)).catch((error: unknown) => {
-      entry.lastError = error instanceof Error ? error.message : 'Не удалось обработать уведомление Rust+.';
+      entry.lastError =
+        error instanceof Error
+          ? error.message
+          : 'Не удалось обработать уведомление Rust+.';
       console.error('[Rust+ FCM] Ошибка обработки уведомления:', entry.lastError);
     });
   });
 
   client.on('error', (error: unknown) => {
-    entry.lastError = error instanceof Error ? error.message : 'Ошибка соединения с FCM.';
+    entry.lastError =
+      error instanceof Error ? error.message : 'Ошибка соединения с FCM.';
     console.error('[Rust+ FCM] Ошибка слушателя:', entry.lastError);
   });
 
   try {
-    client.connect();
+    await client.connect();
+    return { started: true, alreadyRunning: false };
   } catch (error) {
-    listeners.delete(userId);
-    try { client.destroy(); } catch { /* no-op */ }
+    if (listeners.get(userId) === entry) {
+      listeners.delete(userId);
+    }
+
+    try {
+      client.destroy();
+    } catch {
+      // Соединение уже могло закрыться.
+    }
+
     throw error;
   }
-
-  return { started: true, alreadyRunning: false };
 }
 
 export function stopRustPlusPushListener(userId: string): boolean {
