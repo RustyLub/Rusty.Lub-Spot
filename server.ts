@@ -902,7 +902,7 @@ app.get('/api/rustplus/auto-pair/status', requireAuth, rustPlusLimiter, (req: Re
   res.json({ success: true, ...getRustPlusPushListenerStatus(user.steamId) });
 });
 
-app.post('/api/rustplus/auto-pair/start', requireAuth, requireCsrf, rustPlusLimiter, (req: Request, res: Response) => {
+app.post('/api/rustplus/auto-pair/start', requireAuth, requireCsrf, rustPlusLimiter, async (req: Request, res: Response) => {
   const user = (req as any).user as SteamSession;
   const androidId = String(req.body?.androidId || '').trim();
   const securityToken = String(req.body?.securityToken || '').trim();
@@ -916,7 +916,7 @@ app.post('/api/rustplus/auto-pair/start', requireAuth, requireCsrf, rustPlusLimi
   }
 
   try {
-    const result = startRustPlusPushListener(user.steamId, androidId, securityToken, async (pairing) => {
+    const result = await startRustPlusPushListener(user.steamId, androidId, securityToken, async (pairing) => {
       // A push notification is accepted only when it belongs to the Steam account logged into this app.
       if (pairing.playerId !== user.steamId) {
         console.warn('[Rust+ FCM] Pairing notification ignored: player SteamID does not match authenticated user.');
