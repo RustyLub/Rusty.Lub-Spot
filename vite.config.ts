@@ -5,6 +5,9 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // GitHub Pages hosts this repository under /Rusty.Lub-Spot/.
+    // Local development and the Node.js deployment continue using /.
+    base: process.env.GITHUB_ACTIONS ? '/Rusty.Lub-Spot/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
@@ -12,7 +15,6 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // Disable HMR in production / cloud run preview when DISABLE_HMR is not false
       hmr: process.env.NODE_ENV !== 'production' && process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
