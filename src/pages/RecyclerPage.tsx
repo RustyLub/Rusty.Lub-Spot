@@ -68,19 +68,19 @@ export const RecyclerPage: React.FC = () => {
   return (
     <div className="p-3 space-y-3 max-w-[1500px] mx-auto select-none">
       {/* Header */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded bg-[#171A21] border border-[#262A36]">
-            <RefreshCw className="w-5 h-5 text-[#F97316]" />
+          <div className="p-2 rounded bg-[#17191E] border border-[#2B2F38]">
+            <RefreshCw className="w-5 h-5 text-[#FF7417]" />
           </div>
           <div>
-            <div className="font-mono font-bold text-[#E6E8EC] text-sm flex items-center gap-2">
+            <div className="font-mono font-bold text-[#F0F1F3] text-sm flex items-center gap-2">
               <span>КАЛЬКУЛЯТОР ПЕРЕРАБОТЧИКА (RECYCLER YIELD)</span>
-              <span className="text-[10px] font-mono text-[#00C896] bg-[#00C896]/10 border border-[#00C896]/30 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-mono text-[#28C995] bg-[#28C995]/10 border border-[#28C995]/30 px-2 py-0.5 rounded">
                 ТОЧНЫЙ ВЫХОД СКРАПА И МВК
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#9298A5]">
+            <div className="text-[11px] font-mono text-[#9BA2AF]">
               Быстрый подсчет ресурсов при переработке компонентов и электроники
             </div>
           </div>
@@ -88,38 +88,38 @@ export const RecyclerPage: React.FC = () => {
 
         {/* Location toggle */}
         <div className="flex items-center gap-2 font-mono text-xs">
-          <span className="text-[#9298A5] text-[11px]">ЛОКАЦИЯ:</span>
+          <span className="text-[#9BA2AF] text-[11px]">ЛОКАЦИЯ:</span>
           <button
             onClick={() => setLocationMode('safe')}
             className={`px-2.5 py-1 rounded border transition-colors flex items-center gap-1.5 ${
               locationMode === 'safe'
-                ? 'bg-[#171A21] border-[#00C896]/60 text-[#00C896] font-bold'
-                : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                ? 'bg-[#17191E] border-[#28C995]/60 text-[#28C995] font-bold'
+                : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-[#00C896]" /> Безопасная зона (100%)
+            <ShieldCheck className="w-3.5 h-3.5 text-[#28C995]" /> Безопасная зона (100%)
           </button>
           <button
             onClick={() => setLocationMode('monument')}
             className={`px-2.5 py-1 rounded border transition-colors flex items-center gap-1.5 ${
               locationMode === 'monument'
-                ? 'bg-[#171A21] border-[#F97316]/60 text-[#F97316] font-bold'
-                : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                ? 'bg-[#17191E] border-[#FF7417]/60 text-[#FF7417] font-bold'
+                : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
             }`}
           >
-            <Flame className="w-3.5 h-3.5 text-[#F97316]" /> Монумент РТ (+20% бонус)
+            <Flame className="w-3.5 h-3.5 text-[#FF7417]" /> Монумент РТ (+20% бонус)
           </button>
         </div>
       </div>
 
       {/* Recycler Component Buttons Grid */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs space-y-2">
-        <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-1.5 border-b border-[#262A36]">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs space-y-2">
+        <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-1.5 border-b border-[#2B2F38]">
           <span>КАТАЛОГ КОМПОНЕНТОВ ДЛЯ ПЕРЕРАБОТКИ (КЛИКНИТЕ ДЛЯ ДОБАВЛЕНИЯ)</span>
           {inputs.length > 0 && (
             <button
               onClick={handleClear}
-              className="text-[#9298A5] hover:text-[#F04444] text-[11px] font-mono transition-colors"
+              className="text-[#9BA2AF] hover:text-[#F04444] text-[11px] font-mono transition-colors"
             >
               Сбросить все
             </button>
@@ -131,18 +131,18 @@ export const RecyclerPage: React.FC = () => {
             <button
               key={item.id}
               onClick={() => handleAddItem(item)}
-              className="p-2 rounded bg-[#171A21] border border-[#262A36] hover:border-[#F97316] text-left transition-colors flex items-center justify-between group"
+              className="p-2 rounded bg-[#17191E] border border-[#2B2F38] hover:border-[#FF7417] text-left transition-colors flex items-center justify-between group"
             >
               <div className="truncate pr-2">
-                <div className="font-bold text-[#E6E8EC] group-hover:text-[#F97316] truncate text-[11px] transition-colors">
+                <div className="font-bold text-[#F0F1F3] group-hover:text-[#FF7417] truncate text-[11px] transition-colors">
                   {item.ruName}
                 </div>
-                <div className="text-[10px] font-mono text-[#9298A5]">
+                <div className="text-[10px] font-mono text-[#9BA2AF]">
                   {item.scrap > 0 && `${item.scrap} скрапа `}
                   {item.hqm > 0 && `· ${item.hqm} МВК`}
                 </div>
               </div>
-              <span className="text-[#F97316] font-mono font-bold text-sm shrink-0">+</span>
+              <span className="text-[#FF7417] font-mono font-bold text-sm shrink-0">+</span>
             </button>
           ))}
         </div>
@@ -151,16 +151,16 @@ export const RecyclerPage: React.FC = () => {
       {/* Main Recycler Workbench: Inputs + Yield Output */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Left 2 Cols: In-Recycler Slot List */}
-        <div className="lg:col-span-2 bg-[#12141A] border border-[#262A36] rounded p-3 text-xs space-y-2">
-          <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-2 border-b border-[#262A36]">
+        <div className="lg:col-span-2 bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs space-y-2">
+          <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-2 border-b border-[#2B2F38]">
             <span>ЗАГРУЖЕНО В ПЕРЕРАБОТЧИК ({inputs.length} ПОЗИЦИЙ)</span>
-            <span className="text-[10px] font-mono text-[#9298A5]">
+            <span className="text-[10px] font-mono text-[#9BA2AF]">
               Количество компонентов в слотах переработчика
             </span>
           </div>
 
           {inputs.length === 0 ? (
-            <div className="p-8 text-center text-[#9298A5] font-mono text-xs">
+            <div className="p-8 text-center text-[#9BA2AF] font-mono text-xs">
               Переработчик пуст. Кликните на компоненты выше для добавления.
             </div>
           ) : (
@@ -168,21 +168,21 @@ export const RecyclerPage: React.FC = () => {
               {inputs.map(item => (
                 <div
                   key={item.item.id}
-                  className="bg-[#171A21] border border-[#262A36] rounded p-2.5 flex items-center justify-between gap-3 text-xs"
+                  className="bg-[#17191E] border border-[#2B2F38] rounded p-2.5 flex items-center justify-between gap-3 text-xs"
                 >
                   <div className="truncate">
-                    <span className="font-bold text-[#E6E8EC]">{item.item.ruName}</span>
-                    <div className="text-[10px] font-mono text-[#9298A5]">
+                    <span className="font-bold text-[#F0F1F3]">{item.item.ruName}</span>
+                    <div className="text-[10px] font-mono text-[#9BA2AF]">
                       1 шт = {item.item.scrap} скрапа, {item.item.hqm} МВК, {item.item.metalFragments} металла
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 shrink-0">
                     {/* Stepper */}
-                    <div className="flex items-center gap-1 bg-[#12141A] border border-[#262A36] rounded p-0.5 font-mono">
+                    <div className="flex items-center gap-1 bg-[#17191E] border border-[#2B2F38] rounded p-0.5 font-mono">
                       <button
                         onClick={() => handleUpdateQty(item.item.id, item.qty - 1)}
-                        className="p-1 hover:bg-[#262A36] rounded text-[#E6E8EC] transition-colors"
+                        className="p-1 hover:bg-[#2B2F38] rounded text-[#F0F1F3] transition-colors"
                       >
                         <Minus className="w-3 h-3" />
                       </button>
@@ -191,11 +191,11 @@ export const RecyclerPage: React.FC = () => {
                         min="0"
                         value={item.qty}
                         onChange={e => handleUpdateQty(item.item.id, Number(e.target.value))}
-                        className="w-12 text-center bg-transparent text-[#E6E8EC] font-bold tabular-nums focus:outline-none"
+                        className="w-12 text-center bg-transparent text-[#F0F1F3] font-bold tabular-nums focus:outline-none"
                       />
                       <button
                         onClick={() => handleUpdateQty(item.item.id, item.qty + 1)}
-                        className="p-1 hover:bg-[#262A36] rounded text-[#E6E8EC] transition-colors"
+                        className="p-1 hover:bg-[#2B2F38] rounded text-[#F0F1F3] transition-colors"
                       >
                         <Plus className="w-3 h-3" />
                       </button>
@@ -203,7 +203,7 @@ export const RecyclerPage: React.FC = () => {
 
                     <button
                       onClick={() => handleRemove(item.item.id)}
-                      className="p-1 text-[#9298A5] hover:text-[#F04444] rounded transition-colors"
+                      className="p-1 text-[#9BA2AF] hover:text-[#F04444] rounded transition-colors"
                       title="Удалить слот"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -216,53 +216,53 @@ export const RecyclerPage: React.FC = () => {
         </div>
 
         {/* Right 1 Col: Yield Output Card */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-4 text-xs flex flex-col justify-between space-y-4">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 text-xs flex flex-col justify-between space-y-4">
           <div>
-            <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-2 border-b border-[#262A36]">
+            <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-2 border-b border-[#2B2F38]">
               <span className="flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[#F97316]" />
+                <Sparkles className="w-4 h-4 text-[#FF7417]" />
                 ИТОГОВЫЙ ВЫХОД РЕСУРСОВ
               </span>
               {locationMode === 'monument' && (
-                <span className="text-[10px] font-mono text-[#F97316] font-bold">+20% БОНУС</span>
+                <span className="text-[10px] font-mono text-[#FF7417] font-bold">+20% БОНУС</span>
               )}
             </div>
 
             {/* Scrap Main Hero */}
-            <div className="bg-[#171A21] border border-[#262A36] rounded p-3 text-center my-3">
-              <div className="text-[10px] font-mono text-[#9298A5]">ПОЛУЧЕННЫЙ СКРАП (SCRAP)</div>
-              <div className="text-3xl font-mono font-bold text-[#F97316] tabular-nums mt-0.5">
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-center my-3">
+              <div className="text-[10px] font-mono text-[#9BA2AF]">ПОЛУЧЕННЫЙ СКРАП (SCRAP)</div>
+              <div className="text-3xl font-mono font-bold text-[#FF7417] tabular-nums mt-0.5">
                 {totalScrap.toLocaleString()} шт
               </div>
             </div>
 
             {/* Other resources grid */}
             <div className="space-y-2 font-mono text-xs">
-              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#171A21] border border-[#262A36]">
+              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#17191E] border border-[#2B2F38]">
                 <span className="text-[#F5B942] font-bold">МВК (HQM):</span>
                 <span className="font-bold text-[#F5B942] tabular-nums text-sm">
                   {totalHqm.toLocaleString()} шт
                 </span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#171A21] border border-[#262A36]">
-                <span className="text-[#9298A5]">Фрагменты металла:</span>
-                <span className="font-bold text-[#E6E8EC] tabular-nums">
+              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#17191E] border border-[#2B2F38]">
+                <span className="text-[#9BA2AF]">Фрагменты металла:</span>
+                <span className="font-bold text-[#F0F1F3] tabular-nums">
                   {totalMetalFrags.toLocaleString()} шт
                 </span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#171A21] border border-[#262A36]">
-                <span className="text-[#9298A5]">Ткань (Cloth):</span>
-                <span className="font-bold text-[#E6E8EC] tabular-nums">
+              <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#17191E] border border-[#2B2F38]">
+                <span className="text-[#9BA2AF]">Ткань (Cloth):</span>
+                <span className="font-bold text-[#F0F1F3] tabular-nums">
                   {totalCloth.toLocaleString()} шт
                 </span>
               </div>
 
               {totalLeather > 0 && (
-                <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#171A21] border border-[#262A36]">
-                  <span className="text-[#9298A5]">Кожа (Leather):</span>
-                  <span className="font-bold text-[#E6E8EC] tabular-nums">
+                <div className="flex justify-between items-center py-1.5 px-3 rounded bg-[#17191E] border border-[#2B2F38]">
+                  <span className="text-[#9BA2AF]">Кожа (Leather):</span>
+                  <span className="font-bold text-[#F0F1F3] tabular-nums">
                     {totalLeather.toLocaleString()} шт
                   </span>
                 </div>
@@ -270,9 +270,9 @@ export const RecyclerPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] font-mono text-[#9298A5] border-t border-[#262A36] flex justify-between items-center">
+          <div className="pt-2 text-[10px] font-mono text-[#9BA2AF] border-t border-[#2B2F38] flex justify-between items-center">
             <span>Время переработки:</span>
-            <span className="text-[#E6E8EC] font-bold tabular-nums">
+            <span className="text-[#F0F1F3] font-bold tabular-nums">
               ~{Math.ceil(inputs.reduce((sum, i) => sum + i.qty, 0) * (locationMode === 'monument' ? 3.5 : 5))} сек
             </span>
           </div>

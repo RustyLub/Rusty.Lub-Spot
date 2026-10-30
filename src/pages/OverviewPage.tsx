@@ -117,56 +117,56 @@ export const OverviewPage: React.FC = () => {
     <div className="p-3 space-y-3 max-w-[1600px] mx-auto select-none">
       {/* Action feedback toast */}
       {actionFeedback && (
-        <div className="bg-[#171A21] border border-[#F97316] text-[#E6E8EC] px-3 py-1.5 rounded text-xs font-mono flex items-center justify-between shadow-lg">
+        <div className="bg-[#1D2026] border border-[#FF7417] text-[#F0F1F3] px-3 py-1.5 rounded text-xs font-mono flex items-center justify-between shadow-lg">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#F97316] animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-[#FF7417] animate-ping" />
             {actionFeedback}
           </span>
-          <button onClick={() => setActionFeedback(null)} className="text-[#9298A5] hover:text-white">✕</button>
+          <button onClick={() => setActionFeedback(null)} className="text-[#9BA2AF] hover:text-white">✕</button>
         </div>
       )}
 
       {/* Верхняя сводка: Компактные показатели */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
         {/* Metric 1: Server */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-2.5 flex flex-col justify-between">
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-2.5 flex flex-col justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>СЕРВЕР</span>
-            <span className="text-[#00C896]">ОНЛАЙН</span>
+            <span className="text-[#28C995]">ОНЛАЙН</span>
           </div>
-          <div className="font-bold text-xs text-[#E6E8EC] truncate mt-1" title={selectedServer.name}>
+          <div className="font-bold text-xs text-[#F0F1F3] truncate mt-1" title={selectedServer.name}>
             {selectedServer.name}
           </div>
-          <div className="text-[10px] font-mono text-[#9298A5] mt-0.5">
-            Пинг: <span className="text-[#00C896]">{selectedServer.ping}ms</span>
+          <div className="text-[10px] font-mono text-[#9BA2AF] mt-0.5">
+            Пинг: <span className="text-[#28C995]">{selectedServer.ping}ms</span>
           </div>
         </div>
 
         {/* Metric 2: Online Pop */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-2.5 flex flex-col justify-between">
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-2.5 flex flex-col justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>ИГРОКИ</span>
-            <Users className="w-3 h-3 text-[#F97316]" />
+            <Users className="w-3 h-3 text-[#FF7417]" />
           </div>
-          <div className="font-bold font-mono text-base text-[#F97316] tabular-nums mt-0.5">
+          <div className="font-bold font-mono text-base text-[#FF7417] tabular-nums mt-0.5">
             {selectedServer.currentPlayers} / {selectedServer.maxPlayers}
           </div>
-          <div className="text-[10px] font-mono text-[#9298A5]">
+          <div className="text-[10px] font-mono text-[#9BA2AF]">
             {selectedServer.queue > 0 ? `Очередь: ${selectedServer.queue}` : 'Без очереди'}
           </div>
         </div>
 
         {/* Metric 3: Connection */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-2.5 flex flex-col justify-between">
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-2.5 flex flex-col justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>RUST+ СВЯЗЬ</span>
-            <Radio className="w-3 h-3 text-[#00C896]" />
+            <Radio className="w-3 h-3 text-[#28C995]" />
           </div>
-          <div className="font-bold font-mono text-xs text-[#00C896] mt-1 flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#00C896] animate-pulse" />
+          <div className="font-bold font-mono text-xs text-[#28C995] mt-1 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#28C995] animate-pulse" />
             {isRustPlusConnected ? 'СИНХРОНИЗИРОВАНО' : 'ОФЛАЙН'}
           </div>
-          <div className="text-[10px] font-mono text-[#9298A5] mt-0.5">
+          <div className="text-[10px] font-mono text-[#9BA2AF] mt-0.5">
             Канал: 28082 TCP
           </div>
         </div>
@@ -174,19 +174,19 @@ export const OverviewPage: React.FC = () => {
         {/* Metric 4: Unread Events */}
         <div 
           onClick={() => setActiveTab('notifications')}
-          className="bg-[#12141A] border border-[#262A36] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
+          className="bg-[#17191E] border border-[#2B2F38] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
         >
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>СОБЫТИЯ</span>
             <Bell className="w-3 h-3 text-[#F5B942]" />
           </div>
-          <div className="font-bold font-mono text-base text-[#E6E8EC] tabular-nums mt-0.5 flex items-center gap-1.5">
+          <div className="font-bold font-mono text-base text-[#F0F1F3] tabular-nums mt-0.5 flex items-center gap-1.5">
             <span>{unreadCount} новых</span>
             {unreadCount > 0 && (
-              <span className="w-2 h-2 rounded-full bg-[#F97316]" />
+              <span className="w-2 h-2 rounded-full bg-[#FF7417]" />
             )}
           </div>
-          <div className="text-[10px] font-mono text-[#9298A5]">
+          <div className="text-[10px] font-mono text-[#9BA2AF]">
             Всего: {notifications.length}
           </div>
         </div>
@@ -194,16 +194,16 @@ export const OverviewPage: React.FC = () => {
         {/* Metric 5: Team status */}
         <div 
           onClick={() => setActiveTab('team')}
-          className="bg-[#12141A] border border-[#262A36] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
+          className="bg-[#17191E] border border-[#2B2F38] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
         >
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>КОМАНДА</span>
-            <Shield className="w-3 h-3 text-[#00C896]" />
+            <Shield className="w-3 h-3 text-[#28C995]" />
           </div>
-          <div className="font-bold font-mono text-base text-[#00C896] tabular-nums mt-0.5">
+          <div className="font-bold font-mono text-base text-[#28C995] tabular-nums mt-0.5">
             {onlineTeam.length} / {teamMembers.length} онлайн
           </div>
-          <div className="text-[10px] font-mono text-[#9298A5]">
+          <div className="text-[10px] font-mono text-[#9BA2AF]">
             Сбор: G11 Бункер
           </div>
         </div>
@@ -211,16 +211,16 @@ export const OverviewPage: React.FC = () => {
         {/* Metric 6: Base devices */}
         <div 
           onClick={() => setActiveTab('smart_electrical')}
-          className="bg-[#12141A] border border-[#262A36] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
+          className="bg-[#17191E] border border-[#2B2F38] hover:border-[#383E4E] rounded p-2.5 flex flex-col justify-between cursor-pointer transition-colors"
         >
-          <div className="text-[10px] font-mono text-[#9298A5] flex items-center justify-between">
+          <div className="text-[10px] font-mono text-[#9BA2AF] flex items-center justify-between">
             <span>БАЗА И ПИТАНИЕ</span>
-            <Zap className="w-3 h-3 text-[#F97316]" />
+            <Zap className="w-3 h-3 text-[#FF7417]" />
           </div>
-          <div className="font-bold font-mono text-base text-[#E6E8EC] tabular-nums mt-0.5">
+          <div className="font-bold font-mono text-base text-[#F0F1F3] tabular-nums mt-0.5">
             {batteryLevel}% батарея
           </div>
-          <div className="text-[10px] font-mono text-[#00C896]">
+          <div className="text-[10px] font-mono text-[#28C995]">
             Турели: {activeTurrets.filter(t => t.state).length}/{activeTurrets.length} активны
           </div>
         </div>
@@ -229,14 +229,14 @@ export const OverviewPage: React.FC = () => {
       {/* Рабочая область: Адаптивная сетка 6 блоков */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {/* Блок 1: Быстрые команды базы (с подтверждением для опасных действий) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Flame className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Flame className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>БЫСТРЫЕ КОМАНДЫ БАЗЫ</span>
               </div>
-              <span className="text-[10px] font-mono text-[#00C896]">ОК</span>
+              <span className="text-[10px] font-mono text-[#28C995]">ОК</span>
             </div>
 
             <div className="grid grid-cols-2 gap-2 mb-3">
@@ -246,7 +246,7 @@ export const OverviewPage: React.FC = () => {
                   <div className="font-bold text-[#F04444] flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5" /> ВЗВЕСТИ СИРЕНУ РЕЙДА?
                   </div>
-                  <div className="text-[11px] text-[#9298A5]">
+                  <div className="text-[11px] text-[#9BA2AF]">
                     Включит все боевые турели, ПВО и сирену 120дБ.
                   </div>
                   <div className="flex gap-2 pt-1">
@@ -258,7 +258,7 @@ export const OverviewPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setConfirmingRaidAlarm(false)}
-                      className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#9298A5] font-mono text-[11px]"
+                      className="px-2.5 py-1 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#9BA2AF] font-mono text-[11px]"
                     >
                       Отмена
                     </button>
@@ -275,7 +275,7 @@ export const OverviewPage: React.FC = () => {
                     </span>
                     <Flame className="w-3.5 h-3.5 text-[#F04444]" />
                   </div>
-                  <div className="text-[10px] text-[#9298A5] mt-1">
+                  <div className="text-[10px] text-[#9BA2AF] mt-1">
                     Турели + сирена
                   </div>
                 </button>
@@ -287,7 +287,7 @@ export const OverviewPage: React.FC = () => {
                   <div className="font-bold text-blue-400 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5" /> ЗАБЛОКИРОВАТЬ БАЗУ?
                   </div>
-                  <div className="text-[11px] text-[#9298A5]">
+                  <div className="text-[11px] text-[#9BA2AF]">
                     Активирует бронешлюзы и запретит вход в бункер.
                   </div>
                   <div className="flex gap-2 pt-1">
@@ -299,7 +299,7 @@ export const OverviewPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setConfirmingLockdown(false)}
-                      className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#9298A5] font-mono text-[11px]"
+                      className="px-2.5 py-1 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#9BA2AF] font-mono text-[11px]"
                     >
                       Отмена
                     </button>
@@ -308,7 +308,7 @@ export const OverviewPage: React.FC = () => {
               ) : (
                 <button
                   onClick={() => setConfirmingLockdown(true)}
-                  className="p-2 rounded bg-[#141A24] hover:bg-[#1A2333] border border-[#262A36] text-left transition-colors group"
+                  className="p-2 rounded bg-[#141A24] hover:bg-[#1A2333] border border-[#2B2F38] text-left transition-colors group"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-blue-400 group-hover:text-blue-300">
@@ -316,7 +316,7 @@ export const OverviewPage: React.FC = () => {
                     </span>
                     <Lock className="w-3.5 h-3.5 text-blue-400" />
                   </div>
-                  <div className="text-[10px] text-[#9298A5] mt-1">
+                  <div className="text-[10px] text-[#9BA2AF] mt-1">
                     ПВО + гермошлюзы
                   </div>
                 </button>
@@ -325,7 +325,7 @@ export const OverviewPage: React.FC = () => {
               {/* Ночной режим */}
               <button
                 onClick={executeNightSaver}
-                className="p-2 rounded bg-[#171A21] hover:bg-[#1E222D] border border-[#262A36] text-left transition-colors group"
+                className="p-2 rounded bg-[#1D2026] hover:bg-[#1E222D] border border-[#2B2F38] text-left transition-colors group"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-[#F5B942] group-hover:text-amber-300">
@@ -333,7 +333,7 @@ export const OverviewPage: React.FC = () => {
                   </span>
                   <Zap className="w-3.5 h-3.5 text-[#F5B942]" />
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   Свет ВКЛ, ферма ВЫКЛ
                 </div>
               </button>
@@ -341,15 +341,15 @@ export const OverviewPage: React.FC = () => {
               {/* Управление сигнализацией / Координаты */}
               <button
                 onClick={handleCopyBase}
-                className="p-2 rounded bg-[#121E19] hover:bg-[#172B23] border border-[#00C896]/50 text-left transition-colors group"
+                className="p-2 rounded bg-[#121E19] hover:bg-[#172B23] border border-[#28C995]/50 text-left transition-colors group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-[#00C896] group-hover:text-emerald-300">
+                  <span className="text-[11px] font-bold text-[#28C995] group-hover:text-emerald-300">
                     {copiedBaseCoords ? 'СКОПИРОВАНО!' : 'КООРДИНАТЫ'}
                   </span>
-                  <MapPin className="w-3.5 h-3.5 text-[#00C896]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#28C995]" />
                 </div>
-                <div className="text-[10px] text-[#9298A5] mt-1">
+                <div className="text-[10px] text-[#9BA2AF] mt-1">
                   База G11 (В буфер)
                 </div>
               </button>
@@ -357,17 +357,17 @@ export const OverviewPage: React.FC = () => {
           </div>
 
           {/* Быстрое сообщение по рации */}
-          <form onSubmit={handleQuickPing} className="pt-2 border-t border-[#262A36] flex gap-1.5">
+          <form onSubmit={handleQuickPing} className="pt-2 border-t border-[#2B2F38] flex gap-1.5">
             <input
               type="text"
               value={teamPingInput}
               onChange={e => setTeamPingInput(e.target.value)}
               placeholder="Сигнал команде (напр. 'Враг на крыше G11')..."
-              className="flex-1 bg-[#171A21] border border-[#262A36] rounded px-2.5 py-1 text-xs text-[#E6E8EC] placeholder-[#9298A5] focus:outline-none focus:border-[#F97316]"
+              className="flex-1 bg-[#1D2026] border border-[#2B2F38] rounded px-2.5 py-1 text-xs text-[#F0F1F3] placeholder-[#9BA2AF] focus:outline-none focus:border-[#FF7417]"
             />
             <button
               type="submit"
-              className="px-2.5 py-1 bg-[#F97316] hover:bg-[#E05326] text-white font-medium text-xs rounded transition-colors shrink-0"
+              className="px-2.5 py-1 bg-[#FF7417] hover:bg-[#E85D12] text-white font-medium text-xs rounded transition-colors shrink-0"
             >
               Отправить
             </button>
@@ -375,16 +375,16 @@ export const OverviewPage: React.FC = () => {
         </div>
 
         {/* Блок 2: Состав команды (Аватар, ник, роль, HP, статус, квадрат) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Users className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Users className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>СОСТАВ КОМАНДЫ ({onlineTeam.length}/{teamMembers.length})</span>
               </div>
               <button
                 onClick={() => setActiveTab('team')}
-                className="text-[10px] font-mono text-[#F97316] hover:underline flex items-center gap-0.5"
+                className="text-[10px] font-mono text-[#FF7417] hover:underline flex items-center gap-0.5"
               >
                 Все <ChevronRight className="w-3 h-3" />
               </button>
@@ -394,11 +394,11 @@ export const OverviewPage: React.FC = () => {
               {teamMembers.map(member => (
                 <div
                   key={member.id}
-                  className="bg-[#171A21] border border-[#262A36] rounded p-2 flex items-center justify-between gap-2 text-xs"
+                  className="bg-[#1D2026] border border-[#2B2F38] rounded p-2 flex items-center justify-between gap-2 text-xs"
                 >
                   <div className="flex items-center gap-2 truncate">
                     <div className="relative shrink-0">
-                      <div className="w-7 h-7 rounded overflow-hidden border border-[#262A36]">
+                      <div className="w-7 h-7 rounded overflow-hidden border border-[#2B2F38]">
                         <img
                           src={member.avatar}
                           alt={member.name}
@@ -407,14 +407,14 @@ export const OverviewPage: React.FC = () => {
                         />
                       </div>
                       <span
-                        className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-[#12141A] ${
-                          member.isOnline ? 'bg-[#00C896]' : 'bg-[#9298A5]'
+                        className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-[#17191E] ${
+                          member.isOnline ? 'bg-[#28C995]' : 'bg-[#9BA2AF]'
                         }`}
                       />
                     </div>
 
                     <div className="truncate">
-                      <div className="font-medium text-[#E6E8EC] truncate flex items-center gap-1.5">
+                      <div className="font-medium text-[#F0F1F3] truncate flex items-center gap-1.5">
                         <span className="truncate">{member.name}</span>
                         {member.isLeader && (
                           <span className="text-[9px] font-mono text-[#F5B942] bg-amber-950/60 px-1 rounded">
@@ -422,7 +422,7 @@ export const OverviewPage: React.FC = () => {
                           </span>
                         )}
                       </div>
-                      <div className="text-[10px] font-mono text-[#9298A5] truncate">
+                      <div className="text-[10px] font-mono text-[#9BA2AF] truncate">
                         {member.role || 'Боец'} · {member.heldItem}
                       </div>
                     </div>
@@ -430,11 +430,11 @@ export const OverviewPage: React.FC = () => {
 
                   <div className="text-right shrink-0">
                     <div className="flex items-center gap-1.5 justify-end">
-                      <div className="w-12 h-1.5 bg-[#262A36] rounded-full overflow-hidden">
+                      <div className="w-12 h-1.5 bg-[#2B2F38] rounded-full overflow-hidden">
                         <div
                           className={`h-full ${
                             member.hp > 50
-                              ? 'bg-[#00C896]'
+                              ? 'bg-[#28C995]'
                               : member.hp > 20
                               ? 'bg-[#F5B942]'
                               : 'bg-[#F04444]'
@@ -442,12 +442,12 @@ export const OverviewPage: React.FC = () => {
                           style={{ width: `${member.hp}%` }}
                         />
                       </div>
-                      <span className="font-mono text-[11px] tabular-nums font-bold text-[#E6E8EC]">
+                      <span className="font-mono text-[11px] tabular-nums font-bold text-[#F0F1F3]">
                         {member.hp} HP
                       </span>
                     </div>
-                    <div className="text-[10px] font-mono text-[#9298A5]">
-                      Квадрат: <span className="text-[#F97316] font-bold">{member.coords.grid}</span>
+                    <div className="text-[10px] font-mono text-[#9BA2AF]">
+                      Квадрат: <span className="text-[#FF7417] font-bold">{member.coords.grid}</span>
                     </div>
                   </div>
                 </div>
@@ -455,23 +455,23 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] text-[#9298A5] font-mono flex justify-between border-t border-[#262A36] mt-2">
+          <div className="pt-2 text-[10px] text-[#9BA2AF] font-mono flex justify-between border-t border-[#2B2F38] mt-2">
             <span>ГОЛОСОВАЯ СВЯЗЬ: АКТИВНА</span>
             <span>СПАВН: БАЗА G11</span>
           </div>
         </div>
 
         {/* Блок 3: Журнал событий (Время, тип, уровень, описание, переход) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Bell className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Bell className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>ЖУРНАЛ СОБЫТИЙ И ТРЕВОГ</span>
               </div>
               <button
                 onClick={() => setActiveTab('notifications')}
-                className="text-[10px] font-mono text-[#F97316] hover:underline flex items-center gap-0.5"
+                className="text-[10px] font-mono text-[#FF7417] hover:underline flex items-center gap-0.5"
               >
                 Все <ChevronRight className="w-3 h-3" />
               </button>
@@ -487,7 +487,7 @@ export const OverviewPage: React.FC = () => {
                       ? 'bg-[#1E1416] border-[#F04444]/50 text-[#F04444]'
                       : notif.severity === 'warning'
                       ? 'bg-[#221B12] border-[#F5B942]/50 text-[#F5B942]'
-                      : 'bg-[#171A21] border-[#262A36] text-[#E6E8EC]'
+                      : 'bg-[#1D2026] border-[#2B2F38] text-[#F0F1F3]'
                   }`}
                 >
                   <span
@@ -501,12 +501,12 @@ export const OverviewPage: React.FC = () => {
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold truncate text-[#E6E8EC]">{notif.title}</span>
-                      <span className="text-[10px] font-mono text-[#9298A5] ml-2 shrink-0">
+                      <span className="font-semibold truncate text-[#F0F1F3]">{notif.title}</span>
+                      <span className="text-[10px] font-mono text-[#9BA2AF] ml-2 shrink-0">
                         {notif.timestamp}
                       </span>
                     </div>
-                    <div className="text-[11px] text-[#9298A5] line-clamp-1 mt-0.5">
+                    <div className="text-[11px] text-[#9BA2AF] line-clamp-1 mt-0.5">
                       {notif.message}
                     </div>
                   </div>
@@ -515,23 +515,23 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] text-[#9298A5] font-mono flex justify-between border-t border-[#262A36] mt-2">
+          <div className="pt-2 text-[10px] text-[#9BA2AF] font-mono flex justify-between border-t border-[#2B2F38] mt-2">
             <span>КАНАЛ: RUST+ EVENT FEED</span>
-            <span className="text-[#00C896]">ОНЛАЙН СИНХРОНИЗАЦИЯ</span>
+            <span className="text-[#28C995]">ОНЛАЙН СИНХРОНИЗАЦИЯ</span>
           </div>
         </div>
 
         {/* Блок 4: Электрика и питание (Батарея, мощность, статус, время работы) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Zap className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Zap className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>ЭЛЕКТРИКА И ПИТАНИЕ БАЗЫ</span>
               </div>
               <button
                 onClick={() => setActiveTab('smart_electrical')}
-                className="text-[10px] font-mono text-[#F97316] hover:underline flex items-center gap-0.5"
+                className="text-[10px] font-mono text-[#FF7417] hover:underline flex items-center gap-0.5"
               >
                 Панель <ChevronRight className="w-3 h-3" />
               </button>
@@ -539,21 +539,21 @@ export const OverviewPage: React.FC = () => {
 
             {/* Battery state */}
             {mainBattery && (
-              <div className="bg-[#171A21] border border-[#262A36] rounded p-2.5 mb-2.5">
+              <div className="bg-[#1D2026] border border-[#2B2F38] rounded p-2.5 mb-2.5">
                 <div className="flex items-center justify-between text-xs mb-1.5">
-                  <span className="font-medium text-[#E6E8EC]">Большая батарея (Large Battery)</span>
-                  <span className="font-mono text-[#00C896] font-bold tabular-nums">
+                  <span className="font-medium text-[#F0F1F3]">Большая батарея (Large Battery)</span>
+                  <span className="font-mono text-[#28C995] font-bold tabular-nums">
                     {batteryLevel}%
                   </span>
                 </div>
-                <div className="w-full h-2 bg-[#262A36] rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-[#2B2F38] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#00C896] rounded-full"
+                    className="h-full bg-[#28C995] rounded-full"
                     style={{ width: `${batteryLevel}%` }}
                   />
                 </div>
-                <div className="flex justify-between text-[10px] font-mono text-[#9298A5] mt-1.5">
-                  <span>Вход: <strong className="text-[#00C896]">+{batteryInput}W</strong> (Ветряки)</span>
+                <div className="flex justify-between text-[10px] font-mono text-[#9BA2AF] mt-1.5">
+                  <span>Вход: <strong className="text-[#28C995]">+{batteryInput}W</strong> (Ветряки)</span>
                   <span>Расход: <strong className="text-[#F5B942]">-{batteryOutput}W</strong></span>
                 </div>
               </div>
@@ -561,49 +561,49 @@ export const OverviewPage: React.FC = () => {
 
             {/* Devices summary grid */}
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="bg-[#171A21] border border-[#262A36] rounded p-2 flex items-center justify-between">
+              <div className="bg-[#1D2026] border border-[#2B2F38] rounded p-2 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] text-[#9298A5]">АКТИВНЫЕ ТУРЕЛИ</div>
-                  <div className="font-mono font-bold text-[#E6E8EC]">
+                  <div className="text-[10px] text-[#9BA2AF]">АКТИВНЫЕ ТУРЕЛИ</div>
+                  <div className="font-mono font-bold text-[#F0F1F3]">
                     {activeTurrets.filter(t => t.state).length}/{activeTurrets.length} шт
                   </div>
                 </div>
-                <Shield className="w-4 h-4 text-[#00C896]" />
+                <Shield className="w-4 h-4 text-[#28C995]" />
               </div>
 
-              <div className="bg-[#171A21] border border-[#262A36] rounded p-2 flex items-center justify-between">
+              <div className="bg-[#1D2026] border border-[#2B2F38] rounded p-2 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] text-[#9298A5]">СИРЕНА РЕЙДА</div>
-                  <div className="font-mono font-bold text-[#E6E8EC]">
+                  <div className="text-[10px] text-[#9BA2AF]">СИРЕНА РЕЙДА</div>
+                  <div className="font-mono font-bold text-[#F0F1F3]">
                     {sirenAlarm?.state ? (
                       <span className="text-[#F04444] animate-pulse">ВКЛЮЧЕНА</span>
                     ) : (
-                      <span className="text-[#00C896]">В норме</span>
+                      <span className="text-[#28C995]">В норме</span>
                     )}
                   </div>
                 </div>
-                {sirenAlarm?.state ? <Volume2 className="w-4 h-4 text-[#F04444]" /> : <VolumeX className="w-4 h-4 text-[#9298A5]" />}
+                {sirenAlarm?.state ? <Volume2 className="w-4 h-4 text-[#F04444]" /> : <VolumeX className="w-4 h-4 text-[#9BA2AF]" />}
               </div>
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] text-[#9298A5] font-mono flex justify-between border-t border-[#262A36] mt-2">
+          <div className="pt-2 text-[10px] text-[#9BA2AF] font-mono flex justify-between border-t border-[#2B2F38] mt-2">
             <span>АВТОНОМНОСТЬ:</span>
-            <span className="text-[#00C896] font-semibold">{estimatedRuntimeHours}</span>
+            <span className="text-[#28C995] font-semibold">{estimatedRuntimeHours}</span>
           </div>
         </div>
 
         {/* Блок 5: Сохранённые метки (Название, координаты, категория, быстрый переход) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <MapPin className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <MapPin className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>СОХРАНЁННЫЕ МЕТКИ ({markers.length})</span>
               </div>
               <button
                 onClick={() => setActiveTab('map')}
-                className="text-[10px] font-mono text-[#F97316] hover:underline flex items-center gap-0.5"
+                className="text-[10px] font-mono text-[#FF7417] hover:underline flex items-center gap-0.5"
               >
                 Карта <ChevronRight className="w-3 h-3" />
               </button>
@@ -614,7 +614,7 @@ export const OverviewPage: React.FC = () => {
                 <div
                   key={marker.id}
                   onClick={() => setActiveTab('map')}
-                  className="bg-[#171A21] border border-[#262A36] hover:border-[#383E4E] rounded p-2 flex items-center justify-between text-xs cursor-pointer transition-colors"
+                  className="bg-[#1D2026] border border-[#2B2F38] hover:border-[#383E4E] rounded p-2 flex items-center justify-between text-xs cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-2 truncate">
                     <span
@@ -622,13 +622,13 @@ export const OverviewPage: React.FC = () => {
                       style={{ backgroundColor: marker.color }}
                     />
                     <div className="truncate">
-                      <span className="font-medium text-[#E6E8EC] truncate">{marker.name}</span>
-                      <div className="text-[10px] font-mono text-[#9298A5] truncate">
+                      <span className="font-medium text-[#F0F1F3] truncate">{marker.name}</span>
+                      <div className="text-[10px] font-mono text-[#9BA2AF] truncate">
                         {marker.note || 'Категория: ' + marker.type}
                       </div>
                     </div>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-[#12141A] border border-[#262A36] text-[11px] font-mono text-[#F97316] font-bold shrink-0 ml-2">
+                  <span className="px-2 py-0.5 rounded bg-[#17191E] border border-[#2B2F38] text-[11px] font-mono text-[#FF7417] font-bold shrink-0 ml-2">
                     {marker.grid}
                   </span>
                 </div>
@@ -636,23 +636,23 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] text-[#9298A5] font-mono flex justify-between border-t border-[#262A36] mt-2">
+          <div className="pt-2 text-[10px] text-[#9BA2AF] font-mono flex justify-between border-t border-[#2B2F38] mt-2">
             <span>КЛИК ДЛЯ ПЕРЕХОДА НА КАРТУ</span>
             <span>ГРИД: АКТИВЕН</span>
           </div>
         </div>
 
         {/* Блок 6: Быстрые камеры (Список, статус, переход к просмотру) */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-col justify-between">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#262A36]">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-                <Eye className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#2B2F38]">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+                <Eye className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>БЫСТРЫЕ КАМЕРЫ НАБЛЮДЕНИЯ</span>
               </div>
               <button
                 onClick={() => setActiveTab('camera_codes')}
-                className="text-[10px] font-mono text-[#F97316] hover:underline flex items-center gap-0.5"
+                className="text-[10px] font-mono text-[#FF7417] hover:underline flex items-center gap-0.5"
               >
                 Все <ChevronRight className="w-3 h-3" />
               </button>
@@ -663,15 +663,15 @@ export const OverviewPage: React.FC = () => {
                 <button
                   key={cam.id}
                   onClick={() => openCCTV(cam)}
-                  className="bg-[#171A21] border border-[#262A36] hover:border-[#F97316]/60 rounded p-2 text-left transition-colors group"
+                  className="bg-[#1D2026] border border-[#2B2F38] hover:border-[#FF7417]/60 rounded p-2 text-left transition-colors group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#E6E8EC] group-hover:text-[#F97316]">
+                    <span className="font-mono text-xs font-bold text-[#F0F1F3] group-hover:text-[#FF7417]">
                       {cam.code}
                     </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00C896]" title="Камера доступна" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#28C995]" title="Камера доступна" />
                   </div>
-                  <div className="text-[10px] text-[#9298A5] truncate mt-1">
+                  <div className="text-[10px] text-[#9BA2AF] truncate mt-1">
                     {cam.ruMonument}
                   </div>
                 </button>
@@ -679,9 +679,9 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 text-[10px] text-[#9298A5] font-mono flex justify-between border-t border-[#262A36] mt-2">
+          <div className="pt-2 text-[10px] text-[#9BA2AF] font-mono flex justify-between border-t border-[#2B2F38] mt-2">
             <span>CCTV СИСТЕМА: PTZ ОНЛАЙН</span>
-            <span className="text-[#00C896]">СИГНАЛ 100%</span>
+            <span className="text-[#28C995]">СИГНАЛ 100%</span>
           </div>
         </div>
       </div>

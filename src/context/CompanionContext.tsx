@@ -119,7 +119,7 @@ export const CompanionProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const [activeTab, setActiveTab] = useState<NavPageId>(() => {
-    return (localStorage.getItem(`${LOCAL_STORAGE_PREFIX}tab`) as NavPageId) || 'overview';
+    return (localStorage.getItem(`${LOCAL_STORAGE_PREFIX}tab`) as NavPageId) || 'home';
   });
 
   const [servers, setServers] = useState<RustServer[]>(() => {
@@ -462,13 +462,16 @@ export const CompanionProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
   }, [checkSteamSession]);
 
-  // Sync paired servers whenever user is authenticated
+  // Sync paired servers periodically so FCM-discovered in-game pairings appear without a reload.
   useEffect(() => {
-    if (steamAuthState === 'authenticated') {
-      fetchPairedServers();
-    } else {
+    if (steamAuthState !== 'authenticated') {
       setPairedServers([]);
+      return;
     }
+
+    fetchPairedServers();
+    const timer = window.setInterval(fetchPairedServers, 5000);
+    return () => window.clearInterval(timer);
   }, [steamAuthState, fetchPairedServers]);
 
   // Synchronize team leader profile with authenticated Steam profile
@@ -635,16 +638,51 @@ export const CompanionProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         return { success: false, message: data.message || 'Ошибка сопряжения сервера' };
       }
 
+      // Pairing and connecting are one user action: start the live Rust+ session immediately.
+      const serverId = data.server?.id as string | undefined;
+      let connectionMessage = 'Сервер привязан.';
+
+      if (serverId) {
+        try {
+          const connectRes = await fetch(`/api/rustplus/servers/${encodeURIComponent(serverId)}/connect`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-csrf-token': csrfToken,
+            },
+          });
+          const connectData = await connectRes.json();
+          if (connectRes.ok && connectData.success) {
+            connectionMessage = 'Сервер привязан, Rust+ подключён. Реальные данные получены.';
+            addNotification({
+              title: 'RUST+ ПОДКЛЮЧЁН',
+              message: `"${params.name || params.ip}": соединение установлено, получены реальные данные.`,
+              severity: 'success',
+              category: 'system',
+            });
+          } else {
+            connectionMessage = `Сервер привязан, но подключение не удалось: ${connectData.message || 'проверьте доступность сервера и данные сопряжения'}`;
+            addNotification({
+              title: 'СЕРВЕР ПРИВЯЗАН — НЕТ СОЕДИНЕНИЯ',
+              message: connectionMessage,
+              severity: 'warning',
+              category: 'system',
+            });
+          }
+        } catch {
+          connectionMessage = 'Сервер привязан, но соединение не удалось проверить из-за сетевой ошибки.';
+          addNotification({
+            title: 'RUST+ НЕ ПОДКЛЮЧЁН',
+            message: connectionMessage,
+            severity: 'warning',
+            category: 'system',
+          });
+        }
+      }
+
       await fetchPairedServers();
-
-      addNotification({
-        title: 'СЕРВЕР RUST+ ПРИВЯЗАН',
-        message: `Сервер "${params.name || params.ip}" успешно зарегистрирован в реестре сопряжения.`,
-        severity: 'info',
-        category: 'system',
-      });
-
-      return { success: true, message: data.message };
+      return { success: true, message: connectionMessage };
     } catch (err: any) {
       return { success: false, message: err?.message || 'Сетевой сбой при сопряжении сервера' };
     }

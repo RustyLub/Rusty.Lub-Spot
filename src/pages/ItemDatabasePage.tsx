@@ -36,25 +36,25 @@ export const ItemDatabasePage: React.FC = () => {
   const selectedItem = RUST_ITEMS.find(i => i.id === selectedItemId) || filteredItems[0] || RUST_ITEMS[0];
 
   return (
-    <div className="h-[calc(100vh-2.75rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#0D0F12]">
+    <div className="h-[calc(100vh-2.75rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#101114]">
       {/* Left List of Items */}
-      <div className="w-full md:w-[380px] bg-[#12141A] border-r border-[#262A36] flex flex-col justify-between shrink-0">
+      <div className="w-full md:w-[380px] bg-[#17191E] border-r border-[#2B2F38] flex flex-col justify-between shrink-0">
         <div className="p-3 space-y-2.5 flex-1 overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-            <BookOpen className="w-3.5 h-3.5 text-[#F97316]" />
+          <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+            <BookOpen className="w-3.5 h-3.5 text-[#FF7417]" />
             <span>СПРАВОЧНИК ПРЕДМЕТОВ RUST ({RUST_ITEMS.length})</span>
           </div>
 
           {/* Search Box */}
           <div className="relative">
-            <Search className="w-3.5 h-3.5 text-[#9298A5] absolute left-2.5 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#9BA2AF] absolute left-2.5 top-2.5" />
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Поиск по названию или описанию..."
-              className="w-full bg-[#171A21] border border-[#262A36] rounded pl-8 pr-2 py-1.5 text-xs text-[#E6E8EC] placeholder-[#9298A5] focus:outline-none focus:border-[#F97316] transition-colors"
+              className="w-full bg-[#17191E] border border-[#2B2F38] rounded pl-8 pr-2 py-1.5 text-xs text-[#F0F1F3] placeholder-[#9BA2AF] focus:outline-none focus:border-[#FF7417] transition-colors"
             />
           </div>
 
@@ -66,8 +66,8 @@ export const ItemDatabasePage: React.FC = () => {
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-2 py-1 rounded whitespace-nowrap border transition-colors ${
                   categoryFilter === cat
-                    ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-semibold'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-semibold'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
                 }`}
               >
                 {cat}
@@ -77,7 +77,7 @@ export const ItemDatabasePage: React.FC = () => {
 
           {/* Workbench Tier Tabs */}
           <div className="flex items-center gap-1 text-[10px] font-mono">
-            <span className="text-[#9298A5] mr-1">ВЕРСТАК:</span>
+            <span className="text-[#9BA2AF] mr-1">ВЕРСТАК:</span>
             {[
               { id: 'all', label: 'Все' },
               { id: 0, label: 'Без Т' },
@@ -90,8 +90,8 @@ export const ItemDatabasePage: React.FC = () => {
                 onClick={() => setWorkbenchFilter(wb.id as any)}
                 className={`px-2 py-0.5 rounded border transition-colors ${
                   workbenchFilter === wb.id
-                    ? 'bg-[#171A21] border-[#F97316] text-[#F97316] font-bold'
-                    : 'bg-[#12141A] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                    ? 'bg-[#17191E] border-[#FF7417] text-[#FF7417] font-bold'
+                    : 'bg-[#17191E] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
                 }`}
               >
                 {wb.label}
@@ -110,18 +110,18 @@ export const ItemDatabasePage: React.FC = () => {
                   onClick={() => setSelectedItemId(item.id)}
                   className={`p-2.5 rounded border text-xs cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-[#171A21] border-[#F97316] text-[#E6E8EC]'
-                      : 'bg-[#12141A] border-[#262A36] hover:bg-[#171A21] hover:border-[#262A36]'
+                      ? 'bg-[#17191E] border-[#FF7417] text-[#F0F1F3]'
+                      : 'bg-[#17191E] border-[#2B2F38] hover:bg-[#17191E] hover:border-[#2B2F38]'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-bold text-[#E6E8EC] truncate">{item.ruName}</span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#171A21] text-[#F97316] font-bold border border-[#262A36]">
+                    <span className="font-bold text-[#F0F1F3] truncate">{item.ruName}</span>
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#17191E] text-[#FF7417] font-bold border border-[#2B2F38]">
                       {item.workbench === 0 ? 'Без верстака' : `Т${item.workbench}`}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-[10px] font-mono text-[#9298A5]">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[#9BA2AF]">
                     <span>{item.category}</span>
                     <span className="tabular-nums">Изучение: {item.researchScrap} скрапа</span>
                   </div>
@@ -132,7 +132,7 @@ export const ItemDatabasePage: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-2 border-t border-[#262A36] bg-[#0D0F12] text-[10px] font-mono text-[#9298A5] flex justify-between">
+        <div className="p-2 border-t border-[#2B2F38] bg-[#101114] text-[10px] font-mono text-[#9BA2AF] flex justify-between">
           <span>БАЗА ДАННЫХ RUST WIKI</span>
           <span className="tabular-nums">НАЙДЕНО: {filteredItems.length}</span>
         </div>
@@ -140,24 +140,24 @@ export const ItemDatabasePage: React.FC = () => {
 
       {/* Right Item Detail Dossier */}
       {selectedItem ? (
-        <div className="flex-1 bg-[#0D0F12] overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 bg-[#101114] overflow-y-auto p-4 space-y-4">
           {/* Header */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-bold text-[#E6E8EC] font-mono">
+                <h2 className="text-lg font-bold text-[#F0F1F3] font-mono">
                   {selectedItem.ruName}
                 </h2>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#171A21] text-[#9298A5] border border-[#262A36]">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#17191E] text-[#9BA2AF] border border-[#2B2F38]">
                   {selectedItem.name}
                 </span>
               </div>
-              <div className="text-xs font-mono text-[#9298A5] mt-1.5 flex items-center gap-4">
-                <span>Категория: <strong className="text-[#E6E8EC]">{selectedItem.category}</strong></span>
+              <div className="text-xs font-mono text-[#9BA2AF] mt-1.5 flex items-center gap-4">
+                <span>Категория: <strong className="text-[#F0F1F3]">{selectedItem.category}</strong></span>
                 <span>·</span>
                 <span>
                   Уровень верстака:{' '}
-                  <strong className="text-[#F97316]">
+                  <strong className="text-[#FF7417]">
                     {selectedItem.workbench === 0 ? 'Любой (без Т)' : `Верстак Т${selectedItem.workbench}`}
                   </strong>
                 </span>
@@ -171,9 +171,9 @@ export const ItemDatabasePage: React.FC = () => {
           </div>
 
           {/* Description */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 text-xs space-y-1">
-            <div className="font-mono text-[#9298A5] text-[11px] font-semibold">ОПИСАНИЕ И ХАРАКТЕРИСТИКИ:</div>
-            <div className="text-[#E6E8EC] text-sm leading-relaxed">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 text-xs space-y-1">
+            <div className="font-mono text-[#9BA2AF] text-[11px] font-semibold">ОПИСАНИЕ И ХАРАКТЕРИСТИКИ:</div>
+            <div className="text-[#F0F1F3] text-sm leading-relaxed">
               {selectedItem.description}
             </div>
           </div>
@@ -181,9 +181,9 @@ export const ItemDatabasePage: React.FC = () => {
           {/* Crafting Recipe & Recycle Yields Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {/* Craft Cost */}
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 text-xs space-y-2">
-              <div className="font-mono font-bold text-[#E6E8EC] flex items-center gap-1.5 pb-2 border-b border-[#262A36]">
-                <Package className="w-4 h-4 text-[#F97316]" />
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 text-xs space-y-2">
+              <div className="font-mono font-bold text-[#F0F1F3] flex items-center gap-1.5 pb-2 border-b border-[#2B2F38]">
+                <Package className="w-4 h-4 text-[#FF7417]" />
                 <span>РЕЦЕПТ СОЗДАНИЯ (КРАФТ)</span>
               </div>
 
@@ -191,33 +191,33 @@ export const ItemDatabasePage: React.FC = () => {
                 {selectedItem.craftCost.map((c, idx) => (
                   <div
                     key={idx}
-                    className="flex justify-between items-center py-2 px-3 rounded bg-[#171A21] border border-[#262A36] font-mono text-xs"
+                    className="flex justify-between items-center py-2 px-3 rounded bg-[#17191E] border border-[#2B2F38] font-mono text-xs"
                   >
-                    <span className="text-[#E6E8EC]">{c.item}</span>
-                    <span className="font-bold text-[#F97316] tabular-nums">{c.qty} шт</span>
+                    <span className="text-[#F0F1F3]">{c.item}</span>
+                    <span className="font-bold text-[#FF7417] tabular-nums">{c.qty} шт</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Recycle Yield */}
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 text-xs space-y-2">
-              <div className="font-mono font-bold text-[#E6E8EC] flex items-center gap-1.5 pb-2 border-b border-[#262A36]">
-                <Sparkles className="w-4 h-4 text-[#00C896]" />
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 text-xs space-y-2">
+              <div className="font-mono font-bold text-[#F0F1F3] flex items-center gap-1.5 pb-2 border-b border-[#2B2F38]">
+                <Sparkles className="w-4 h-4 text-[#28C995]" />
                 <span>ПЕРЕРАБОТКА В ПЕРЕРАБОТЧИКЕ</span>
               </div>
 
-              <div className="p-3 rounded bg-[#171A21] border border-[#262A36] text-xs font-mono text-[#E6E8EC] leading-relaxed">
+              <div className="p-3 rounded bg-[#17191E] border border-[#2B2F38] text-xs font-mono text-[#F0F1F3] leading-relaxed">
                 {selectedItem.recycleYield}
               </div>
-              <div className="text-[10px] font-mono text-[#9298A5] pt-1">
+              <div className="text-[10px] font-mono text-[#9BA2AF] pt-1">
                 * Разборка предмета в переработчике возвращает до 50% исходных ресурсов
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex-1 flex items-center justify-center text-[#9298A5] font-mono text-xs">
+        <div className="flex-1 flex items-center justify-center text-[#9BA2AF] font-mono text-xs">
           Выберите предмет из списка слева
         </div>
       )}

@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "node scripts/patch-push-receiver.cjs",
     "dev": "tsx server.ts",
     "start": "npm run build && NODE_ENV=production tsx server.ts",
     "build": "vite build",
@@ -21,9 +22,11 @@
     "express": "^4.21.2",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
+    "@liamcottle/rustplus.js": "^2.5.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "vite": "^8.3.0"
+    "vite": "^8.3.0",
+    "@liamcottle/push-receiver": "^0.0.4"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",
@@ -32,7 +35,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.21",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.2",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",
     "typescript": "^7.0.2"

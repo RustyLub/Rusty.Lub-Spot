@@ -2,57 +2,112 @@
 
 @layer base {
   :root {
+    color-scheme: dark;
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --font-display: 'Chakra Petch', sans-serif;
-    
-    --bg-main: #0D0F12;
-    --bg-card: #12141A;
-    --bg-panel: #171A21;
-    --border-color: #262A36;
-    --accent-primary: #F97316;
-    --accent-secondary: #E05326;
-    --color-success: #00C896;
-    --color-warning: #F5B942;
-    --color-danger: #F04444;
-    --text-primary: #E6E8EC;
-    --text-secondary: #9298A5;
+
+    --bg-main: #101114;
+    --bg-card: #17191e;
+    --bg-panel: #1d2026;
+    --border-color: #2b2f38;
+    --accent-primary: #ff7417;
+    --accent-secondary: #e85d12;
+    --color-success: #28c995;
+    --color-warning: #f5b942;
+    --color-danger: #f04444;
+    --text-primary: #f0f1f3;
+    --text-secondary: #9ba2af;
+    --surface-highlight: rgba(255, 116, 23, 0.08);
   }
-  
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #343944 #101114;
+  }
+
+  html {
+    min-height: 100%;
+    background: var(--bg-main);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    background-color: #0D0F12;
-    color: #E6E8EC;
-    font-family: var(--font-sans);
+    min-height: 100vh;
+    margin: 0;
     overflow-x: hidden;
+    background:
+      radial-gradient(ellipse at 78% -15%, rgba(255, 116, 23, 0.055), transparent 42%),
+      var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:focus-visible, a:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    color: #fff;
+    background: rgba(255, 116, 23, 0.35);
   }
 }
 
-/* Custom compact industrial scrollbars */
+/* Compact, quiet scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0D0F12;
+  background: #101114;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262A36;
-  border-radius: 2px;
+  background: #343944;
+  border: 1px solid #101114;
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #383E4E;
+  background: #4a505d;
 }
 
-/* Scanline effect for tactical CCTV */
+/* Shared surfaces: restrained borders and consistent motion */
+.surface, [class*="rounded"][class*="border"] {
+  transition-property: border-color, background-color, box-shadow, transform;
+  transition-duration: 180ms;
+  transition-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scanline effect retained for tactical CCTV */
 .cctv-scanlines {
   background: linear-gradient(
-    rgba(13, 15, 18, 0) 50%, 
+    rgba(13, 15, 18, 0) 50%,
     rgba(0, 0, 0, 0.45) 50%
   ), linear-gradient(
     90deg,
     rgba(240, 68, 68, 0.03),
     rgba(0, 200, 150, 0.02),
-    rgba(249, 115, 22, 0.03)
+    rgba(255, 116, 23, 0.03)
   );
   background-size: 100% 4px, 6px 100%;
 }

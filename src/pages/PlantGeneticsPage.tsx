@@ -24,11 +24,11 @@ export const PlantGeneticsPage: React.FC = () => {
   ]);
 
   const geneTypes: { type: GeneType; label: string; desc: string; color: string; isPositive: boolean }[] = [
-    { type: 'G', label: 'Скорость роста (Growth)', desc: 'Ускоряет созревание растения', color: '#00C896', isPositive: true },
+    { type: 'G', label: 'Скорость роста (Growth)', desc: 'Ускоряет созревание растения', color: '#28C995', isPositive: true },
     { type: 'Y', label: 'Урожайность (Yield)', desc: 'Увеличивает количество плодов/конопли', color: '#F5B942', isPositive: true },
     { type: 'H', label: 'Выживаемость (Hardiness)', desc: 'Устойчивость к холоду и плохой почве', color: '#06b6d4', isPositive: true },
     { type: 'W', label: 'Расход воды (Water)', desc: 'Требует больше полива водой', color: '#F04444', isPositive: false },
-    { type: 'X', label: 'Пустой ген (Empty)', desc: 'Бесполезный ген, замедляет селекцию', color: '#9298A5', isPositive: false },
+    { type: 'X', label: 'Пустой ген (Empty)', desc: 'Бесполезный ген, замедляет селекцию', color: '#9BA2AF', isPositive: false },
   ];
 
   // Crossbreeding Calculation:
@@ -111,30 +111,30 @@ export const PlantGeneticsPage: React.FC = () => {
 
   const getGeneColor = (g: GeneType) => {
     switch (g) {
-      case 'G': return 'bg-[#10241B] text-[#00C896] border-[#00C896]/60';
+      case 'G': return 'bg-[#10251D] text-[#28C995] border-[#28C995]/60';
       case 'Y': return 'bg-[#221B12] text-[#F5B942] border-[#F5B942]/60';
       case 'H': return 'bg-cyan-950/60 text-cyan-400 border-cyan-600/60';
-      case 'W': return 'bg-[#261416] text-[#F04444] border-[#F04444]/60';
-      case 'X': return 'bg-[#171A21] text-[#9298A5] border-[#262A36]';
+      case 'W': return 'bg-[#281719] text-[#F04444] border-[#F04444]/60';
+      case 'X': return 'bg-[#17191E] text-[#9BA2AF] border-[#2B2F38]';
     }
   };
 
   return (
     <div className="p-3 space-y-3 max-w-[1400px] mx-auto select-none">
       {/* Header */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded bg-[#171A21] border border-[#262A36]">
-            <Sprout className="w-5 h-5 text-[#00C896]" />
+          <div className="p-2 rounded bg-[#17191E] border border-[#2B2F38]">
+            <Sprout className="w-5 h-5 text-[#28C995]" />
           </div>
           <div>
-            <div className="font-mono font-bold text-[#E6E8EC] text-sm flex items-center gap-2">
+            <div className="font-mono font-bold text-[#F0F1F3] text-sm flex items-center gap-2">
               <span>КАЛЬКУЛЯТОР ГЕНЕТИКИ И СКРЕЩИВАНИЯ (RUST FARMING)</span>
-              <span className="text-[10px] font-mono text-[#00C896] bg-[#10241B] border border-[#00C896]/40 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-mono text-[#28C995] bg-[#10251D] border border-[#28C995]/40 px-2 py-0.5 rounded">
                 МЕХАНИКА ВЕСОВ 0.6 / 1.0
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#9298A5]">
+            <div className="text-[11px] font-mono text-[#9BA2AF]">
               Точный расчет скрещивания рассады в большой грядке для выведения «Идеального клона» (God Clone)
             </div>
           </div>
@@ -143,7 +143,7 @@ export const PlantGeneticsPage: React.FC = () => {
         <button
           onClick={handleAddParent}
           disabled={parents.length >= 4}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-xs disabled:opacity-40 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E05326] text-white font-mono text-xs disabled:opacity-40 transition-colors"
         >
           <Plus className="w-3.5 h-3.5" /> Добавить родителя ({parents.length}/4)
         </button>
@@ -154,7 +154,7 @@ export const PlantGeneticsPage: React.FC = () => {
         {geneTypes.map(g => (
           <div
             key={g.type}
-            className="bg-[#12141A] border border-[#262A36] rounded p-2 flex items-center gap-2"
+            className="bg-[#17191E] border border-[#2B2F38] rounded p-2 flex items-center gap-2"
           >
             <div
               className={`w-6 h-6 rounded flex items-center justify-center font-mono font-bold text-xs border ${getGeneColor(
@@ -164,8 +164,8 @@ export const PlantGeneticsPage: React.FC = () => {
               {g.type}
             </div>
             <div className="truncate">
-              <div className="font-bold text-[#E6E8EC] truncate">{g.label}</div>
-              <div className="text-[10px] text-[#9298A5] font-mono">
+              <div className="font-bold text-[#F0F1F3] truncate">{g.label}</div>
+              <div className="text-[10px] text-[#9BA2AF] font-mono">
                 Вес: {g.isPositive ? '0.6' : '1.0'}
               </div>
             </div>
@@ -174,10 +174,10 @@ export const PlantGeneticsPage: React.FC = () => {
       </div>
 
       {/* Parents Matrix Section */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 space-y-3 text-xs">
-        <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-2 border-b border-[#262A36]">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 space-y-3 text-xs">
+        <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-2 border-b border-[#2B2F38]">
           <span>РОДИТЕЛЬСКИЕ КЛОНЫ В ГРЯДКЕ (КЛИКНИТЕ НА ГЕН ДЛЯ СМЕНЫ)</span>
-          <span className="text-[11px] text-[#9298A5] font-normal">
+          <span className="text-[11px] text-[#9BA2AF] font-normal">
             Высаживаются по углам грядки вокруг центрального ростка
           </span>
         </div>
@@ -186,13 +186,13 @@ export const PlantGeneticsPage: React.FC = () => {
           {parents.map((parent, pIdx) => (
             <div
               key={parent.id}
-              className="bg-[#171A21] border border-[#262A36] rounded p-2.5 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3"
+              className="bg-[#17191E] border border-[#2B2F38] rounded p-2.5 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3"
             >
               <div className="flex items-center gap-2 min-w-[140px]">
-                <span className="w-5 h-5 rounded-full bg-[#12141A] border border-[#262A36] flex items-center justify-center font-mono font-bold text-[10px] text-[#E6E8EC]">
+                <span className="w-5 h-5 rounded-full bg-[#17191E] border border-[#2B2F38] flex items-center justify-center font-mono font-bold text-[10px] text-[#F0F1F3]">
                   {pIdx + 1}
                 </span>
-                <span className="font-medium text-[#E6E8EC]">{parent.name}</span>
+                <span className="font-medium text-[#F0F1F3]">{parent.name}</span>
               </div>
 
               {/* 6 Gene Slots */}
@@ -220,7 +220,7 @@ export const PlantGeneticsPage: React.FC = () => {
                 {parents.length > 2 && (
                   <button
                     onClick={() => handleRemoveParent(parent.id)}
-                    className="p-1 rounded hover:bg-[#261416] text-[#9298A5] hover:text-[#F04444]"
+                    className="p-1 rounded hover:bg-[#281719] text-[#9BA2AF] hover:text-[#F04444]"
                     title="Удалить"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -233,15 +233,15 @@ export const PlantGeneticsPage: React.FC = () => {
       </div>
 
       {/* Resulting Child Output Banner */}
-      <div className="bg-[#171A21] border-2 border-[#F97316]/60 rounded p-4 text-xs space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#262A36]">
+      <div className="bg-[#17191E] border-2 border-[#FF7417]/60 rounded p-4 text-xs space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#2B2F38]">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#F97316]" />
-            <span className="font-mono font-bold text-sm text-[#E6E8EC]">
+            <Sparkles className="w-5 h-5 text-[#FF7417]" />
+            <span className="font-mono font-bold text-sm text-[#F0F1F3]">
               РЕЗУЛЬТАТ СКРЕЩИВАНИЯ (ЦЕНТРАЛЬНЫЙ РОСТОК):
             </span>
           </div>
-          <span className="font-mono text-xs font-bold text-[#00C896] bg-[#10241B] px-2.5 py-1 rounded border border-[#00C896]/40">
+          <span className="font-mono text-xs font-bold text-[#28C995] bg-[#10251D] px-2.5 py-1 rounded border border-[#28C995]/40">
             СТАТУС: {child.stats}
           </span>
         </div>
@@ -251,7 +251,7 @@ export const PlantGeneticsPage: React.FC = () => {
           <div className="flex items-center gap-2">
             {child.genes.map((gene, idx) => (
               <div key={idx} className="flex flex-col items-center gap-1">
-                <span className="text-[10px] font-mono text-[#9298A5]">Слот {idx + 1}</span>
+                <span className="text-[10px] font-mono text-[#9BA2AF]">Слот {idx + 1}</span>
                 <div
                   className={`w-11 h-11 rounded-lg flex items-center justify-center font-mono font-bold text-lg border-2 shadow-lg ${getGeneColor(
                     gene
@@ -263,16 +263,16 @@ export const PlantGeneticsPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="bg-[#12141A] p-3 rounded border border-[#262A36] font-mono text-[11px] text-[#E6E8EC] space-y-1">
-            <div className="font-bold text-[#E6E8EC]">ОЦЕНКА КАЧЕСТВА:</div>
+          <div className="bg-[#17191E] p-3 rounded border border-[#2B2F38] font-mono text-[11px] text-[#F0F1F3] space-y-1">
+            <div className="font-bold text-[#F0F1F3]">ОЦЕНКА КАЧЕСТВА:</div>
             <div>
               {child.genes.every(g => g === 'G' || g === 'Y' || g === 'H') ? (
-                <span className="text-[#00C896] font-bold">★ ОТЛИЧНЫЙ КЛОН (Без красных генов)</span>
+                <span className="text-[#28C995] font-bold">★ ОТЛИЧНЫЙ КЛОН (Без красных генов)</span>
               ) : (
                 <span className="text-[#F5B942]">Содержит нежелательные гены (W / X)</span>
               )}
             </div>
-            <div className="text-[10px] text-[#9298A5]">
+            <div className="text-[10px] text-[#9BA2AF]">
               Рекомендуется срезать клон на стадии «Созревание» (Ripe)
             </div>
           </div>
@@ -281,23 +281,23 @@ export const PlantGeneticsPage: React.FC = () => {
 
       {/* Target Presets: 4G2Y / 3G3Y */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 space-y-1.5">
-          <div className="font-bold font-mono text-[#E6E8EC] text-xs">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 space-y-1.5">
+          <div className="font-bold font-mono text-[#F0F1F3] text-xs">
             4G 2Y — СКОРОСТНОЙ ХАРВЕСТ
           </div>
-          <div className="text-[11px] text-[#9298A5]">
+          <div className="text-[11px] text-[#9BA2AF]">
             Идеально для конопли (ткань) и ягод для чая. Быстрый рост и хороший сбор.
           </div>
-          <div className="text-[10px] font-mono text-[#00C896]">
+          <div className="text-[10px] font-mono text-[#28C995]">
             Гены: G G G G Y Y
           </div>
         </div>
 
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 space-y-1.5">
-          <div className="font-bold font-mono text-[#E6E8EC] text-xs">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 space-y-1.5">
+          <div className="font-bold font-mono text-[#F0F1F3] text-xs">
             3G 3Y — БАЛАНСИРОВАННЫЙ СБОР
           </div>
-          <div className="text-[11px] text-[#9298A5]">
+          <div className="text-[11px] text-[#9BA2AF]">
             Универсальный сорт для картофеля и тыквы с оптимальным запасом плодов.
           </div>
           <div className="text-[10px] font-mono text-[#F5B942]">
@@ -305,11 +305,11 @@ export const PlantGeneticsPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3 space-y-1.5">
-          <div className="font-bold font-mono text-[#E6E8EC] text-xs">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 space-y-1.5">
+          <div className="font-bold font-mono text-[#F0F1F3] text-xs">
             2G 4Y — МАКСИМАЛЬНЫЙ УРОЖАЙ
           </div>
-          <div className="text-[11px] text-[#9298A5]">
+          <div className="text-[11px] text-[#9BA2AF]">
             Для ночного созревания: наибольший выход с куста при длительном росте.
           </div>
           <div className="text-[10px] font-mono text-cyan-400">

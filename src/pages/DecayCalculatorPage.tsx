@@ -86,7 +86,7 @@ export const DecayCalculatorPage: React.FC = () => {
   };
 
   const getDecayStatusColor = (h: number) => {
-    if (h >= 48) return 'text-[#00C896]';
+    if (h >= 48) return 'text-[#28C995]';
     if (h >= 12) return 'text-[#F5B942]';
     return 'text-[#F04444]';
   };
@@ -108,7 +108,7 @@ export const DecayCalculatorPage: React.FC = () => {
       step: 1000,
       quickAdd: 5000,
       hours: hoursStone,
-      color: '#9298A5',
+      color: '#9BA2AF',
     },
     {
       key: 'metal' as const,
@@ -117,7 +117,7 @@ export const DecayCalculatorPage: React.FC = () => {
       step: 500,
       quickAdd: 2000,
       hours: hoursMetal,
-      color: '#F97316',
+      color: '#FF7417',
     },
     {
       key: 'hqm' as const,
@@ -133,19 +133,19 @@ export const DecayCalculatorPage: React.FC = () => {
   return (
     <div className="p-3 space-y-3 max-w-[1400px] mx-auto select-none">
       {/* Header */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded bg-[#171A21] border border-[#262A36]">
-            <Hourglass className="w-5 h-5 text-[#F97316]" />
+          <div className="p-2 rounded bg-[#17191E] border border-[#2B2F38]">
+            <Hourglass className="w-5 h-5 text-[#FF7417]" />
           </div>
           <div>
-            <div className="font-mono font-bold text-[#E6E8EC] text-sm flex items-center gap-2">
+            <div className="font-mono font-bold text-[#F0F1F3] text-sm flex items-center gap-2">
               <span>КАЛЬКУЛЯТОР ГНИЕНИЯ И СОДЕРЖАНИЯ (TOOL CUPBOARD)</span>
-              <span className="text-[10px] font-mono text-[#00C896] bg-[#00C896]/10 border border-[#00C896]/30 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-mono text-[#28C995] bg-[#28C995]/10 border border-[#28C995]/30 px-2 py-0.5 rounded">
                 СИНХРОНИЗИРОВАНО С ШКАФОМ
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#9298A5]">
+            <div className="text-[11px] font-mono text-[#9BA2AF]">
               Расчет времени содержания базы до начала гниения построек при пустом шкафу
             </div>
           </div>
@@ -153,22 +153,22 @@ export const DecayCalculatorPage: React.FC = () => {
 
         {/* Quick Presets */}
         <div className="flex items-center gap-1.5 font-mono text-xs">
-          <span className="text-[#9298A5] mr-1 text-[11px]">ПРЕСЕТ:</span>
+          <span className="text-[#9BA2AF] mr-1 text-[11px]">ПРЕСЕТ:</span>
           <button
             onClick={() => applyPreset('starter')}
-            className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] text-[11px] transition-colors"
+            className="px-2.5 py-1 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] text-[11px] transition-colors"
           >
             2х2 Стартер
           </button>
           <button
             onClick={() => applyPreset('clan')}
-            className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] text-[11px] transition-colors"
+            className="px-2.5 py-1 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] text-[11px] transition-colors"
           >
             Клановая 3х3
           </button>
           <button
             onClick={() => applyPreset('bunker')}
-            className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] text-[11px] transition-colors"
+            className="px-2.5 py-1 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] text-[11px] transition-colors"
           >
             МВК Бункер
           </button>
@@ -176,9 +176,9 @@ export const DecayCalculatorPage: React.FC = () => {
       </div>
 
       {/* Main Remaining Time Hero Banner */}
-      <div className="bg-[#12141A] border border-[#262A36] rounded p-4 text-xs flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 text-xs flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="font-mono text-[#9298A5] text-xs mb-1">
+          <div className="font-mono text-[#9BA2AF] text-xs mb-1">
             ВРЕМЯ ДО НАЧАЛА ГНИЕНИЯ (ПО НАИБОЛЕЕ ДЕФИЦИТНОМУ РЕСУРСУ):
           </div>
           <div className={`font-mono text-3xl font-bold tracking-tight ${getDecayStatusColor(minHours)} tabular-nums`}>
@@ -189,23 +189,23 @@ export const DecayCalculatorPage: React.FC = () => {
               </>
             )}
           </div>
-          <div className="text-[11px] font-mono text-[#9298A5] mt-1 flex items-center gap-2">
+          <div className="text-[11px] font-mono text-[#9BA2AF] mt-1 flex items-center gap-2">
             <span>Шкаф инструментов защищает постройку от разрушения</span>
             <span>·</span>
-            <span className="text-[#E6E8EC]">
+            <span className="text-[#F0F1F3]">
               Лимит: {minHours < 24 ? 'Критически мало ресурсов!' : 'База защищена'}
             </span>
           </div>
         </div>
 
-        <div className="bg-[#171A21] p-3 rounded border border-[#262A36] font-mono text-xs space-y-1.5">
-          <div className="text-[#9298A5] text-[10px] font-semibold">ВРЕМЯ ПОЛНОГО РАЗРУШЕНИЯ БЕЗ РЕСУРСОВ:</div>
-          <div className="text-[#E6E8EC] text-[11px] grid grid-cols-2 gap-x-5 gap-y-1">
-            <span>Солома: <strong className="text-[#E6E8EC]">1 час</strong></span>
-            <span>Дерево: <strong className="text-[#E6E8EC]">3 часа</strong></span>
-            <span>Камень: <strong className="text-[#E6E8EC]">5 часов</strong></span>
-            <span>Металл: <strong className="text-[#E6E8EC]">8 часов</strong></span>
-            <span className="col-span-2 text-[#F97316]">МВК (HQM): <strong>12 часов</strong></span>
+        <div className="bg-[#17191E] p-3 rounded border border-[#2B2F38] font-mono text-xs space-y-1.5">
+          <div className="text-[#9BA2AF] text-[10px] font-semibold">ВРЕМЯ ПОЛНОГО РАЗРУШЕНИЯ БЕЗ РЕСУРСОВ:</div>
+          <div className="text-[#F0F1F3] text-[11px] grid grid-cols-2 gap-x-5 gap-y-1">
+            <span>Солома: <strong className="text-[#F0F1F3]">1 час</strong></span>
+            <span>Дерево: <strong className="text-[#F0F1F3]">3 часа</strong></span>
+            <span>Камень: <strong className="text-[#F0F1F3]">5 часов</strong></span>
+            <span>Металл: <strong className="text-[#F0F1F3]">8 часов</strong></span>
+            <span className="col-span-2 text-[#FF7417]">МВК (HQM): <strong>12 часов</strong></span>
           </div>
         </div>
       </div>
@@ -213,27 +213,27 @@ export const DecayCalculatorPage: React.FC = () => {
       {/* Interactive Inputs & Resource Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
         {/* Box 1: Resources in TC */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 space-y-3">
-          <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-2 border-b border-[#262A36]">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 space-y-3">
+          <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-2 border-b border-[#2B2F38]">
             <div className="flex items-center gap-2">
-              <Box className="w-4 h-4 text-[#F97316]" />
+              <Box className="w-4 h-4 text-[#FF7417]" />
               <span>ТЕКУЩИЕ РЕСУРСЫ В ШКАФУ (ИНВЕНТАРЬ ТС)</span>
             </div>
-            <span className="text-[10px] font-mono text-[#9298A5]">24 СЛОТА ШКАФА</span>
+            <span className="text-[10px] font-mono text-[#9BA2AF]">24 СЛОТА ШКАФА</span>
           </div>
 
           <div className="space-y-3">
             {resourcesConfig.map(res => (
               <div key={res.key} className="space-y-1">
                 <div className="flex justify-between items-center font-mono text-[11px]">
-                  <span className="text-[#9298A5]">{res.name} ({res.enName})</span>
+                  <span className="text-[#9BA2AF]">{res.name} ({res.enName})</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[#E6E8EC] font-bold tabular-nums">
+                    <span className="text-[#F0F1F3] font-bold tabular-nums">
                       {inTC[res.key].toLocaleString()} шт
                     </span>
                     <button
                       onClick={() => addResource(res.key, res.quickAdd)}
-                      className="px-1.5 py-0.5 rounded bg-[#171A21] hover:bg-[#262A36] text-[#F97316] border border-[#262A36] text-[10px] font-mono flex items-center gap-0.5 transition-colors"
+                      className="px-1.5 py-0.5 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#FF7417] border border-[#2B2F38] text-[10px] font-mono flex items-center gap-0.5 transition-colors"
                       title={`Добавить +${res.quickAdd}`}
                     >
                       <Plus className="w-2.5 h-2.5" />
@@ -247,7 +247,7 @@ export const DecayCalculatorPage: React.FC = () => {
                   step={res.step}
                   value={inTC[res.key]}
                   onChange={e => setInTC({ ...inTC, [res.key]: Math.max(0, Number(e.target.value)) })}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono tabular-nums focus:outline-none focus:border-[#F97316] transition-colors"
+                  className="w-full bg-[#17191E] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono tabular-nums focus:outline-none focus:border-[#FF7417] transition-colors"
                 />
               </div>
             ))}
@@ -255,13 +255,13 @@ export const DecayCalculatorPage: React.FC = () => {
         </div>
 
         {/* Box 2: Daily Upkeep Rates */}
-        <div className="bg-[#12141A] border border-[#262A36] rounded p-3.5 space-y-3">
-          <div className="font-mono font-bold text-[#E6E8EC] flex items-center justify-between pb-2 border-b border-[#262A36]">
+        <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3.5 space-y-3">
+          <div className="font-mono font-bold text-[#F0F1F3] flex items-center justify-between pb-2 border-b border-[#2B2F38]">
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#F97316]" />
+              <Clock className="w-4 h-4 text-[#FF7417]" />
               <span>РАСХОД СОДЕРЖАНИЯ В СУТКИ (ЗА 24 ЧАСА)</span>
             </div>
-            <span className="text-[10px] font-mono text-[#9298A5]">АВТО-ПОДСЧЕТ</span>
+            <span className="text-[10px] font-mono text-[#9BA2AF]">АВТО-ПОДСЧЕТ</span>
           </div>
 
           <div className="space-y-3">
@@ -270,8 +270,8 @@ export const DecayCalculatorPage: React.FC = () => {
               return (
                 <div key={res.key} className="space-y-1">
                   <div className="flex justify-between items-center font-mono text-[11px]">
-                    <span className="text-[#9298A5]">{res.name} / сутки</span>
-                    <span className={`tabular-nums font-semibold ${hours < 24 ? 'text-[#F04444]' : hours < 48 ? 'text-[#F5B942]' : 'text-[#00C896]'}`}>
+                    <span className="text-[#9BA2AF]">{res.name} / сутки</span>
+                    <span className={`tabular-nums font-semibold ${hours < 24 ? 'text-[#F04444]' : hours < 48 ? 'text-[#F5B942]' : 'text-[#28C995]'}`}>
                       ~{formatHoursText(hours)} запаса
                     </span>
                   </div>
@@ -281,15 +281,15 @@ export const DecayCalculatorPage: React.FC = () => {
                     step={res.step / 2}
                     value={dailyUpkeep[res.key]}
                     onChange={e => setDailyUpkeep({ ...dailyUpkeep, [res.key]: Math.max(0, Number(e.target.value)) })}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono tabular-nums focus:outline-none focus:border-[#F97316] transition-colors"
+                    className="w-full bg-[#17191E] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono tabular-nums focus:outline-none focus:border-[#FF7417] transition-colors"
                   />
                   {/* Visual Progress Ratio */}
-                  <div className="w-full bg-[#0D0F12] h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-[#101114] h-1.5 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-300"
                       style={{
                         width: `${Math.min(100, Math.max(0, dailyUpkeep[res.key] > 0 ? (hours / 72) * 100 : 100))}%`,
-                        backgroundColor: hours < 24 ? '#F04444' : hours < 48 ? '#F5B942' : '#00C896',
+                        backgroundColor: hours < 24 ? '#F04444' : hours < 48 ? '#F5B942' : '#28C995',
                       }}
                     />
                   </div>

@@ -118,19 +118,19 @@ export const PlayerTrackerPage: React.FC = () => {
   });
 
   return (
-    <div className="h-[calc(100vh-2.75rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#0D0F12]">
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col md:flex-row overflow-hidden select-none bg-[#101114]">
       {/* Left List of Players */}
-      <div className="w-full md:w-[380px] bg-[#12141A] border-r border-[#262A36] flex flex-col justify-between shrink-0">
+      <div className="w-full md:w-[380px] bg-[#17191E] border-r border-[#2B2F38] flex flex-col justify-between shrink-0">
         <div className="p-3 space-y-2.5 flex-1 overflow-y-auto">
           {/* Header & Add Button */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#E6E8EC]">
-              <Users className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#F0F1F3]">
+              <Users className="w-3.5 h-3.5 text-[#FF7417]" />
               <span>ТРЕКЕР ИГРОКОВ ({players.length})</span>
             </div>
             <button
               onClick={() => setIsAddModalOpen(true)}
-              className="flex items-center gap-1 px-2 py-1 rounded bg-[#F97316] hover:bg-[#E05326] text-white text-[11px] font-mono transition-colors"
+              className="flex items-center gap-1 px-2 py-1 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white text-[11px] font-mono transition-colors"
             >
               <Plus className="w-3 h-3" /> Добавить
             </button>
@@ -138,13 +138,13 @@ export const PlayerTrackerPage: React.FC = () => {
 
           {/* Search Box */}
           <div className="relative">
-            <Search className="w-3.5 h-3.5 text-[#9298A5] absolute left-2.5 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#9BA2AF] absolute left-2.5 top-2.5" />
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Поиск по нику, клану, SteamID..."
-              className="w-full bg-[#171A21] border border-[#262A36] rounded pl-8 pr-2 py-1.5 text-xs text-[#E6E8EC] placeholder-[#9298A5] focus:outline-none focus:border-[#F97316]"
+              className="w-full bg-[#1D2026] border border-[#2B2F38] rounded pl-8 pr-2 py-1.5 text-xs text-[#F0F1F3] placeholder-[#9BA2AF] focus:outline-none focus:border-[#FF7417]"
             />
           </div>
 
@@ -156,8 +156,8 @@ export const PlayerTrackerPage: React.FC = () => {
                 onClick={() => setTagFilter(tag)}
                 className={`px-2 py-0.5 rounded whitespace-nowrap border transition-colors ${
                   tagFilter === tag
-                    ? 'bg-[#171A21] border-[#F97316] text-[#F97316]'
-                    : 'bg-[#171A21] border-[#262A36] text-[#9298A5] hover:text-[#E6E8EC]'
+                    ? 'bg-[#1D2026] border-[#FF7417] text-[#FF7417]'
+                    : 'bg-[#1D2026] border-[#2B2F38] text-[#9BA2AF] hover:text-[#F0F1F3]'
                 }`}
               >
                 {tag}
@@ -175,15 +175,15 @@ export const PlayerTrackerPage: React.FC = () => {
                   onClick={() => setSelectedPlayerId(p.id)}
                   className={`p-2.5 rounded border text-xs cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-[#171A21] border-[#F97316]'
-                      : 'bg-[#171A21] border-[#262A36] hover:border-[#383E4E]'
+                      ? 'bg-[#1D2026] border-[#FF7417]'
+                      : 'bg-[#1D2026] border-[#2B2F38] hover:border-[#383E4E]'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-1.5 truncate">
-                      <span className="font-bold text-[#E6E8EC] truncate">{p.nickname}</span>
+                      <span className="font-bold text-[#F0F1F3] truncate">{p.nickname}</span>
                       {p.clanTag && (
-                        <span className="text-[10px] font-mono px-1 rounded bg-[#12141A] text-[#9298A5] border border-[#262A36]">
+                        <span className="text-[10px] font-mono px-1 rounded bg-[#17191E] text-[#9BA2AF] border border-[#2B2F38]">
                           [{p.clanTag}]
                         </span>
                       )}
@@ -194,17 +194,17 @@ export const PlayerTrackerPage: React.FC = () => {
                           ? 'bg-[#261416] text-[#F04444] border border-[#F04444]/40'
                           : p.combatRating === 'Опасный'
                           ? 'bg-[#221B12] text-[#F5B942] border border-[#F5B942]/40'
-                          : 'bg-[#12141A] text-[#9298A5] border border-[#262A36]'
+                          : 'bg-[#17191E] text-[#9BA2AF] border border-[#2B2F38]'
                       }`}
                     >
                       {p.combatRating}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-[10px] font-mono text-[#9298A5]">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[#9BA2AF]">
                     <span className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-[#F97316]" />
-                      Квадрат: <strong className="text-[#E6E8EC]">{p.lastSeenGrid}</strong>
+                      <MapPin className="w-3 h-3 text-[#FF7417]" />
+                      Квадрат: <strong className="text-[#F0F1F3]">{p.lastSeenGrid}</strong>
                     </span>
                     <span>{p.lastSeenDate}</span>
                   </div>
@@ -214,7 +214,7 @@ export const PlayerTrackerPage: React.FC = () => {
                     {p.tags.slice(0, 3).map(tag => (
                       <span
                         key={tag}
-                        className="text-[9px] bg-[#12141A] border border-[#262A36] text-[#9298A5] px-1.5 py-0.2 rounded"
+                        className="text-[9px] bg-[#17191E] border border-[#2B2F38] text-[#9BA2AF] px-1.5 py-0.2 rounded"
                       >
                         {tag}
                       </span>
@@ -227,7 +227,7 @@ export const PlayerTrackerPage: React.FC = () => {
         </div>
 
         {/* List Footer */}
-        <div className="p-2 border-t border-[#262A36] bg-[#0D0F12] text-[10px] font-mono text-[#9298A5] flex justify-between">
+        <div className="p-2 border-t border-[#2B2F38] bg-[#101114] text-[10px] font-mono text-[#9BA2AF] flex justify-between">
           <span>СИНХРОНИЗАЦИЯ: ЛОКАЛЬНАЯ БД</span>
           <span>ЗАПИСЕЙ: {filteredPlayers.length}</span>
         </div>
@@ -235,20 +235,20 @@ export const PlayerTrackerPage: React.FC = () => {
 
       {/* Right Detailed Dossier Panel */}
       {selectedPlayer ? (
-        <div className="flex-1 bg-[#0D0F12] overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 bg-[#101114] overflow-y-auto p-4 space-y-4">
           {/* Data Availability Matrix Banner */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs space-y-2">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Info className="w-4 h-4 text-[#F97316]" />
-                <span className="font-mono font-bold text-[#E6E8EC]">
+                <Info className="w-4 h-4 text-[#FF7417]" />
+                <span className="font-mono font-bold text-[#F0F1F3]">
                   МАТРИЦА ДОСТУПНОСТИ ДАННЫХ ИГРОКОВ (RUST+ // A2S // BATTLEMETRICS // ДОСЬЕ)
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setShowMatrix(prev => !prev)}
-                className="text-[11px] font-mono text-[#F97316] hover:underline flex items-center gap-1"
+                className="text-[11px] font-mono text-[#FF7417] hover:underline flex items-center gap-1"
               >
                 <span>{showMatrix ? 'Скрыть регламент' : 'Показать регламент источников'}</span>
                 {showMatrix ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -256,10 +256,10 @@ export const PlayerTrackerPage: React.FC = () => {
             </div>
 
             {showMatrix && (
-              <div className="pt-2 border-t border-[#262A36] overflow-x-auto">
-                <table className="w-full text-left font-mono text-[10px] text-[#9298A5] border-collapse">
+              <div className="pt-2 border-t border-[#2B2F38] overflow-x-auto">
+                <table className="w-full text-left font-mono text-[10px] text-[#9BA2AF] border-collapse">
                   <thead>
-                    <tr className="border-b border-[#262A36] text-[#E6E8EC]">
+                    <tr className="border-b border-[#2B2F38] text-[#F0F1F3]">
                       <th className="py-1.5 pr-2 font-bold">Категория данных</th>
                       <th className="py-1.5 px-2 font-bold">Реальный источник</th>
                       <th className="py-1.5 px-2 font-bold">Необходимые права</th>
@@ -269,43 +269,43 @@ export const PlayerTrackerPage: React.FC = () => {
                   </thead>
                   <tbody className="divide-y divide-[#1D212B]">
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">1. Онлайн сервера</td>
-                      <td className="py-1.5 px-2 text-[#00C896]">A2S_INFO / Rust+ AppInfo</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">1. Онлайн сервера</td>
+                      <td className="py-1.5 px-2 text-[#28C995]">A2S_INFO / Rust+ AppInfo</td>
                       <td className="py-1.5 px-2">Публичный query port или сопряжение</td>
                       <td className="py-1.5 px-2">Показывает общее число игроков и очередь</td>
                       <td className="py-1.5 pl-2">UDP запрос или WebSocket getInfo</td>
                     </tr>
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">2. Игровая карта и сетка</td>
-                      <td className="py-1.5 px-2 text-[#00C896]">Rust+ AppMap</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">2. Игровая карта и сетка</td>
+                      <td className="py-1.5 px-2 text-[#28C995]">Rust+ AppMap</td>
                       <td className="py-1.5 px-2">Сопряжение с сервером Rust+</td>
                       <td className="py-1.5 px-2">JPG монументов и границы океана; базы врагов скрыты</td>
                       <td className="py-1.5 pl-2">WebSocket getMap</td>
                     </tr>
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">3. Собственная команда</td>
-                      <td className="py-1.5 px-2 text-[#00C896]">Rust+ AppTeamInfo</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">3. Собственная команда</td>
+                      <td className="py-1.5 px-2 text-[#28C995]">Rust+ AppTeamInfo</td>
                       <td className="py-1.5 px-2">Членство в отряде Rust</td>
                       <td className="py-1.5 px-2">Только свои тиммейты (координаты X/Y, HP, статус)</td>
                       <td className="py-1.5 pl-2">WebSocket getTeamInfo</td>
                     </tr>
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">4. Произвольные игроки</td>
-                      <td className="py-1.5 px-2 text-[#F97316]">Rust+ НЕ ПРЕДОСТАВЛЯЕТ</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">4. Произвольные игроки</td>
+                      <td className="py-1.5 px-2 text-[#FF7417]">Rust+ НЕ ПРЕДОСТАВЛЯЕТ</td>
                       <td className="py-1.5 px-2">A2S_PLAYER / BattleMetrics</td>
                       <td className="py-1.5 px-2">Координаты врагов недоступны (защита от читов)</td>
                       <td className="py-1.5 pl-2">Публичный список ников A2S</td>
                     </tr>
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">5. История появлений</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">5. История появлений</td>
                       <td className="py-1.5 px-2 text-[#F5B942]">Тактическое досье Rusty.Lub</td>
                       <td className="py-1.5 px-2">Записи оператора / разведки</td>
                       <td className="py-1.5 px-2">Историческая фиксация квадратов встреч в бою</td>
                       <td className="py-1.5 pl-2">Локальный журнал контактов</td>
                     </tr>
                     <tr>
-                      <td className="py-1.5 pr-2 text-[#E6E8EC] font-semibold">6. События и вертолеты</td>
-                      <td className="py-1.5 px-2 text-[#00C896]">Rust+ AppMapMarkers</td>
+                      <td className="py-1.5 pr-2 text-[#F0F1F3] font-semibold">6. События и вертолеты</td>
+                      <td className="py-1.5 px-2 text-[#28C995]">Rust+ AppMapMarkers</td>
                       <td className="py-1.5 px-2">Сопряжение с сервером Rust+</td>
                       <td className="py-1.5 px-2">Cargo Ship, CH47 Chinook, Patrol Heli, Vending</td>
                       <td className="py-1.5 pl-2">WebSocket getMapMarkers</td>
@@ -317,24 +317,24 @@ export const PlayerTrackerPage: React.FC = () => {
           </div>
 
           {/* Player Dossier Header */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded bg-[#171A21] border border-[#262A36] flex items-center justify-center font-bold font-mono text-lg text-[#F97316]">
+              <div className="w-12 h-12 rounded bg-[#1D2026] border border-[#2B2F38] flex items-center justify-center font-bold font-mono text-lg text-[#FF7417]">
                 {selectedPlayer.nickname.slice(0, 2).toUpperCase()}
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold text-[#E6E8EC] font-mono">
+                  <h2 className="text-base font-bold text-[#F0F1F3] font-mono">
                     {selectedPlayer.nickname}
                   </h2>
                   {selectedPlayer.clanTag && (
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#171A21] text-[#9298A5] border border-[#262A36]">
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#1D2026] text-[#9BA2AF] border border-[#2B2F38]">
                       КЛАН [{selectedPlayer.clanTag}]
                     </span>
                   )}
                 </div>
-                <div className="text-xs font-mono text-[#9298A5] mt-0.5 flex items-center gap-3">
+                <div className="text-xs font-mono text-[#9BA2AF] mt-0.5 flex items-center gap-3">
                   <span>SteamID: {selectedPlayer.steamId}</span>
                   {selectedPlayer.hoursPlayed && (
                     <span>Часы в Rust: {selectedPlayer.hoursPlayed}ч</span>
@@ -348,9 +348,9 @@ export const PlayerTrackerPage: React.FC = () => {
                 href={`https://steamcommunity.com/profiles/${selectedPlayer.steamId}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] text-xs font-mono transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] text-xs font-mono transition-colors"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-[#F97316]" />
+                <ExternalLink className="w-3.5 h-3.5 text-[#FF7417]" />
                 Steam Профиль
               </a>
             </div>
@@ -359,16 +359,16 @@ export const PlayerTrackerPage: React.FC = () => {
           {/* Aliases & Tags */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {/* Known Aliases History */}
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs">
-              <div className="font-mono text-[#9298A5] text-[11px] mb-2 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs">
+              <div className="font-mono text-[#9BA2AF] text-[11px] mb-2 flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>ИЗВЕСТНЫЕ НИКИ (ИСТОРИЯ АЛИАСОВ)</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {selectedPlayer.aliases.map((alias, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 rounded bg-[#171A21] border border-[#262A36] text-[#E6E8EC] font-mono text-[11px]"
+                    className="px-2 py-0.5 rounded bg-[#1D2026] border border-[#2B2F38] text-[#F0F1F3] font-mono text-[11px]"
                   >
                     {alias}
                   </span>
@@ -377,21 +377,21 @@ export const PlayerTrackerPage: React.FC = () => {
             </div>
 
             {/* Custom Tags Manager */}
-            <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs">
-              <div className="font-mono text-[#9298A5] text-[11px] mb-2 flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-[#F97316]" />
+            <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs">
+              <div className="font-mono text-[#9BA2AF] text-[11px] mb-2 flex items-center gap-1.5">
+                <Tag className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>ТАКТИЧЕСКИЕ ТЕГИ</span>
               </div>
               <div className="flex flex-wrap gap-1.5 mb-2.5">
                 {selectedPlayer.tags.map(tag => (
                   <span
                     key={tag}
-                    className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#171A21] border border-[#262A36] text-[#E6E8EC] text-[11px]"
+                    className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#1D2026] border border-[#2B2F38] text-[#F0F1F3] text-[11px]"
                   >
                     {tag}
                     <button
                       onClick={() => removePlayerTag(selectedPlayer.id, tag)}
-                      className="text-[#9298A5] hover:text-[#F04444] ml-1 text-xs"
+                      className="text-[#9BA2AF] hover:text-[#F04444] ml-1 text-xs"
                       title="Удалить тег"
                     >
                       ✕
@@ -407,11 +407,11 @@ export const PlayerTrackerPage: React.FC = () => {
                   value={customTagInput}
                   onChange={e => setCustomTagInput(e.target.value)}
                   placeholder="Добавить тег (напр. 'Снайпер')..."
-                  className="flex-1 bg-[#171A21] border border-[#262A36] rounded px-2 py-1 text-xs text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="flex-1 bg-[#1D2026] border border-[#2B2F38] rounded px-2 py-1 text-xs text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
                 <button
                   type="submit"
-                  className="px-2.5 py-1 rounded bg-[#171A21] hover:bg-[#262A36] text-[#E6E8EC] border border-[#262A36] font-mono text-[11px]"
+                  className="px-2.5 py-1 rounded bg-[#1D2026] hover:bg-[#2B2F38] text-[#F0F1F3] border border-[#2B2F38] font-mono text-[11px]"
                 >
                   + Тег
                 </button>
@@ -420,15 +420,15 @@ export const PlayerTrackerPage: React.FC = () => {
           </div>
 
           {/* Tactical Dossier Notes (Editable) */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs space-y-2">
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs space-y-2">
             <div className="flex items-center justify-between">
-              <div className="font-mono text-[#9298A5] text-[11px] flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-[#F97316]" />
+              <div className="font-mono text-[#9BA2AF] text-[11px] flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-[#FF7417]" />
                 <span>РАЗВЕДДАННЫЕ И ЗАМЕТКИ (ДОСЬЕ)</span>
               </div>
               <button
                 onClick={handleSaveNotes}
-                className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-mono text-[11px] transition-colors"
+                className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-mono text-[11px] transition-colors"
               >
                 {noteSavedFeedback ? <Check className="w-3.5 h-3.5" /> : <Save className="w-3.5 h-3.5" />}
                 {noteSavedFeedback ? 'Сохранено!' : 'Сохранить заметку'}
@@ -440,19 +440,19 @@ export const PlayerTrackerPage: React.FC = () => {
               value={editableNotes}
               onChange={e => setEditableNotes(e.target.value)}
               placeholder="Введите информацию о базе игрока, составе команды, привычках, луте..."
-              className="w-full bg-[#171A21] border border-[#262A36] rounded p-2.5 text-[#E6E8EC] font-sans focus:outline-none focus:border-[#F97316] text-xs leading-relaxed"
+              className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2.5 text-[#F0F1F3] font-sans focus:outline-none focus:border-[#FF7417] text-xs leading-relaxed"
             />
           </div>
 
           {/* Sightings Log & Add Sighting Form */}
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-3 text-xs space-y-3">
-            <div className="font-mono text-[#9298A5] text-[11px] flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#F97316]" />
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-3 text-xs space-y-3">
+            <div className="font-mono text-[#9BA2AF] text-[11px] flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[#FF7417]" />
               <span>ЖУРНАЛ ФИКСАЦИЙ И НАБЛЮДЕНИЙ ({selectedPlayer.sightings.length})</span>
             </div>
 
             {/* Add sighting inline form */}
-            <form onSubmit={handleAddSighting} className="bg-[#171A21] border border-[#262A36] rounded p-2.5 flex flex-wrap gap-2 items-center">
+            <form onSubmit={handleAddSighting} className="bg-[#1D2026] border border-[#2B2F38] rounded p-2.5 flex flex-wrap gap-2 items-center">
               <div className="w-24">
                 <input
                   type="text"
@@ -460,7 +460,7 @@ export const PlayerTrackerPage: React.FC = () => {
                   value={newSightingGrid}
                   onChange={e => setNewSightingGrid(e.target.value)}
                   placeholder="Квадрат (G11)"
-                  className="w-full bg-[#12141A] border border-[#262A36] rounded px-2 py-1 text-xs text-[#E6E8EC] uppercase font-mono focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#17191E] border border-[#2B2F38] rounded px-2 py-1 text-xs text-[#F0F1F3] uppercase font-mono focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
               <div className="flex-1 min-w-[200px]">
@@ -470,12 +470,12 @@ export const PlayerTrackerPage: React.FC = () => {
                   value={newSightingNote}
                   onChange={e => setNewSightingNote(e.target.value)}
                   placeholder="Где и с чем замечен (напр. 'Сфера, спуск с АК')..."
-                  className="w-full bg-[#12141A] border border-[#262A36] rounded px-2 py-1 text-xs text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#17191E] border border-[#2B2F38] rounded px-2 py-1 text-xs text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
               <button
                 type="submit"
-                className="px-3 py-1 rounded bg-[#12141A] hover:bg-[#262A36] text-[#E6E8EC] font-mono text-[11px] border border-[#262A36] transition-colors"
+                className="px-3 py-1 rounded bg-[#17191E] hover:bg-[#2B2F38] text-[#F0F1F3] font-mono text-[11px] border border-[#2B2F38] transition-colors"
               >
                 + Зафиксировать
               </button>
@@ -486,15 +486,15 @@ export const PlayerTrackerPage: React.FC = () => {
               {selectedPlayer.sightings.map(s => (
                 <div
                   key={s.id}
-                  className="bg-[#171A21] border border-[#262A36] rounded p-2.5 flex items-center justify-between text-xs"
+                  className="bg-[#1D2026] border border-[#2B2F38] rounded p-2.5 flex items-center justify-between text-xs"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-[#12141A] text-[10px] font-mono text-[#F97316] font-bold border border-[#262A36]">
+                    <span className="px-2 py-0.5 rounded bg-[#17191E] text-[10px] font-mono text-[#FF7417] font-bold border border-[#2B2F38]">
                       {s.grid}
                     </span>
-                    <span className="text-[#E6E8EC]">{s.note}</span>
+                    <span className="text-[#F0F1F3]">{s.note}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#9298A5] shrink-0">
+                  <span className="text-[10px] font-mono text-[#9BA2AF] shrink-0">
                     {s.date}
                   </span>
                 </div>
@@ -503,7 +503,7 @@ export const PlayerTrackerPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="flex-1 flex items-center justify-center text-[#9298A5] font-mono text-xs">
+        <div className="flex-1 flex items-center justify-center text-[#9BA2AF] font-mono text-xs">
           Выберите игрока из списка слева
         </div>
       )}
@@ -511,54 +511,54 @@ export const PlayerTrackerPage: React.FC = () => {
       {/* Add New Player Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-[#12141A] border border-[#262A36] rounded p-4 w-full max-w-md text-xs space-y-3">
-            <div className="flex justify-between items-center pb-2 border-b border-[#262A36]">
-              <span className="font-mono font-bold text-[#E6E8EC] text-sm">ДОБАВИТЬ ИГРОКА В ТРЕКЕР</span>
-              <button onClick={() => setIsAddModalOpen(false)} className="text-[#9298A5] hover:text-[#E6E8EC]">✕</button>
+          <div className="bg-[#17191E] border border-[#2B2F38] rounded p-4 w-full max-w-md text-xs space-y-3">
+            <div className="flex justify-between items-center pb-2 border-b border-[#2B2F38]">
+              <span className="font-mono font-bold text-[#F0F1F3] text-sm">ДОБАВИТЬ ИГРОКА В ТРЕКЕР</span>
+              <button onClick={() => setIsAddModalOpen(false)} className="text-[#9BA2AF] hover:text-[#F0F1F3]">✕</button>
             </div>
 
             <form onSubmit={handleCreatePlayer} className="space-y-2.5">
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Никнейм игрока *</label>
+                  <label className="block text-[#9BA2AF] mb-1">Никнейм игрока *</label>
                   <input
                     type="text"
                     required
                     value={newNick}
                     onChange={e => setNewNick(e.target.value)}
                     placeholder="напр. PvP_King"
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Тег клана</label>
+                  <label className="block text-[#9BA2AF] mb-1">Тег клана</label>
                   <input
                     type="text"
                     value={newClan}
                     onChange={e => setNewClan(e.target.value)}
                     placeholder="TITAN / ZERO"
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#9298A5] mb-1">SteamID64 (опц.)</label>
+                  <label className="block text-[#9BA2AF] mb-1">SteamID64 (опц.)</label>
                   <input
                     type="text"
                     value={newSteamId}
                     onChange={e => setNewSteamId(e.target.value)}
                     placeholder="76561198..."
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono focus:outline-none focus:border-[#FF7417]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#9298A5] mb-1">Боевая угроза</label>
+                  <label className="block text-[#9BA2AF] mb-1">Боевая угроза</label>
                   <select
                     value={newRating}
                     onChange={e => setNewRating(e.target.value as any)}
-                    className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                    className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                   >
                     <option value="Низкий">Низкий (Фермер)</option>
                     <option value="Обычный">Обычный</option>
@@ -569,24 +569,24 @@ export const PlayerTrackerPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#9298A5] mb-1">Квадрат первой фиксации</label>
+                <label className="block text-[#9BA2AF] mb-1">Квадрат первой фиксации</label>
                 <input
                   type="text"
                   required
                   value={newGrid}
                   onChange={e => setNewGrid(e.target.value)}
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] font-mono uppercase focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] font-mono uppercase focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
               <div>
-                <label className="block text-[#9298A5] mb-1">Заметки о базе / поведении</label>
+                <label className="block text-[#9BA2AF] mb-1">Заметки о базе / поведении</label>
                 <textarea
                   rows={2}
                   value={newNotes}
                   onChange={e => setNewNotes(e.target.value)}
                   placeholder="Где живет, чем стреляет, союзники..."
-                  className="w-full bg-[#171A21] border border-[#262A36] rounded p-2 text-[#E6E8EC] focus:outline-none focus:border-[#F97316]"
+                  className="w-full bg-[#1D2026] border border-[#2B2F38] rounded p-2 text-[#F0F1F3] focus:outline-none focus:border-[#FF7417]"
                 />
               </div>
 
@@ -594,13 +594,13 @@ export const PlayerTrackerPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-3 py-1.5 rounded bg-[#171A21] text-[#9298A5] hover:bg-[#262A36] hover:text-[#E6E8EC]"
+                  className="px-3 py-1.5 rounded bg-[#1D2026] text-[#9BA2AF] hover:bg-[#2B2F38] hover:text-[#F0F1F3]"
                 >
                   Отмена
                 </button>
                 <button
                   type="submit"
-                  className="px-3 py-1.5 rounded bg-[#F97316] hover:bg-[#E05326] text-white font-medium"
+                  className="px-3 py-1.5 rounded bg-[#FF7417] hover:bg-[#E85D12] text-white font-medium"
                 >
                   Добавить в досье
                 </button>
