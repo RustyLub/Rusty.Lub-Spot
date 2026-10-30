@@ -45,7 +45,10 @@ async function retry(retryCount, ...args) {
 
     const delay = RETRY_DELAYS[retryCount];
     console.warn(
-      `[push-receiver] Request failed (${statusCode || code || 'network error'}); retry ${retryCount + 1}/${MAX_RETRIES} in ${delay}ms.`,
+      '[push-receiver] Request failed (' +
+        (statusCode || code || 'network error') +
+        '); retry ' + (retryCount + 1) + '/' + MAX_RETRIES +
+        ' in ' + delay + 'ms.',
     );
     await waitFor(delay);
     return retry(retryCount + 1, ...args);
